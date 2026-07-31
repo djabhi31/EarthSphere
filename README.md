@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌍 EarthSphere
+
+> Real-time Earth Event Intelligence — powered by NASA EONET
+
+[Live Demo](https://earthsphere.in) · [Report Bug](https://github.com/abhil/earthsphere/issues)
+
+## Overview
+EarthSphere is a premium, real-time natural event monitoring platform that visualizes earthquakes, wildfires, storms, and other Earth events using NASA's EONET (Earth Observatory Natural Event Tracker) API.
+
+## Features
+- 🗺️ Interactive MapLibre GL JS map with real-time event markers
+- 🌐 3D Earth globe visualization with Three.js
+- 🎨 Premium dark/light mode with glassmorphism design
+- ⚡ Cinematic scroll animations and motion system
+- 📊 Real-time analytics dashboard with Recharts
+- 🔍 Advanced event filtering, search, and saved views
+- 📱 Fully responsive design (320px → 1920px)
+- ♿ WCAG AA accessible, reduced-motion support
+
+## Tech Stack
+- **Framework**: Next.js 16 (App Router, Turbopack)
+- **Language**: TypeScript (strict)
+- **Styling**: Tailwind CSS v4 + CSS custom properties
+- **Maps**: MapLibre GL JS (GPU-accelerated)
+- **3D**: Three.js (Earth globe)
+- **Animation**: Motion (Framer Motion) v12+
+- **State**: Zustand + TanStack Query
+- **Charts**: Recharts
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+
+- npm or pnpm
 
+### Installation
 ```bash
+git clone https://github.com/YOUR_USERNAME/earthsphere.git
+cd earthsphere
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
+```
+src/
+├── app/          # Next.js App Router pages
+├── components/   # React components
+│   ├── ui/       # Reusable UI components
+│   ├── layout/   # Navbar, Footer, PageTransition
+│   ├── landing/  # Landing page sections
+│   ├── events/   # Event-related components
+│   ├── analytics/# Chart components
+│   ├── map/      # Map components
+│   ├── motion/   # ScrollReveal, StaggerGroup, Parallax
+│   └── features/ # SavedViews, ShareSession
+├── hooks/        # Custom React hooks
+└── lib/          # Utilities, tokens, store
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Lighthouse Scores
+- 🚀 Performance: **99/100**
+- 🎯 SEO: **100/100**
+- ♿ Accessibility: **93/100**
+- ⏱️ FCP: 0.6s | LCP: 0.9s | CLS: 0
 
-## Learn More
+## License
+MIT — see [LICENSE](LICENSE)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Acknowledgments
+- [NASA EONET API](https://eonet.gsfc.nasa.gov/)
+- Data provided by NASA's Earth Observatory

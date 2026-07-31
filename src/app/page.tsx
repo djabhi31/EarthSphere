@@ -1,65 +1,157 @@
-import Image from "next/image";
+// =============================================================================
+// EarthSphere — Cinematic Scroll-Reactive Landing Page
+// =============================================================================
 
-export default function Home() {
+"use client";
+
+import { useRef, useState, useEffect, useMemo } from "react";
+import { motion, useScroll, useTransform, useSpring } from "motion/react";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import dynamic from "next/dynamic";
+
+const ParticleField = dynamic(() => import("@/components/ui/ParticleField").then(mod => mod.ParticleField), { ssr: false });
+const FloatingEarth = dynamic(() => import("@/components/ui/FloatingEarth").then(mod => mod.FloatingEarth), { ssr: false });
+import { useEvents, useEventStats } from "@/hooks/useEvents";
+import type { EONETEvent } from "@/lib/types";
+
+// Import Section Components
+import { HeroSection } from "@/components/landing/HeroSection";
+import { IntelligenceSection } from "@/components/landing/IntelligenceSection";
+import { CategoriesSection } from "@/components/landing/CategoriesSection";
+import { TimelineSection, LANDMARK_EVENTS } from "@/components/landing/TimelineSection";
+import { MapPreviewSection } from "@/components/landing/MapPreviewSection";
+import { CTASection } from "@/components/landing/CTASection";
+
+const EVENT_FILTERS = { status: "open" as const, limit: 60 };
+const EMPTY_EVENTS: EONETEvent[] = [];
+
+export default function HomePage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll position of the entire page
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const scrollSmooth = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
+  // Data fetching
+  const { data: rawEvents } = useEvents(EVENT_FILTERS);
+  const { data: stats } = useEventStats();
+  const events = useMemo(() => (rawEvents?.events ? [...rawEvents.events] : EMPTY_EVENTS), [rawEvents]);
+
+  // Coordinates focus target state for globe
+  const [focusCoords, setFocusCoords] = useState<[number, number] | null>(null);
+
+  // Map scroll progress to scenes visibility
+  const opacityScene1 = useTransform(scrollSmooth, [0, 0.12, 0.16], [1, 1, 0]);
+  const yScene1 = useTransform(scrollSmooth, [0, 0.16], [0, -50]);
+
+  const opacityScene2 = useTransform(scrollSmooth, [0.12, 0.18, 0.3, 0.35], [0, 1, 1, 0]);
+  const yScene2 = useTransform(scrollSmooth, [0.12, 0.18, 0.35], [50, 0, -50]);
+
+  const opacityScene3 = useTransform(scrollSmooth, [0.3, 0.35, 0.52, 0.58], [0, 1, 1, 0]);
+  const yScene3 = useTransform(scrollSmooth, [0.3, 0.35, 0.58], [50, 0, -50]);
+
+  const opacityScene4 = useTransform(scrollSmooth, [0.52, 0.58, 0.72, 0.78], [0, 1, 1, 0]);
+  
+  const opacityScene5 = useTransform(scrollSmooth, [0.72, 0.78, 0.88, 0.93], [0, 1, 1, 0]);
+  const yScene5 = useTransform(scrollSmooth, [0.72, 0.78, 0.93], [50, 0, -50]);
+
+  const opacityScene6 = useTransform(scrollSmooth, [0.88, 0.93, 1.0], [0, 1, 1]);
+  const yScene6 = useTransform(scrollSmooth, [0.88, 0.93], [50, 0]);
+
+  // Handle timeline scroll-linked coordinates locking
+  useEffect(() => {
+    let lastFocusCoords: [number, number] | null = null;
+
+    return scrollSmooth.on('change', (v) => {
+      let targetCoords: [number, number] | null = null;
+
+      // Timeline section is roughly between 52% and 72% scroll
+      if (v >= 0.55 && v < 0.6) {
+        targetCoords = LANDMARK_EVENTS[0].coords;
+      } else if (v >= 0.6 && v < 0.66) {
+        targetCoords = LANDMARK_EVENTS[1].coords;
+      } else if (v >= 0.66 && v < 0.72) {
+        targetCoords = LANDMARK_EVENTS[2].coords;
+      }
+
+      if (targetCoords !== lastFocusCoords) {
+        lastFocusCoords = targetCoords;
+        setFocusCoords(targetCoords);
+      }
+    });
+  }, [scrollSmooth]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div ref={containerRef} className="relative min-h-[650vh] bg-canvas text-white">
+      <Navbar activeEventCount={stats?.totalActive} />
+
+      {/* ── Fixed Backdrop Canvas Globe & Stars (interaction Layer) ──── */}
+      <div className="fixed inset-0 z-[1] pointer-events-none flex items-center justify-center">
+        {/* Particle Stars */}
+        <ParticleField className="absolute inset-0 z-0" />
+        
+        {/* Globe Container */}
+        <div className="pointer-events-auto relative z-10 w-full h-full flex items-center justify-center">
+          <FloatingEarth 
+            events={events} 
+            focusCoords={focusCoords} 
+            interactive={true} 
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
+
+      {/* ── Scrollable Storytelling Layer ───────────────────────────── */}
+      <div className="relative z-10 w-full">
+        
+        <motion.section
+          style={{ opacity: opacityScene1, y: yScene1 }}
+          className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center select-none"
+        >
+          <HeroSection stats={stats} />
+        </motion.section>
+
+        <motion.section
+          style={{ opacity: opacityScene2, y: yScene2 }}
+          className="relative flex min-h-screen items-center px-6"
+        >
+          <IntelligenceSection />
+        </motion.section>
+
+        <motion.section
+          style={{ opacity: opacityScene3, y: yScene3 }}
+          className="relative flex min-h-screen items-center px-6"
+        >
+          <CategoriesSection />
+        </motion.section>
+
+        <motion.section
+          style={{ opacity: opacityScene4 }}
+          className="relative min-h-[160vh] py-24 px-6 flex flex-col justify-start"
+        >
+          <TimelineSection />
+        </motion.section>
+
+        <motion.section
+          style={{ opacity: opacityScene5, y: yScene5 }}
+          className="relative flex min-h-screen items-center px-6"
+        >
+          <MapPreviewSection events={events} />
+        </motion.section>
+
+        <motion.section
+          style={{ opacity: opacityScene6, y: yScene6 }}
+          className="relative flex min-h-screen items-center justify-center px-6 text-center select-none"
+        >
+          <CTASection />
+        </motion.section>
+      </div>
+
+      <Footer />
     </div>
   );
 }
