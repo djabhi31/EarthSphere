@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const runtime = 'edge';
+
 const EONET_API_BASE = 'https://eonet.gsfc.nasa.gov/api/v3';
 
 /**
