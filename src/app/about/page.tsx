@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/button";
-import { Code2, Heart, Shield, Radio, Layers, Globe, Github, Linkedin, Twitter, Sparkles, Terminal } from "lucide-react";
+import { Code2, Heart, Shield, Radio, Layers, Globe, Sparkles, Terminal } from "lucide-react";
 import { ParticleField } from "@/components/ui/ParticleField";
 import { MissionSection } from "@/components/about/MissionSection";
 import { TechStack } from "@/components/about/TechStack";
@@ -14,6 +14,17 @@ import { fadeInUp, staggerContainer, staggerItem } from "@/lib/motion-presets";
  * Features a cinematic storytelling approach with scroll reveals and premium typography.
  * Includes a dedicated Creator section.
  */
+
+const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.24c3-.34 6-1.53 6-6.76a5.5 5.5 0 0 0-1.5-3.78 5.1 5.1 0 0 0-.1-3.82s-1.2-.38-3.9 1.4a13.4 13.4 0 0 0-7 0c-2.7-1.78-3.9-1.4-3.9-1.4a5.1 5.1 0 0 0-.1 3.82 5.5 5.5 0 0 0-1.5 3.78c0 5.23 3 6.42 6 6.76a4.8 4.8 0 0 0-1 3.24v4"></path></svg>
+);
+const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+);
+const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+);
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen pt-24 pb-32 bg-canvas relative overflow-hidden">
@@ -118,13 +129,13 @@ export default function AboutPage() {
                 
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-4">
                   <a href="https://github.com/abhilash-ghosh" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-surface/50 border border-border-subtle text-text-secondary hover:text-white hover:bg-surface-elevated hover:border-electric-cyan/50 transition-all duration-300 hover:-translate-y-1">
-                    <Github className="w-5 h-5" />
+                    <GithubIcon className="w-5 h-5" />
                   </a>
                   <a href="https://linkedin.com/in/abhilash-ghosh" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-surface/50 border border-border-subtle text-text-secondary hover:text-white hover:bg-surface-elevated hover:border-electric-cyan/50 transition-all duration-300 hover:-translate-y-1">
-                    <Linkedin className="w-5 h-5" />
+                    <LinkedinIcon className="w-5 h-5" />
                   </a>
                   <a href="https://twitter.com/abhilash-ghosh" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-surface/50 border border-border-subtle text-text-secondary hover:text-white hover:bg-surface-elevated hover:border-electric-cyan/50 transition-all duration-300 hover:-translate-y-1">
-                    <Twitter className="w-5 h-5" />
+                    <TwitterIcon className="w-5 h-5" />
                   </a>
                   <Button variant="outline" className="ml-2 border-border-subtle rounded-xl hover:border-electric-cyan/50 transition-all duration-300">
                     View Portfolio
