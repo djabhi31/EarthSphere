@@ -41,17 +41,19 @@ export function TechStack() {
         </motion.p>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
         {TECH_ITEMS.map((tech, i) => (
-          <motion.div key={i} variants={staggerItem} className="h-full group">
-            <SpotlightCard className="p-8 h-full flex flex-col items-start gap-5 relative overflow-hidden rounded-3xl border border-border-subtle hover:border-electric-cyan/30 transition-colors duration-500">
-              <div className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-              <div className="relative z-10 p-4 rounded-2xl bg-surface-elevated/80 border border-border-default backdrop-blur-md group-hover:scale-110 transition-transform duration-500">
-                <tech.icon className="w-7 h-7 text-white" />
-              </div>
-              <div className="relative z-10">
-                <h3 className="font-bold text-xl text-white mb-2">{tech.name}</h3>
-                <p className="text-text-secondary font-light">{tech.desc}</p>
+          <motion.div key={i} variants={staggerItem} className="h-full">
+            <SpotlightCard className="h-full">
+              <div className="p-8 h-full flex flex-col items-start gap-5 relative overflow-hidden group">
+                <div className={`absolute inset-0 bg-gradient-to-br ${tech.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                <div className="relative z-10 p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-500 shadow-inner">
+                  <tech.icon className="w-6 h-6 text-white" />
+                </div>
+                <div className="relative z-10">
+                  <h3 className="font-bold text-lg text-white mb-1">{tech.name}</h3>
+                  <p className="text-sm text-text-secondary font-light">{tech.desc}</p>
+                </div>
               </div>
             </SpotlightCard>
           </motion.div>
