@@ -9,7 +9,7 @@ import {
   getCategoryLabel,
   cn,
 } from "@/lib/utils";
-import { ANIMATION_SECONDS } from "@/lib/design-tokens";
+import { durations } from "@/lib/design-tokens";
 import { CategoryIcon } from "@/components/ui/CategoryIcon";
 import type { EventStatus } from "@/lib/types";
 
@@ -64,7 +64,7 @@ function FilterBadge({
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
-      transition={{ duration: ANIMATION_SECONDS.fast }}
+      transition={{ duration: durations.fast }}
       className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-white/70"
     >
       {color && (
@@ -269,7 +269,7 @@ export function EventFilters({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: ANIMATION_SECONDS.normal }}
+              transition={{ duration: durations.standard }}
               className="overflow-hidden"
             >
               <div className="flex flex-wrap items-center gap-2 pt-3">

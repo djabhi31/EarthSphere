@@ -7,15 +7,9 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { MapPin } from "lucide-react";
-import { formatDate, timeAgo, formatMagnitude, formatCoordinates, cn } from "@/lib/utils";
-import type { EventGeometry, Coordinate } from "@/lib/types";
+import { formatDate, timeAgo, formatMagnitude, formatCoordinates, cn, getPointCoordinates } from "@/lib/utils";
+import type { EventGeometry } from "@/lib/types";
 
-function getPointCoordinates(geo: EventGeometry): [number, number] | null {
-  if (geo.type !== "Point") return null;
-  const coords = geo.coordinates as Coordinate;
-  if (coords.length < 2) return null;
-  return [coords[0], coords[1]]; // [lng, lat]
-}
 
 interface TimelineEntryProps {
   geo: EventGeometry;

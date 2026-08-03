@@ -42,8 +42,8 @@ export function ShareSession() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial="initial"
-            animate="animate"
+            initial="hidden"
+            animate="visible"
             exit="exit"
             variants={fadeInUp}
             transition={springPresets.gentle}

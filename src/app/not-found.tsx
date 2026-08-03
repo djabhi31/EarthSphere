@@ -16,8 +16,8 @@ export default function NotFound() {
       <ParticleField particleCount={150} className="absolute inset-0 z-0 opacity-60 pointer-events-none" />
       
       <motion.div 
-        initial="initial"
-        animate="animate"
+        initial="hidden"
+        animate="visible"
         variants={fadeInUp}
         className="relative z-10 text-center px-6 max-w-2xl mx-auto"
       >

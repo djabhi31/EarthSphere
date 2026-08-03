@@ -5,7 +5,7 @@
 // =============================================================================
 
 let audioCtx: AudioContext | null = null;
-let isMuted = false;
+let isEnabled = true;
 
 // Initialize on first user interaction
 function getAudioContext(): AudioContext | null {
@@ -17,12 +17,12 @@ function getAudioContext(): AudioContext | null {
       audioCtx = new AudioContextClass();
     }
     
-    // Hydrate mute state
+    // Hydrate state
     const saved = localStorage.getItem("earthsphere-audio-enabled");
     if (saved !== null) {
-      isMuted = saved === "false";
+      isEnabled = saved === "true";
     } else {
-      isMuted = false; // default enabled
+      isEnabled = true; // default enabled
       localStorage.setItem("earthsphere-audio-enabled", "true");
     }
   }
@@ -30,13 +30,13 @@ function getAudioContext(): AudioContext | null {
 }
 
 export const audioSynth = {
-  // Toggle mute state
+  // Toggle state
   toggleMute(): boolean {
-    isMuted = !isMuted;
+    isEnabled = !isEnabled;
     if (typeof window !== "undefined") {
-      localStorage.setItem("earthsphere-audio-enabled", (!isMuted).toString());
+      localStorage.setItem("earthsphere-audio-enabled", isEnabled.toString());
     }
-    return isMuted;
+    return !isEnabled; // return true if muted to match old toggleMute return semantics
   },
 
   // Check if muted
@@ -44,16 +44,16 @@ export const audioSynth = {
     if (typeof window !== "undefined" && !audioCtx) {
       const saved = localStorage.getItem("earthsphere-audio-enabled");
       if (saved !== null) {
-        isMuted = saved === "false";
+        isEnabled = saved === "true";
       }
     }
-    return isMuted;
+    return !isEnabled;
   },
 
   // Play hover sound (light high-frequency blip)
   playHover() {
     const ctx = getAudioContext();
-    if (!ctx || isMuted) return;
+    if (!ctx || !isEnabled) return;
 
     // Resume context if suspended (browser security)
     if (ctx.state === "suspended") {
@@ -87,7 +87,7 @@ export const audioSynth = {
   // Play click sound (analog tech blip)
   playClick() {
     const ctx = getAudioContext();
-    if (!ctx || isMuted) return;
+    if (!ctx || !isEnabled) return;
 
     if (ctx.state === "suspended") {
       ctx.resume();
@@ -119,7 +119,7 @@ export const audioSynth = {
   // Play atmospheric rise on category selection
   playCategoryTransition() {
     const ctx = getAudioContext();
-    if (!ctx || isMuted) return;
+    if (!ctx || !isEnabled) return;
 
     if (ctx.state === "suspended") {
       ctx.resume();

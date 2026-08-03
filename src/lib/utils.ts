@@ -250,6 +250,41 @@ export function getEventStatus(event: EONETEvent): 'active' | 'closed' {
 }
 
 /**
+ * Get coordinates [lng, lat] from a Point geometry.
+ * Returns null if not a Point or invalid coordinates.
+ */
+export function getPointCoordinates(geo: EventGeometry): [number, number] | null {
+  if (geo.type !== 'Point') return null;
+  const coords = geo.coordinates as number[];
+  if (!coords || coords.length < 2) return null;
+  return [coords[0], coords[1]];
+}
+
+/**
+ * Compute human-readable duration of an event.
+ */
+export function computeDuration(event: EONETEvent): string {
+  if (!event.geometry || event.geometry.length === 0) return '—';
+  const firstDate = new Date(event.geometry[0].date);
+  const lastDate = event.closed
+    ? new Date(event.closed)
+    : new Date(event.geometry[event.geometry.length - 1].date);
+  const diffMs = lastDate.getTime() - firstDate.getTime();
+  if (diffMs < 0) return '< 1 day';
+
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  if (days === 0) return '< 1 day';
+  if (days === 1) return '1 day';
+  if (days < 30) return `${days} days`;
+  if (days < 365) {
+    const months = Math.floor(days / 30);
+    return `${months} month${months > 1 ? 's' : ''}`;
+  }
+  const years = Math.floor(days / 365);
+  return `${years} year${years > 1 ? 's' : ''}`;
+}
+
+/**
  * Get the most recent geometry entry from an event.
  * Geometry entries are sorted by date descending; returns the first (latest).
  * Returns undefined if the event has no geometry.

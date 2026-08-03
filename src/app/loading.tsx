@@ -14,8 +14,8 @@ export default function Loading() {
       <div className="absolute inset-0 bg-gradient-to-br from-electric-cyan/5 via-transparent to-purple-500/5 opacity-50 z-0" />
       
       <motion.div 
-        initial="initial"
-        animate="animate"
+        initial="hidden"
+        animate="visible"
         variants={fadeIn}
         className="relative z-10 flex flex-col items-center"
       >

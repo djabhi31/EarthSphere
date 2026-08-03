@@ -184,6 +184,7 @@ export default function EventMap({
       map.remove();
       mapRef.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ── Tile Layer Switcher ──────────────────────────────────────────────────
@@ -260,57 +261,59 @@ export default function EventMap({
         </div>
       `;
 
-      // Set up click handler to pass event ID
       el.addEventListener("click", (e) => {
         e.stopPropagation();
         onEventClick?.(event.id);
+        
+        // Lazy create popup if it doesn't exist
+        if (!marker.getPopup()) {
+          const popupContainer = document.createElement("div");
+          popupContainer.style.cssText = "color: #ffffff; background: #0f1420; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); max-width: 220px; font-family: sans-serif;";
+          
+          const headerDiv = document.createElement("div");
+          headerDiv.style.cssText = "display: flex; align-items: center; gap: 6px; margin-bottom: 4px;";
+          const dotSpan = document.createElement("span");
+          dotSpan.style.cssText = `width: 8px; height: 8px; border-radius: 50%; background-color: ${color};`;
+          const catSpan = document.createElement("span");
+          catSpan.style.cssText = "font-size: 10px; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.5);";
+          catSpan.textContent = categoryLabel;
+          headerDiv.appendChild(dotSpan);
+          headerDiv.appendChild(catSpan);
+          
+          const titleH3 = document.createElement("h3");
+          titleH3.style.cssText = "font-size: 13px; font-weight: bold; margin: 0 0 6px 0; color: #ffffff; line-height: 1.3; font-family: inherit;";
+          titleH3.textContent = event.title;
+          
+          const dateP = document.createElement("p");
+          dateP.style.cssText = "font-size: 11px; color: rgba(255,255,255,0.6); margin: 0 0 8px 0; font-family: inherit;";
+          dateP.textContent = dateStr;
+          
+          popupContainer.appendChild(headerDiv);
+          popupContainer.appendChild(titleH3);
+          popupContainer.appendChild(dateP);
+          
+          if (geo.magnitudeValue != null) {
+            const magP = document.createElement("p");
+            magP.style.cssText = `font-size: 11px; color: ${color}; font-weight: 600; margin: 0 0 8px 0; font-family: monospace;`;
+            magP.textContent = `Magnitude: ${formatMagnitude(geo.magnitudeValue, geo.magnitudeUnit)}`;
+            popupContainer.appendChild(magP);
+          }
+          
+          const linkA = document.createElement("a");
+          linkA.href = `/events/${event.id}`;
+          linkA.style.cssText = "font-size: 11px; font-weight: 600; color: #00d4aa; text-decoration: none; font-family: inherit; display: inline-block;";
+          linkA.textContent = "View Details \u2192";
+          popupContainer.appendChild(linkA);
+
+          const popup = new maplibregl.Popup({ offset: 12, closeButton: false })
+            .setDOMContent(popupContainer);
+          marker.setPopup(popup);
+          marker.togglePopup(); // immediately show it
+        }
       });
-
-      // Create custom dark styled Popup using DOM API to prevent XSS
-      const popupContainer = document.createElement("div");
-      popupContainer.style.cssText = "color: #ffffff; background: #0f1420; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); max-width: 220px; font-family: sans-serif;";
-      
-      const headerDiv = document.createElement("div");
-      headerDiv.style.cssText = "display: flex; align-items: center; gap: 6px; margin-bottom: 4px;";
-      const dotSpan = document.createElement("span");
-      dotSpan.style.cssText = `width: 8px; height: 8px; border-radius: 50%; background-color: ${color};`;
-      const catSpan = document.createElement("span");
-      catSpan.style.cssText = "font-size: 10px; font-weight: 600; text-transform: uppercase; color: rgba(255,255,255,0.5);";
-      catSpan.textContent = categoryLabel;
-      headerDiv.appendChild(dotSpan);
-      headerDiv.appendChild(catSpan);
-      
-      const titleH3 = document.createElement("h3");
-      titleH3.style.cssText = "font-size: 13px; font-weight: bold; margin: 0 0 6px 0; color: #ffffff; line-height: 1.3; font-family: inherit;";
-      titleH3.textContent = event.title;
-      
-      const dateP = document.createElement("p");
-      dateP.style.cssText = "font-size: 11px; color: rgba(255,255,255,0.6); margin: 0 0 8px 0; font-family: inherit;";
-      dateP.textContent = dateStr;
-      
-      popupContainer.appendChild(headerDiv);
-      popupContainer.appendChild(titleH3);
-      popupContainer.appendChild(dateP);
-      
-      if (geo.magnitudeValue != null) {
-        const magP = document.createElement("p");
-        magP.style.cssText = `font-size: 11px; color: ${color}; font-weight: 600; margin: 0 0 8px 0; font-family: monospace;`;
-        magP.textContent = `Magnitude: ${formatMagnitude(geo.magnitudeValue, geo.magnitudeUnit)}`;
-        popupContainer.appendChild(magP);
-      }
-      
-      const linkA = document.createElement("a");
-      linkA.href = `/events/${event.id}`;
-      linkA.style.cssText = "font-size: 11px; font-weight: 600; color: #00d4aa; text-decoration: none; font-family: inherit; display: inline-block;";
-      linkA.textContent = "View Details \u2192";
-      popupContainer.appendChild(linkA);
-
-      const popup = new maplibregl.Popup({ offset: 12, closeButton: false })
-        .setDOMContent(popupContainer);
 
       const marker = new maplibregl.Marker({ element: el })
         .setLngLat([lng, lat])
-        .setPopup(popup)
         .addTo(map);
 
       markersRef.current.push(marker);
@@ -318,6 +321,7 @@ export default function EventMap({
 
     return () => {
       markersRef.current.forEach((m) => m.remove());
+      markersRef.current = [];
     };
   }, [events, onEventClick]);
 

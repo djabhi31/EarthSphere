@@ -6,15 +6,15 @@ const EONET_API_BASE = 'https://eonet.gsfc.nasa.gov/api/v3';
 
 /**
  * Proxy route for NASA EONET v3 API
- * Handles CORS and adds caching for event data
+ * Handles CORS and adds caching for all EONET endpoints
  */
-export async function GET(request: Request) {
+export async function GET(request: Request, { params }: { params: Promise<{ path: string[] }> | { path: string[] } }) {
   try {
     const { searchParams } = new URL(request.url);
     const apiParams = new URLSearchParams();
 
     // Forward allowed query parameters
-    const allowedParams = ['status', 'limit', 'days', 'source', 'start', 'end'];
+    const allowedParams = ['status', 'limit', 'days', 'source', 'start', 'end', 'category', 'magID', 'magMin', 'magMax', 'bbox'];
     allowedParams.forEach((param) => {
       const value = searchParams.get(param);
       if (value) {
@@ -22,7 +22,10 @@ export async function GET(request: Request) {
       }
     });
 
-    const apiUrl = `${EONET_API_BASE}/events?${apiParams.toString()}`;
+    const resolvedParams = await params;
+    const endpointPath = resolvedParams.path.join('/');
+    const queryString = apiParams.toString();
+    const apiUrl = `${EONET_API_BASE}/${endpointPath}${queryString ? `?${queryString}` : ''}`;
 
     const response = await fetch(apiUrl, {
       headers: {
@@ -47,7 +50,7 @@ export async function GET(request: Request) {
   } catch (error) {
     console.error('Error proxying EONET API:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch event data from NASA EONET' },
+      { error: 'Failed to fetch data from NASA EONET' },
       { status: 500 }
     );
   }

@@ -28,8 +28,8 @@ export default function Error({
       <ParticleField className="fixed inset-0 z-0 pointer-events-none" />
       
       <motion.div 
-        initial="initial"
-        animate="animate"
+        initial="hidden"
+        animate="visible"
         variants={fadeInUp}
         className="relative z-10 glass rounded-3xl p-8 md:p-12 max-w-lg w-full text-center border border-destructive/20 shadow-2xl shadow-destructive/10"
       >

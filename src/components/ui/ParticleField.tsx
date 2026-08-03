@@ -243,6 +243,11 @@ export function ParticleField({
 
     // ── Animation loop ────────────────────────────────────────────────
     const animate = () => {
+      if (document.hidden) {
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      
       const rect = canvas.getBoundingClientRect();
       const w = rect.width;
       const h = rect.height;

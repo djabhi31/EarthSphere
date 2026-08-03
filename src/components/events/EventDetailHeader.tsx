@@ -35,8 +35,8 @@ export function EventDetailHeader({ event, duration }: EventDetailHeaderProps) {
       <motion.div
         className="relative z-10 mx-auto max-w-7xl px-6"
         variants={staggerContainer()}
-        initial="initial"
-        animate="animate"
+        initial="hidden"
+        animate="visible"
       >
         <motion.nav variants={staggerItem} className="mb-6 flex items-center gap-1 text-xs text-white/30 uppercase tracking-widest font-bold">
           <Link href="/" className="hover:text-white transition-colors cursor-none" onMouseEnter={() => audioSynth.playHover()} onClick={() => audioSynth.playClick()}>Home</Link>

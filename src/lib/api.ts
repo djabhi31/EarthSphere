@@ -9,7 +9,6 @@ import type {
   EONETGeoJSON,
   CategoriesResponse,
   SourcesResponse,
-  LayersResponse,
   MagnitudesResponse,
   FilterState,
 } from './types';
@@ -18,7 +17,7 @@ import type {
 // Configuration
 // -----------------------------------------------------------------------------
 
-const BASE_URL = 'https://eonet.gsfc.nasa.gov/api/v3';
+const BASE_URL = '/api/eonet';
 
 /** Default request timeout in milliseconds */
 const REQUEST_TIMEOUT = 15_000;

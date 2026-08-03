@@ -14,12 +14,13 @@ import { useEvent, useEvents } from "@/hooks/useEvents";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { audioSynth } from "@/lib/audio";
-import {
   getCategoryColor,
   getCategoryLabel,
   getEventStatus,
+  computeDuration,
+  getPointCoordinates,
 } from "@/lib/utils";
-import type { EventGeometry, Coordinate, EONETEvent } from "@/lib/types";
+import type { EONETEvent } from "@/lib/types";
 import { Activity, Globe, ExternalLink } from "lucide-react";
 
 import { EventDetailHeader } from "@/components/events/EventDetailHeader";
@@ -39,33 +40,6 @@ const EventMap = dynamic(() => import("@/components/map/EventMap"), {
   ),
 });
 
-function getPointCoordinates(geo: EventGeometry): [number, number] | null {
-  if (geo.type !== "Point") return null;
-  const coords = geo.coordinates as Coordinate;
-  if (coords.length < 2) return null;
-  return [coords[0], coords[1]];
-}
-
-function computeDuration(event: EONETEvent): string {
-  if (event.geometry.length === 0) return "—";
-  const firstDate = new Date(event.geometry[0].date);
-  const lastDate = event.closed
-    ? new Date(event.closed)
-    : new Date(event.geometry[event.geometry.length - 1].date);
-  const diffMs = lastDate.getTime() - firstDate.getTime();
-  if (diffMs < 0) return "< 1 day";
-
-  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  if (days === 0) return "< 1 day";
-  if (days === 1) return "1 day";
-  if (days < 30) return `${days} days`;
-  if (days < 365) {
-    const months = Math.floor(days / 30);
-    return `${months} month${months > 1 ? "s" : ""}`;
-  }
-  const years = Math.floor(days / 365);
-  return `${years} year${years > 1 ? "s" : ""}`;
-}
 
 function DetailSkeleton() {
   return (
