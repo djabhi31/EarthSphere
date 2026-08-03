@@ -14,6 +14,7 @@ import { useEvent, useEvents } from "@/hooks/useEvents";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { audioSynth } from "@/lib/audio";
+import {
   getCategoryColor,
   getCategoryLabel,
   getEventStatus,
