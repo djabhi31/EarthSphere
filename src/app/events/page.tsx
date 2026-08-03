@@ -11,6 +11,7 @@ import { ShareSession } from "@/components/features/ShareSession";
 import { SavedViews } from "@/components/features/SavedViews";
 import { useEarthSphereStore } from "@/lib/store";
 import type { EONETEvent, EventStatus, FilterState } from "@/lib/types";
+import { Navbar } from "@/components/layout/Navbar";
 
 const INITIAL_LIMIT = 50;
 const LOAD_MORE_INCREMENT = 50;
@@ -140,7 +141,9 @@ export default function EventsExplorerPage() {
   }, [setCategories, setStatus, setSearchInput]);
 
   return (
-    <main className="min-h-screen bg-canvas relative">
+    <>
+    <Navbar />
+    <main className="min-h-screen bg-canvas pt-20 flex flex-col">
       <div className="absolute top-6 right-4 sm:right-8 z-40">
         <ShareSession />
       </div>
@@ -175,5 +178,6 @@ export default function EventsExplorerPage() {
         totalEvents={data?.events?.length}
       />
     </main>
+    </>
   );
 }

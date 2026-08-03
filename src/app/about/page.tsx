@@ -8,6 +8,7 @@ import { ParticleField } from "@/components/ui/ParticleField";
 import { MissionSection } from "@/components/about/MissionSection";
 import { TechStack } from "@/components/about/TechStack";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/motion-presets";
+import { Navbar } from "@/components/layout/Navbar";
 
 /**
  * About Page
@@ -36,7 +37,10 @@ const SpotifyIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen pt-24 pb-32 bg-canvas relative overflow-hidden">
+    <>
+      <Navbar />
+      <div className="min-h-screen pt-24 pb-32 bg-canvas relative overflow-hidden">
+
       {/* Dynamic Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <motion.div 
@@ -222,5 +226,6 @@ export default function AboutPage() {
         
       </div>
     </div>
+    </>
   );
 }

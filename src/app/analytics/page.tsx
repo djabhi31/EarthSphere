@@ -37,6 +37,7 @@ import { StatsGrid } from "@/components/analytics/StatsGrid";
 import { ChartCard } from "@/components/analytics/ChartCard";
 import { InsightsPanel } from "@/components/analytics/InsightsPanel";
 import { fadeInUp } from "@/lib/motion-presets";
+import { Navbar } from "@/components/layout/Navbar";
 
 // Custom Tooltip for charts
 interface CustomTooltipProps {
@@ -131,7 +132,9 @@ export default function AnalyticsPage() {
   const totalEvents = (statsData?.totalActive ?? 0) + (statsData?.totalClosed ?? 0);
 
   return (
-    <main className="min-h-screen bg-canvas pt-24 pb-16">
+    <>
+      <Navbar activeEventCount={statsData?.totalActive} />
+      <main className="min-h-screen bg-canvas pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnalyticsHeader />
         
@@ -255,5 +258,6 @@ export default function AnalyticsPage() {
         </motion.div>
       </div>
     </main>
+    </>
   );
 }
