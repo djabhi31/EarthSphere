@@ -37,14 +37,27 @@ const SpotifyIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export default function AboutPage() {
   return (
     <div className="min-h-screen pt-24 pb-32 bg-canvas relative overflow-hidden">
-      {/* Background Elements */}
+      {/* Dynamic Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-electric-cyan/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-cosmic-purple/5 rounded-full blur-[150px]" />
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3], x: [0, 50, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-electric-cyan/10 rounded-full blur-[150px]" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2], y: [0, -50, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[-20%] right-[-10%] w-[1000px] h-[1000px] bg-cosmic-purple/10 rounded-full blur-[150px]" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.3, 0.1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+          className="absolute top-[40%] left-[40%] w-[600px] h-[600px] bg-solar-orange/5 rounded-full blur-[150px]" 
+        />
       </div>
-      <ParticleField className="fixed inset-0 z-0 pointer-events-none opacity-60" />
+      <ParticleField className="fixed inset-0 z-0 pointer-events-none opacity-50" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-32">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 space-y-40">
         
         {/* Section 1: Hero Mission Statement */}
         <MissionSection />
@@ -55,43 +68,61 @@ export default function AboutPage() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative"
         >
+          {/* Connector Line (visible on desktop) */}
+          <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-px bg-gradient-to-r from-electric-cyan via-transparent to-cosmic-purple opacity-50" />
+
           <div className="space-y-8">
-            <motion.div variants={staggerItem} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-elevated/50 border border-border-subtle backdrop-blur-md">
-              <Sparkles className="w-4 h-4 text-solar-orange" />
-              <span className="text-sm font-medium tracking-wide text-text-secondary uppercase">Powered by NASA EONET</span>
+            <motion.div variants={staggerItem} className="inline-flex items-center gap-3 px-4 py-2.5 rounded-full bg-surface-elevated/80 border border-electric-cyan/20 backdrop-blur-xl shadow-[0_0_20px_rgba(0,240,255,0.05)]">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-solar-orange opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-solar-orange"></span>
+              </span>
+              <span className="text-sm font-semibold tracking-[0.15em] text-white uppercase">Powered by EONET v3</span>
             </motion.div>
-            <motion.h2 variants={staggerItem} className="text-4xl md:text-5xl font-bold tracking-tight text-text-primary leading-tight">
-              Real-Time Intelligence from the <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-ice-blue">Cosmos</span>
+            
+            <motion.h2 variants={staggerItem} className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+              Real-Time <br />
+              Intelligence from <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan via-ice-blue to-cosmic-purple">
+                the Cosmos
+              </span>
             </motion.h2>
+            
             <motion.p variants={staggerItem} className="text-text-secondary leading-relaxed text-lg md:text-xl font-light">
               The Earth Observatory Natural Event Tracker (EONET) is a NASA API that provides continuous, curated data on natural events. From wildfires in California to storms in the Pacific, EONET aggregates data from multiple international monitoring agencies.
             </motion.p>
-            <motion.p variants={staggerItem} className="text-text-secondary leading-relaxed text-lg md:text-xl font-light">
-              EarthSphere leverages the latest EONET v3 architecture to bring this critical data to the surface in real-time, completely free and open for public use.
-            </motion.p>
+            
             <motion.div variants={staggerItem} className="pt-6">
-              <a href="https://eonet.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center justify-center text-sm font-semibold h-12 bg-text-primary text-space-black hover:bg-text-primary/90 rounded-full px-8 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105">
-                Explore EONET API <Globe className="w-4 h-4 ml-2 group-hover:rotate-12 transition-transform" />
+              <a href="https://eonet.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer" className="group relative inline-flex items-center justify-center text-sm font-bold h-14 bg-white text-space-black rounded-full px-8 overflow-hidden transition-transform hover:scale-105 active:scale-95">
+                <div className="absolute inset-0 bg-gradient-to-r from-electric-cyan to-cosmic-purple opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+                <span className="relative flex items-center gap-2">
+                  Explore EONET Architecture 
+                  <Globe className="w-4 h-4 group-hover:rotate-[360deg] transition-transform duration-700 ease-in-out" />
+                </span>
               </a>
             </motion.div>
           </div>
-          <motion.div variants={staggerItem} className="h-full">
-            <GlassCard className="p-8 aspect-square lg:aspect-auto h-full flex flex-col justify-center relative overflow-hidden group hover:border-electric-cyan/40 transition-colors duration-500 rounded-3xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-electric-cyan/10 via-transparent to-cosmic-purple/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+          <motion.div variants={staggerItem} className="h-full relative group perspective-1000">
+            <div className="absolute -inset-4 bg-gradient-to-br from-electric-cyan/20 via-transparent to-cosmic-purple/20 rounded-[2.5rem] blur-xl group-hover:blur-2xl transition-all duration-700 opacity-50" />
+            <GlassCard className="p-8 h-full flex flex-col justify-center relative overflow-hidden group-hover:border-electric-cyan/40 transition-all duration-700 rounded-[2rem] bg-surface-elevated/40 backdrop-blur-2xl transform-gpu group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-electric-cyan/10">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-electric-cyan/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               
-              <div className="relative z-10 grid grid-cols-2 gap-6">
+              <div className="relative z-10 grid grid-cols-2 gap-4 md:gap-6">
                 {[
-                  { icon: Radio, label: "Live Data Feed", desc: "Real-time sync", color: "text-electric-cyan", bg: "group-hover:bg-electric-cyan/10" },
-                  { icon: Shield, label: "Verified Sources", desc: "NASA & Global", color: "text-ice-blue", bg: "group-hover:bg-ice-blue/10" },
-                  { icon: Layers, label: "13 Categories", desc: "Comprehensive", color: "text-solar-orange", bg: "group-hover:bg-solar-orange/10" },
-                  { icon: Globe, label: "Global Coverage", desc: "Worldwide events", color: "text-cosmic-purple", bg: "group-hover:bg-cosmic-purple/10" },
+                  { icon: Radio, label: "Live Data Feed", desc: "Real-time global sync", color: "text-electric-cyan", bg: "group-hover:bg-electric-cyan/10", border: "group-hover:border-electric-cyan/30" },
+                  { icon: Shield, label: "Verified Sources", desc: "NASA & global orgs", color: "text-ice-blue", bg: "group-hover:bg-ice-blue/10", border: "group-hover:border-ice-blue/30" },
+                  { icon: Layers, label: "13 Categories", desc: "Volcanoes to icebergs", color: "text-solar-orange", bg: "group-hover:bg-solar-orange/10", border: "group-hover:border-solar-orange/30" },
+                  { icon: Globe, label: "Global Coverage", desc: "Borderless tracking", color: "text-cosmic-purple", bg: "group-hover:bg-cosmic-purple/10", border: "group-hover:border-cosmic-purple/30" },
                 ].map((item, i) => (
-                  <div key={i} className={`flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-surface-elevated/40 border border-border-subtle ${item.bg} transition-all duration-500 hover:-translate-y-1`}>
-                    <item.icon className={`w-8 h-8 mb-3 ${item.color}`} />
-                    <span className="font-semibold text-text-primary mb-1">{item.label}</span>
-                    <span className="text-xs text-text-muted">{item.desc}</span>
+                  <div key={i} className={`flex flex-col items-center justify-center text-center p-6 md:p-8 rounded-3xl bg-surface/50 border border-border-default backdrop-blur-md ${item.bg} ${item.border} transition-all duration-500 hover:-translate-y-2 hover:shadow-xl`}>
+                    <div className={`p-4 rounded-2xl bg-surface-elevated border border-border-subtle mb-4 shadow-inner ${item.color}`}>
+                      <item.icon className="w-6 h-6 md:w-8 md:h-8" />
+                    </div>
+                    <span className="font-bold text-white mb-2">{item.label}</span>
+                    <span className="text-xs md:text-sm text-text-muted font-light">{item.desc}</span>
                   </div>
                 ))}
               </div>
