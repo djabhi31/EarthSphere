@@ -2,7 +2,7 @@
 
 import { getCategoryColor, getCategoryLabel, CATEGORY_CONFIG } from "@/lib/utils";
 import { cn } from "@/lib/utils";
-import { Plus, Minus, Map, Satellite, Mountain, Flame } from "lucide-react";
+import { Plus, Minus, Map, Satellite, Mountain, Flame, Radio, Sun, Activity } from "lucide-react";
 import type { TileLayerType } from "./EventMap";
 
 interface MapControlsProps {
@@ -14,6 +14,12 @@ interface MapControlsProps {
   showLegend?: boolean;
   heatmapEnabled?: boolean;
   onToggleHeatmap?: () => void;
+  radarEnabled?: boolean;
+  onToggleRadar?: () => void;
+  dayNightEnabled?: boolean;
+  onToggleDayNight?: () => void;
+  tectonicEnabled?: boolean;
+  onToggleTectonic?: () => void;
 }
 
 export function MapControls({
@@ -25,6 +31,12 @@ export function MapControls({
   showLegend = true,
   heatmapEnabled = false,
   onToggleHeatmap,
+  radarEnabled = false,
+  onToggleRadar,
+  dayNightEnabled = false,
+  onToggleDayNight,
+  tectonicEnabled = false,
+  onToggleTectonic,
 }: MapControlsProps) {
   const tiles: { id: TileLayerType; label: string; icon: React.ReactNode }[] = [
     { id: "dark", label: "Dark", icon: <Map className="w-3.5 h-3.5" /> },
@@ -53,22 +65,72 @@ export function MapControls({
         </button>
       </div>
 
-      {/* Heatmap Toggle */}
-      {onToggleHeatmap && (
+      {/* Heatmap & Radar Toggles */}
+      {(onToggleHeatmap || onToggleRadar) && (
         <div className="glass rounded-xl overflow-hidden flex flex-col">
-          <button
-            onClick={onToggleHeatmap}
-            className={cn(
-              "p-2.5 flex justify-center transition-colors",
-              heatmapEnabled
-                ? "text-[#00d4aa] bg-white/10 shadow-[inset_0_0_8px_rgba(0,212,170,0.2)]"
-                : "text-white/70 hover:text-white hover:bg-white/10"
-            )}
-            aria-label="Toggle Heatmap"
-            title="Toggle Heatmap"
-          >
-            <Flame className="w-4 h-4" />
-          </button>
+          {onToggleHeatmap && (
+            <button
+              onClick={onToggleHeatmap}
+              className={cn(
+                "p-2.5 flex justify-center transition-colors",
+                heatmapEnabled
+                  ? "text-[#00d4aa] bg-white/10 shadow-[inset_0_0_8px_rgba(0,212,170,0.2)]"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
+              )}
+              aria-label="Toggle Heatmap"
+              title="Toggle Heatmap"
+            >
+              <Flame className="w-4 h-4" />
+            </button>
+          )}
+          {onToggleHeatmap && onToggleRadar && <div className="h-px bg-white/10" />}
+          {onToggleRadar && (
+            <button
+              onClick={onToggleRadar}
+              className={cn(
+                "p-2.5 flex justify-center transition-colors",
+                radarEnabled
+                  ? "text-[#00d4aa] bg-white/10 shadow-[inset_0_0_8px_rgba(0,212,170,0.2)]"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
+              )}
+              aria-label="Toggle Tactical Radar"
+              title="Toggle Tactical Radar"
+            >
+              <Radio className="w-4 h-4" />
+            </button>
+          )}
+          {onToggleDayNight && <div className="h-px bg-white/10" />}
+          {onToggleDayNight && (
+            <button
+              onClick={onToggleDayNight}
+              className={cn(
+                "p-2.5 flex justify-center transition-colors",
+                dayNightEnabled
+                  ? "text-[#00d4aa] bg-white/10 shadow-[inset_0_0_8px_rgba(0,212,170,0.2)]"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
+              )}
+              aria-label="Toggle Solar Terminator"
+              title="Toggle Solar Terminator"
+            >
+              <Sun className="w-4 h-4" />
+            </button>
+          )}
+          {onToggleTectonic && <div className="h-px bg-white/10" />}
+          {onToggleTectonic && (
+            <button
+              onClick={onToggleTectonic}
+              className={cn(
+                "p-2.5 flex justify-center transition-colors",
+                tectonicEnabled
+                  ? "text-amber-400 bg-white/10 shadow-[inset_0_0_8px_rgba(245,158,11,0.2)]"
+                  : "text-white/70 hover:text-white hover:bg-white/10"
+              )}
+              aria-label="Toggle Tectonic Fault Lines"
+              title="Toggle Tectonic Fault Lines"
+            >
+              <Activity className="w-4 h-4" />
+            </button>
+          )}
         </div>
       )}
 

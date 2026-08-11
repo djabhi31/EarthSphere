@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import { X, MapPin, Clock, Activity, ExternalLink, ChevronRight } from 'lucide-react';
+import { useEarthSphereStore } from '@/lib/store';
 import { 
   cn, 
   getCategoryColor, 
@@ -14,6 +16,9 @@ import { formatCoordinates } from '@/lib/utils';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { SeverityBadge } from '@/components/ui/SeverityBadge';
 import { DistanceCalculator } from '@/components/features/DistanceCalculator';
+import { TrajectoryCalculator } from '@/components/features/TrajectoryCalculator';
+import { CarbonEstimator } from '@/components/features/CarbonEstimator';
+import { VolcanoPlumeCalculator } from '@/components/features/VolcanoPlumeCalculator';
 import type { EONETEvent } from '@/lib/types';
 import { slideUp } from '@/lib/motion-presets';
 
@@ -30,6 +35,14 @@ export interface EventDetailPanelProps {
  * Slide-in overlay from the right displaying full event details.
  */
 export function EventDetailPanel({ event, onClose }: EventDetailPanelProps) {
+  const addRecentEvent = useEarthSphereStore((state) => state.addRecentEvent);
+
+  useEffect(() => {
+    if (event?.id) {
+      addRecentEvent(event.id);
+    }
+  }, [event?.id, addRecentEvent]);
+
   if (!event) return null;
 
   const selectedGeo = getLatestGeometry(event);
@@ -175,6 +188,13 @@ export function EventDetailPanel({ event, onClose }: EventDetailPanelProps) {
                 </div>
               </div>
             )}
+
+            {/* Trajectory & Footprint Analysis */}
+            <TrajectoryCalculator event={event} />
+
+            {/* Carbon & Volcano Plume Estimators */}
+            <CarbonEstimator event={event} />
+            <VolcanoPlumeCalculator event={event} />
 
             {/* Distance Proximity Calculator */}
             <DistanceCalculator event={event} />

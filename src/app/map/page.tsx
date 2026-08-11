@@ -10,6 +10,11 @@ import { MapLegend } from "@/components/map/MapLegend";
 import { EventDetailPanel } from "@/components/map/EventDetailPanel";
 import { TimelinePlayer } from "@/components/map/TimelinePlayer";
 import { HotspotPresets } from "@/components/map/HotspotPresets";
+import { RadarOverlay } from "@/components/map/RadarOverlay";
+import { DayNightTerminator } from "@/components/map/DayNightTerminator";
+import { TectonicPlatesOverlay } from "@/components/map/TectonicPlatesOverlay";
+import { LayerOpacityControl } from "@/components/map/LayerOpacityControl";
+import { MapPitchControls } from "@/components/map/MapPitchControls";
 import { CATEGORY_CONFIG } from "@/lib/utils";
 import type { TileLayerType } from "@/components/map/EventMap";
 import type { EONETEvent } from "@/lib/types";
@@ -41,6 +46,13 @@ export default function MapPage() {
   const setDateRange = useEarthSphereStore((state) => state.setDateRange);
   const heatmapEnabled = useEarthSphereStore((state) => state.heatmapEnabled);
   const toggleHeatmap = useEarthSphereStore((state) => state.toggleHeatmap);
+  const radarEnabled = useEarthSphereStore((state) => state.radarEnabled);
+  const toggleRadar = useEarthSphereStore((state) => state.toggleRadar);
+  const dayNightEnabled = useEarthSphereStore((state) => state.dayNightEnabled);
+  const toggleDayNight = useEarthSphereStore((state) => state.toggleDayNight);
+  const tectonicEnabled = useEarthSphereStore((state) => state.tectonicEnabled);
+  const toggleTectonic = useEarthSphereStore((state) => state.toggleTectonic);
+  const layerOpacity = useEarthSphereStore((state) => state.layerOpacity);
 
   const { data: eventsData, isLoading, isError } = useEvents({
     status: "all", // Fetch all and filter locally so we have full data for sidebar search
@@ -104,7 +116,10 @@ export default function MapPage() {
       <Navbar activeEventCount={activeCount} />
 
       {/* Main Map */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" style={{ opacity: layerOpacity }}>
+        <RadarOverlay enabled={radarEnabled} />
+        <DayNightTerminator enabled={dayNightEnabled} />
+        <TectonicPlatesOverlay enabled={tectonicEnabled} />
         {isError ? (
           <div className="h-full w-full flex items-center justify-center text-warning">
             <p>Unable to load map data.</p>
@@ -146,7 +161,8 @@ export default function MapPage() {
 
       <MapLegend categories={CATEGORY_CONFIG} />
 
-      <div className="absolute top-20 right-4 z-30 hidden md:block">
+      <div className="absolute top-20 right-4 z-30 hidden md:flex items-center gap-2">
+        <LayerOpacityControl />
         <HotspotPresets map={mapRef.current} />
       </div>
 
@@ -155,7 +171,8 @@ export default function MapPage() {
         onTimelineFilter={setTimeFilteredEvents} 
       />
 
-      <div className="absolute bottom-6 right-4 z-30">
+      <div className="absolute bottom-6 right-4 z-30 flex flex-col gap-3 items-end">
+        <MapPitchControls map={mapRef.current} />
         <MapControls
           onZoomIn={handleZoomIn}
           onZoomOut={handleZoomOut}
@@ -164,6 +181,12 @@ export default function MapPage() {
           showLegend={false}
           heatmapEnabled={heatmapEnabled}
           onToggleHeatmap={toggleHeatmap}
+          radarEnabled={radarEnabled}
+          onToggleRadar={toggleRadar}
+          dayNightEnabled={dayNightEnabled}
+          onToggleDayNight={toggleDayNight}
+          tectonicEnabled={tectonicEnabled}
+          onToggleTectonic={toggleTectonic}
         />
       </div>
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from "motion/react";
-import { Menu, Radio, Bell } from "lucide-react";
+import { Menu, Radio, Bell, Cpu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Sheet,
@@ -15,7 +15,10 @@ import {
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { SoundToggle } from "@/components/ui/SoundToggle";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { ThemeCustomizer } from "@/components/features/ThemeCustomizer";
 import { WatchlistPanel } from "@/components/features/WatchlistPanel";
+import { AIBriefingModal } from "@/components/features/AIBriefingModal";
+import { useEvents } from "@/hooks/useEvents";
 import { audioSynth } from "@/lib/audio";
 
 // ---------------------------------------------------------------------------
@@ -44,6 +47,10 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
   const prefersReduced = useReducedMotion();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [watchlistOpen, setWatchlistOpen] = useState(false);
+  const [aiBriefingOpen, setAiBriefingOpen] = useState(false);
+
+  const { data: eventsData } = useEvents({ status: 'open' });
+  const eventsList = eventsData?.events || [];
 
   // Scroll-based opacity
   const { scrollY } = useScroll();
@@ -134,7 +141,18 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
 
         {/* ── Right: Event count badge & Toggles ────────────── */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="flex items-center">
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => {
+                setAiBriefingOpen(true);
+                audioSynth.playClick();
+              }}
+              className="p-2 text-electric-cyan hover:bg-electric-cyan/10 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4aa]"
+              aria-label="Open AI Briefing"
+              title="AI Disaster Intelligence Briefing"
+            >
+              <Cpu size={18} />
+            </button>
             <button
               onClick={() => {
                 setWatchlistOpen(true);
@@ -143,8 +161,9 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
               className="p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4aa]"
               aria-label="Open Watchlist"
             >
-              <Bell size={20} />
+              <Bell size={18} />
             </button>
+            <ThemeCustomizer />
             <ThemeToggle />
             <SoundToggle />
           </div>
@@ -231,6 +250,11 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
       <WatchlistPanel 
         isOpen={watchlistOpen} 
         onClose={() => setWatchlistOpen(false)} 
+      />
+      <AIBriefingModal
+        events={eventsList}
+        isOpen={aiBriefingOpen}
+        onClose={() => setAiBriefingOpen(false)}
       />
     </motion.header>
   );

@@ -13,6 +13,29 @@ import type { DateRange, EventStatus, MapViewport, ViewMode } from './types';
 
 const WATCHLIST_KEY = 'earthsphere-watchlist';
 const LAST_VISIT_KEY = 'earthsphere-last-visit';
+const NOTES_KEY = 'earthsphere-event-notes';
+
+export interface EventNoteData {
+  note: string;
+  tags: string[];
+  updatedAt: number;
+}
+
+function loadEventNotes(): Record<string, EventNoteData> {
+  if (typeof window === 'undefined') return {};
+  try {
+    const raw = localStorage.getItem(NOTES_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch { /* ignore */ }
+  return {};
+}
+
+function saveEventNotes(notes: Record<string, EventNoteData>) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+  } catch { /* ignore */ }
+}
 
 function loadWatchlist(): { categories: string[]; eventIds: string[] } {
   if (typeof window === 'undefined') return { categories: [], eventIds: [] };
@@ -88,6 +111,29 @@ interface EarthSphereState {
   watchedEventIds: string[];
   lastVisitTimestamp: number;
 
+  // Radar Overlay
+  radarEnabled: boolean;
+  toggleRadar: () => void;
+
+  // Day/Night & Tectonic Overlays
+  dayNightEnabled: boolean;
+  toggleDayNight: () => void;
+  tectonicEnabled: boolean;
+  toggleTectonic: () => void;
+  layerOpacity: number;
+  setLayerOpacity: (opacity: number) => void;
+
+  // Personalization & Shortcuts
+  accentTheme: 'cyan' | 'pink' | 'orange' | 'emerald';
+  setAccentTheme: (theme: 'cyan' | 'pink' | 'orange' | 'emerald') => void;
+  recentEvents: string[];
+  addRecentEvent: (eventId: string) => void;
+
+  // Event Notes & Tags
+  eventNotes: Record<string, EventNoteData>;
+  setEventNote: (eventId: string, note: string, tags: string[]) => void;
+  deleteEventNote: (eventId: string) => void;
+
   // Actions — Filters
   setCategories: (categories: string[]) => void;
   toggleCategory: (categoryId: string) => void;
@@ -162,6 +208,7 @@ export const useEarthSphereStore = create<EarthSphereState>()(
     (set, get) => {
       const initialWatchlist = loadWatchlist();
       const initialLastVisit = loadLastVisit();
+      const initialNotes = loadEventNotes();
 
       return {
       // -----------------------------------------------------------------------
@@ -173,9 +220,55 @@ export const useEarthSphereStore = create<EarthSphereState>()(
       viewMode: 'grid' as ViewMode,
       ...DEFAULT_TIMELINE,
       heatmapEnabled: false,
+      radarEnabled: false,
+      dayNightEnabled: false,
+      tectonicEnabled: false,
+      layerOpacity: 1,
+      accentTheme: 'cyan' as const,
+      recentEvents: [],
+      eventNotes: initialNotes,
       watchedCategories: initialWatchlist.categories,
       watchedEventIds: initialWatchlist.eventIds,
       lastVisitTimestamp: initialLastVisit,
+
+      toggleRadar: () =>
+        set((state) => ({ radarEnabled: !state.radarEnabled }), undefined, 'toggleRadar'),
+
+      toggleDayNight: () =>
+        set((state) => ({ dayNightEnabled: !state.dayNightEnabled }), undefined, 'toggleDayNight'),
+
+      toggleTectonic: () =>
+        set((state) => ({ tectonicEnabled: !state.tectonicEnabled }), undefined, 'toggleTectonic'),
+
+      setLayerOpacity: (layerOpacity) =>
+        set({ layerOpacity }, undefined, 'setLayerOpacity'),
+
+      setAccentTheme: (accentTheme) =>
+        set({ accentTheme }, undefined, 'setAccentTheme'),
+
+      addRecentEvent: (eventId) =>
+        set((state) => {
+          const filtered = state.recentEvents.filter((id) => id !== eventId);
+          return { recentEvents: [eventId, ...filtered].slice(0, 5) };
+        }, undefined, 'addRecentEvent'),
+
+      setEventNote: (eventId, note, tags) =>
+        set((state) => {
+          const updated = {
+            ...state.eventNotes,
+            [eventId]: { note, tags, updatedAt: Date.now() },
+          };
+          saveEventNotes(updated);
+          return { eventNotes: updated };
+        }, undefined, 'setEventNote'),
+
+      deleteEventNote: (eventId) =>
+        set((state) => {
+          const updated = { ...state.eventNotes };
+          delete updated[eventId];
+          saveEventNotes(updated);
+          return { eventNotes: updated };
+        }, undefined, 'deleteEventNote'),
 
       // -----------------------------------------------------------------------
       // Filter Actions

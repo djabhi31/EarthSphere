@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { useEvents, useCategories, useSources, useEventStats } from "@/hooks/useEvents";
 import { getCategoryColor, getCategoryLabel } from "@/lib/utils";
@@ -36,6 +36,14 @@ import { AnalyticsHeader } from "@/components/analytics/AnalyticsHeader";
 import { StatsGrid } from "@/components/analytics/StatsGrid";
 import { ChartCard } from "@/components/analytics/ChartCard";
 import { InsightsPanel } from "@/components/analytics/InsightsPanel";
+import { TrendPredictor } from "@/components/analytics/TrendPredictor";
+import { CountryRiskTable } from "@/components/analytics/CountryRiskTable";
+import { CategoryChart } from "@/components/analytics/CategoryChart";
+import { YearlyComparisonChart } from "@/components/analytics/YearlyComparisonChart";
+import { SurgeDetector } from "@/components/analytics/SurgeDetector";
+import { SafetyGuideModal } from "@/components/features/SafetyGuideModal";
+import { AlertThresholdModal } from "@/components/features/AlertThresholdModal";
+import { PrintReportView } from "@/components/features/PrintReportView";
 import { fadeInUp } from "@/lib/motion-presets";
 import { Navbar } from "@/components/layout/Navbar";
 
@@ -73,7 +81,11 @@ export default function AnalyticsPage() {
   const { data: categoriesData } = useCategories();
   const { data: sourcesData } = useSources();
 
+  const [safetyModalOpen, setSafetyModalOpen] = useState(false);
+  const [alertConfigOpen, setAlertConfigOpen] = useState(false);
+
   const isLoading = statsLoading || eventsLoading;
+  const eventsList = eventsData?.events || [];
 
   // Chart Data Preparation
   const categoryChartData = useMemo(() => {
@@ -136,8 +148,25 @@ export default function AnalyticsPage() {
       <Navbar activeEventCount={statsData?.totalActive} />
       <main className="min-h-screen bg-canvas pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnalyticsHeader events={eventsData?.events} />
-        
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <AnalyticsHeader events={eventsData?.events} />
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSafetyModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold hover:bg-emerald-500/20 transition-colors"
+            >
+              Safety Guide
+            </button>
+            <button
+              onClick={() => setAlertConfigOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan text-xs font-semibold hover:bg-electric-cyan/20 transition-colors"
+            >
+              Alert Thresholds
+            </button>
+            <PrintReportView events={eventsList} />
+          </div>
+        </div>
+
         <StatsGrid 
           stats={statsData} 
           totalCategories={categoriesData?.categories?.length ?? 0}
@@ -145,7 +174,28 @@ export default function AnalyticsPage() {
           isLoading={isLoading} 
         />
 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+          <TrendPredictor events={eventsList} />
+          <SurgeDetector events={eventsList} />
+        </div>
+
         <InsightsPanel stats={statsData} isLoading={isLoading} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 my-6">
+          <CategoryChart events={eventsList} />
+          <YearlyComparisonChart events={eventsList} />
+          <CountryRiskTable events={eventsList} className="lg:col-span-2" />
+        </div>
+
+        <SafetyGuideModal
+          isOpen={safetyModalOpen}
+          onClose={() => setSafetyModalOpen(false)}
+        />
+
+        <AlertThresholdModal
+          isOpen={alertConfigOpen}
+          onClose={() => setAlertConfigOpen(false)}
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <ChartCard title="Events by Category" icon={<BarChart3 className="w-5 h-5 text-electric-cyan" />}>

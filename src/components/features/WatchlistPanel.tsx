@@ -1,12 +1,14 @@
 "use client";
 
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Bell, Trash2, X } from "lucide-react";
+import { Bell, Trash2, X, FileText } from "lucide-react";
 import { cn, getCategoryLabel, CATEGORY_CONFIG, timeAgo, getCategoryColor } from "@/lib/utils";
 import { useEarthSphereStore } from "@/lib/store";
 import { useEvents } from "@/hooks/useEvents";
 import { CategoryIcon } from "@/components/ui/CategoryIcon";
+import { WatchlistNotesModal } from "@/components/features/WatchlistNotesModal";
+import type { EONETEvent } from "@/lib/types";
 import { audioSynth } from "@/lib/audio";
 import Link from "next/link";
 import { durations } from "@/lib/design-tokens";
@@ -24,7 +26,10 @@ export function WatchlistPanel({ isOpen, onClose }: WatchlistPanelProps) {
     clearWatchlist,
     lastVisitTimestamp,
     updateLastVisit,
+    eventNotes,
   } = useEarthSphereStore();
+
+  const [notesModalEvent, setNotesModalEvent] = useState<EONETEvent | null>(null);
 
   const { data: eventsData, isLoading } = useEvents({ status: "all", days: 30 });
 
@@ -159,24 +164,56 @@ export function WatchlistPanel({ isOpen, onClose }: WatchlistPanelProps) {
                   {watchedEventIds.length === 0 ? (
                     <p className="text-sm text-white/30 text-center py-4">No bookmarked events.</p>
                   ) : (
-                    bookmarkedEvents.map(event => (
-                      <Link 
-                        key={event.id} 
-                        href={`/events/${event.id}`}
-                        onClick={onClose}
-                        className="flex items-center justify-between bg-white/5 hover:bg-white/10 p-3 rounded-xl transition-all group"
-                      >
-                        <div className="flex items-center gap-3 overflow-hidden">
-                          <div 
-                            className="w-2 h-2 rounded-full shrink-0" 
-                            style={{ backgroundColor: getCategoryColor(event.categories[0]?.id) }}
-                          />
-                          <p className="text-sm text-white/80 font-medium truncate group-hover:text-white">
-                            {event.title}
-                          </p>
+                    bookmarkedEvents.map(event => {
+                      const noteData = eventNotes[event.id];
+                      return (
+                        <div key={event.id} className="flex flex-col bg-white/5 p-3 rounded-xl border border-white/5 space-y-2">
+                          <div className="flex items-center justify-between">
+                            <Link 
+                              href={`/events/${event.id}`}
+                              onClick={onClose}
+                              className="flex items-center gap-3 overflow-hidden flex-1"
+                            >
+                              <div 
+                                className="w-2 h-2 rounded-full shrink-0" 
+                                style={{ backgroundColor: getCategoryColor(event.categories[0]?.id) }}
+                              />
+                              <p className="text-sm text-white/80 font-medium truncate hover:text-white">
+                                {event.title}
+                              </p>
+                            </Link>
+
+                            <button
+                              onClick={() => setNotesModalEvent(event)}
+                              className={cn(
+                                "p-1.5 rounded-lg transition-colors ml-2 shrink-0",
+                                noteData
+                                  ? "text-electric-cyan bg-electric-cyan/10"
+                                  : "text-white/30 hover:text-white hover:bg-white/10"
+                              )}
+                              title="Add / Edit Personal Note"
+                            >
+                              <FileText size={14} />
+                            </button>
+                          </div>
+
+                          {noteData && (
+                            <div className="pl-5 text-xs text-white/60 space-y-1">
+                              {noteData.note && <p className="italic line-clamp-2">"{noteData.note}"</p>}
+                              {noteData.tags?.length > 0 && (
+                                <div className="flex flex-wrap gap-1">
+                                  {noteData.tags.map(t => (
+                                    <span key={t} className="px-1.5 py-0.5 rounded text-[9px] bg-electric-cyan/10 text-electric-cyan font-semibold">
+                                      {t}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          )}
                         </div>
-                      </Link>
-                    ))
+                      );
+                    })
                   )}
                 </div>
               </div>
@@ -196,6 +233,12 @@ export function WatchlistPanel({ isOpen, onClose }: WatchlistPanelProps) {
               </button>
             </div>
           </motion.div>
+
+          <WatchlistNotesModal
+            event={notesModalEvent}
+            isOpen={!!notesModalEvent}
+            onClose={() => setNotesModalEvent(null)}
+          />
         </>
       )}
     </AnimatePresence>

@@ -10,6 +10,9 @@ import { EventGrid } from "@/components/events/EventGrid";
 import { ShareSession } from "@/components/features/ShareSession";
 import { SavedViews } from "@/components/features/SavedViews";
 import { EventCompareModal } from "@/components/features/EventCompareModal";
+import { BBoxFilter } from "@/components/features/BBoxFilter";
+import { RecentEventsBar } from "@/components/features/RecentEventsBar";
+import { ShortcutsModal } from "@/components/features/ShortcutsModal";
 import { useEarthSphereStore } from "@/lib/store";
 import type { EONETEvent, EventStatus, FilterState } from "@/lib/types";
 import { Navbar } from "@/components/layout/Navbar";
@@ -172,7 +175,11 @@ export default function EventsExplorerPage() {
         <ShareSession />
       </div>
       <EventsHeader eventCount={filteredEvents.length} isLoading={isLoading} />
+      <div className="px-4 sm:px-6 lg:px-8 my-2">
+        <RecentEventsBar />
+      </div>
       <div className="flex justify-end items-center gap-3 px-4 sm:px-6 lg:px-8 mt-2 -mb-4 relative z-40">
+        <BBoxFilter onApplyBBox={() => {}} />
         <button
           onClick={handleOpenCompare}
           disabled={filteredEvents.length === 0}
@@ -218,6 +225,7 @@ export default function EventsExplorerPage() {
         allEvents={filteredEvents}
         onSelectEventB={setCompareEventB}
       />
+      <ShortcutsModal />
     </main>
     </>
   );
