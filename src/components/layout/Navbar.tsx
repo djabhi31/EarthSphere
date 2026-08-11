@@ -16,6 +16,7 @@ import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { SoundToggle } from "@/components/ui/SoundToggle";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { ThemeCustomizer } from "@/components/features/ThemeCustomizer";
+import { UserClock } from "@/components/ui/UserClock";
 import { WatchlistPanel } from "@/components/features/WatchlistPanel";
 import { AIBriefingModal } from "@/components/features/AIBriefingModal";
 import { useEvents } from "@/hooks/useEvents";
@@ -141,6 +142,9 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
 
         {/* ── Right: Event count badge & Toggles ────────────── */}
         <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hidden sm:block">
+            <UserClock />
+          </div>
           <div className="flex items-center gap-1">
             <button
               onClick={() => {

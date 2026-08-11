@@ -16,6 +16,7 @@ import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { CategoryIcon } from "@/components/ui/CategoryIcon";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { SeverityBadge } from "@/components/ui/SeverityBadge";
+import { EventLocalTime } from "@/components/ui/EventLocalTime";
 import { WatchlistButton } from "@/components/features/WatchlistButton";
 import { audioSynth } from "@/lib/audio";
 
@@ -77,14 +78,17 @@ export function EventCard({ event, className, index = 0 }: EventCardProps) {
         {event.title}
       </h3>
 
-      {/* Date info */}
-      <div className="flex items-center gap-1.5 text-xs text-white/40">
-        <Calendar size={12} aria-hidden="true" />
-        {startDate && (
-          <span>
-            {formatDate(startDate)} · {timeAgo(startDate)}
-          </span>
-        )}
+      {/* Date & Site Time info */}
+      <div className="flex flex-col gap-1 text-xs text-white/40">
+        <div className="flex items-center gap-1.5">
+          <Calendar size={12} aria-hidden="true" />
+          {startDate && (
+            <span>
+              {formatDate(startDate)} · {timeAgo(startDate)}
+            </span>
+          )}
+        </div>
+        <EventLocalTime event={event} />
       </div>
 
       {/* Coordinates */}

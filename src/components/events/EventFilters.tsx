@@ -161,6 +161,10 @@ export function EventFilters({
               )}
             </div>
 
+            <span className="hidden xl:inline-flex items-center gap-1 text-[10px] text-white/30 font-mono">
+              <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-electric-cyan font-bold">?</kbd> for shortcuts
+            </span>
+
             {/* Mobile filter toggle */}
             <button
               onClick={onToggleMobileFilters}

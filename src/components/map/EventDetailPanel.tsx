@@ -15,6 +15,7 @@ import {
 import { formatCoordinates } from '@/lib/utils';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { SeverityBadge } from '@/components/ui/SeverityBadge';
+import { EventLocalTime } from '@/components/ui/EventLocalTime';
 import { DistanceCalculator } from '@/components/features/DistanceCalculator';
 import { TrajectoryCalculator } from '@/components/features/TrajectoryCalculator';
 import { CarbonEstimator } from '@/components/features/CarbonEstimator';
@@ -126,11 +127,14 @@ export function EventDetailPanel({ event, onClose }: EventDetailPanelProps) {
                     <p className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
                       Last Updated
                     </p>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-3.5 h-3.5 text-text-muted" />
-                      <p className="text-sm text-text-primary">
-                        {formatDate(selectedGeo.date)}
-                      </p>
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-3.5 h-3.5 text-text-muted" />
+                        <p className="text-sm text-text-primary">
+                          {formatDate(selectedGeo.date)}
+                        </p>
+                      </div>
+                      <EventLocalTime event={event} />
                     </div>
                   </div>
 
