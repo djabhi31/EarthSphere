@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Download, FileJson, FileSpreadsheet, X, Check, Copy, FileText } from "lucide-react";
+import { Download, FileJson, FileSpreadsheet, X, Check, Copy, FileText, Printer } from "lucide-react";
 import { cn, formatDate, getCategoryLabel } from "@/lib/utils";
 import type { EONETEvent } from "@/lib/types";
 import { audioSynth } from "@/lib/audio";
@@ -105,6 +105,14 @@ export function ExportPanel({
     downloadFile(jsonContent, "json", "application/json");
   };
 
+  const handlePrintPDF = () => {
+    audioSynth.playClick();
+    setIsOpen(false);
+    if (typeof window !== "undefined") {
+      window.print();
+    }
+  };
+
   const handleCopySummary = () => {
     const active = events.filter((e) => !e.closed).length;
     const closed = events.length - active;
@@ -182,6 +190,14 @@ Top Category: ${topCat ? `${getCategoryLabel(topCat[0])} (${topCat[1]})` : 'N/A'
                 Export Options
               </h3>
             </div>
+
+            <ActionButton 
+              icon={Printer} 
+              title="Print PDF Report" 
+              desc="Formatted PDF intelligence summary" 
+              onClick={handlePrintPDF} 
+              successKey="pdf"
+            />
             
             <ActionButton 
               icon={FileSpreadsheet} 

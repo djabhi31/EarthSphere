@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from "motion/react";
-import { Menu, Radio, Bell, Cpu } from "lucide-react";
+import { Menu, Radio, Bell, Cpu, Search } from "lucide-react";
+import { CommandPalette } from "@/components/ui/CommandPalette";
 import { cn } from "@/lib/utils";
 import {
   Sheet,
@@ -49,6 +50,7 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [watchlistOpen, setWatchlistOpen] = useState(false);
   const [aiBriefingOpen, setAiBriefingOpen] = useState(false);
+  const [cmdPaletteOpen, setCmdPaletteOpen] = useState(false);
 
   const { data: eventsData } = useEvents({ status: 'open' });
   const eventsList = eventsData?.events || [];
@@ -145,6 +147,21 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
           <div className="hidden sm:block">
             <UserClock />
           </div>
+
+          {/* Quick Command Search Trigger */}
+          <button
+            onClick={() => {
+              setCmdPaletteOpen(true);
+              audioSynth.playClick();
+            }}
+            className="hidden sm:flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/60 hover:border-electric-cyan/40 hover:bg-white/10 hover:text-white transition-all"
+            title="Search & Commands (Ctrl+K)"
+          >
+            <Search className="h-3.5 w-3.5 text-electric-cyan" />
+            <span>Search</span>
+            <kbd className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-mono text-white/40">Ctrl K</kbd>
+          </button>
+
           <div className="flex items-center gap-1">
             <button
               onClick={() => {
@@ -259,6 +276,10 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
         events={eventsList}
         isOpen={aiBriefingOpen}
         onClose={() => setAiBriefingOpen(false)}
+      />
+      <CommandPalette
+        isOpen={cmdPaletteOpen}
+        onClose={() => setCmdPaletteOpen(false)}
       />
     </motion.header>
   );

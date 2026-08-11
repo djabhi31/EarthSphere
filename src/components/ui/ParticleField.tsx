@@ -377,6 +377,37 @@ export function ParticleField({
         }
       });
 
+      // 4. Draw Cursor Constellation Lines between nearby stars
+      if (mouseRef.current.active && Math.abs(stretchFactor) <= 0.5) {
+        const mx = mouseRef.current.x;
+        const my = mouseRef.current.y;
+        const radius = 130;
+        const nearStars = particlesRef.current.filter(p => {
+          const dx = p.x - mx;
+          const dy = p.y - my;
+          return dx * dx + dy * dy < radius * radius && p.isGiant;
+        });
+
+        for (let i = 0; i < nearStars.length; i++) {
+          for (let j = i + 1; j < nearStars.length; j++) {
+            const s1 = nearStars[i];
+            const s2 = nearStars[j];
+            const dx = s1.x - s2.x;
+            const dy = s1.y - s2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 100) {
+              const lineAlpha = (1 - dist / 100) * 0.25;
+              ctx.beginPath();
+              ctx.moveTo(s1.x, s1.y);
+              ctx.lineTo(s2.x, s2.y);
+              ctx.strokeStyle = `rgba(0, 212, 170, ${lineAlpha})`;
+              ctx.lineWidth = 0.7;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
       rafRef.current = requestAnimationFrame(animate);
     };
 

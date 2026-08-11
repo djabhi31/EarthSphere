@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import { motion, useSpring, useMotionValue, useReducedMotion, useMotionTemplate } from "motion/react";
 import { cn } from "@/lib/utils";
 import { particles, cssVars } from "@/lib/design-tokens";
+import { audioSynth } from "@/lib/audio";
 
 interface SpotlightCardProps {
   children: React.ReactNode;
@@ -84,6 +85,7 @@ export function SpotlightCard({
     setIsHovered(true);
     scale.set(1.02);
     glowOpacity.set(1);
+    audioSynth.playHover();
   };
 
   const handleMouseLeave = () => {

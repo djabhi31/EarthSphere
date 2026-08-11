@@ -19,9 +19,21 @@ export function AlertThresholdModal({ isOpen, onClose }: AlertThresholdModalProp
 
   if (!isOpen) return null;
 
-  const handleSave = () => {
-    setSaved(true);
+  const handleSave = async () => {
     audioSynth.playClick();
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+        await Notification.requestPermission();
+      }
+      if (Notification.permission === 'granted') {
+        new Notification("EarthSphere Alert System Active", {
+          body: `Subscribed to Level ${minSeverity}+ disasters (Wildfires: ${notifyOnWildfires ? 'ON' : 'OFF'}, Storms: ${notifyOnStorms ? 'ON' : 'OFF'})`,
+          icon: "/favicon.ico",
+        });
+      }
+    }
+
+    setSaved(true);
     setTimeout(() => {
       setSaved(false);
       onClose();
