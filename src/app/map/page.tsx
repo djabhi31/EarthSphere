@@ -36,12 +36,10 @@ export default function MapPage() {
   const [timeFilteredEvents, setTimeFilteredEvents] = useState<EONETEvent[] | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
 
-  const { dateRange, setDateRange, heatmapEnabled, toggleHeatmap } = useEarthSphereStore((state) => ({
-    dateRange: state.dateRange,
-    setDateRange: state.setDateRange,
-    heatmapEnabled: state.heatmapEnabled,
-    toggleHeatmap: state.toggleHeatmap,
-  }));
+  const dateRange = useEarthSphereStore((state) => state.dateRange);
+  const setDateRange = useEarthSphereStore((state) => state.setDateRange);
+  const heatmapEnabled = useEarthSphereStore((state) => state.heatmapEnabled);
+  const toggleHeatmap = useEarthSphereStore((state) => state.toggleHeatmap);
 
   const { data: eventsData, isLoading, isError } = useEvents({
     status: "all", // Fetch all and filter locally so we have full data for sidebar search
