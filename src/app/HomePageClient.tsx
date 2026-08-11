@@ -63,6 +63,11 @@ export default function HomePageClient() {
   const opacityScene6 = useTransform(scrollSmooth, [0.88, 0.93, 1.0], [0, 1, 1]);
   const yScene6 = useTransform(scrollSmooth, [0.88, 0.93], [50, 0]);
 
+  // Fade out and float up globe near footer/CTA section so it never overlaps the footer
+  const globeOpacity = useTransform(scrollSmooth, [0.82, 0.92], [1, 0]);
+  const globeScale = useTransform(scrollSmooth, [0.82, 0.92], [1, 0.7]);
+  const globeY = useTransform(scrollSmooth, [0.82, 0.92], [0, -80]);
+
   // Handle timeline scroll-linked coordinates locking
   useEffect(() => {
     let lastFocusCoords: [number, number] | null = null;
@@ -91,7 +96,10 @@ export default function HomePageClient() {
       <Navbar activeEventCount={stats?.totalActive} />
 
       {/* ── Fixed Backdrop Canvas Globe & Stars (interaction Layer) ──── */}
-      <div className="fixed inset-0 z-[1] pointer-events-none flex items-center justify-center">
+      <motion.div 
+        style={{ opacity: globeOpacity, scale: globeScale, y: globeY }}
+        className="fixed inset-0 z-[1] pointer-events-none flex items-center justify-center"
+      >
         {/* Particle Stars */}
         <ParticleField className="absolute inset-0 z-0" />
         
@@ -103,7 +111,7 @@ export default function HomePageClient() {
             interactive={true} 
           />
         </div>
-      </div>
+      </motion.div>
 
       {/* ── Scrollable Storytelling Layer ───────────────────────────── */}
       <div className="relative z-10 w-full">

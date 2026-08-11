@@ -23,7 +23,7 @@ const DATA_SOURCES = [
 
 export function Footer() {
   return (
-    <footer className="relative mt-auto border-t border-[var(--border-subtle)] bg-[var(--surface-sunken)]">
+    <footer className="relative z-20 mt-auto border-t border-[var(--border-subtle)] bg-canvas/90 backdrop-blur-xl">
       {/* Gradient top border */}
       <div
         className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--electric-cyan)] to-transparent"
