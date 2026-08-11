@@ -9,6 +9,7 @@ import { MapSidebar } from "@/components/map/MapSidebar";
 import { MapLegend } from "@/components/map/MapLegend";
 import { EventDetailPanel } from "@/components/map/EventDetailPanel";
 import { TimelinePlayer } from "@/components/map/TimelinePlayer";
+import { HotspotPresets } from "@/components/map/HotspotPresets";
 import { CATEGORY_CONFIG } from "@/lib/utils";
 import type { TileLayerType } from "@/components/map/EventMap";
 import type { EONETEvent } from "@/lib/types";
@@ -144,6 +145,10 @@ export default function MapPage() {
       />
 
       <MapLegend categories={CATEGORY_CONFIG} />
+
+      <div className="absolute top-20 right-4 z-30 hidden md:block">
+        <HotspotPresets map={mapRef.current} />
+      </div>
 
       <TimelinePlayer 
         events={filteredEvents} 

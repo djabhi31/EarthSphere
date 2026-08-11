@@ -145,5 +145,37 @@ export const audioSynth = {
     } catch (e) {
       console.warn("Failed to synthesize transition sound", e);
     }
+  },
+
+  // Play sonification pitch based on event severity (Level 1-5)
+  playSonificationChime(severityLevel: number = 1) {
+    const ctx = getAudioContext();
+    if (!ctx || !isEnabled) return;
+
+    if (ctx.state === "suspended") {
+      ctx.resume();
+    }
+
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      const baseFreq = 220 + severityLevel * 110; // Harmonic scale
+      osc.type = severityLevel >= 4 ? "sawtooth" : "sine";
+      osc.frequency.setValueAtTime(baseFreq, now);
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.5, now + 0.3);
+
+      gain.gain.setValueAtTime(0.025, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.36);
+    } catch (e) {
+      console.warn("Failed to synthesize sonification chime", e);
+    }
   }
 };

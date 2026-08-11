@@ -9,6 +9,7 @@ import { EventFilters } from "@/components/events/EventFilters";
 import { EventGrid } from "@/components/events/EventGrid";
 import { ShareSession } from "@/components/features/ShareSession";
 import { SavedViews } from "@/components/features/SavedViews";
+import { EventCompareModal } from "@/components/features/EventCompareModal";
 import { useEarthSphereStore } from "@/lib/store";
 import type { EONETEvent, EventStatus, FilterState } from "@/lib/types";
 import { Navbar } from "@/components/layout/Navbar";
@@ -149,6 +150,20 @@ export default function EventsExplorerPage() {
     if (filters.dateRange) setDateRange(filters.dateRange);
   }, [setCategories, setStatus, setSearchInput, setDateRange]);
 
+  const [compareModalOpen, setCompareModalOpen] = useState(false);
+  const [compareEventA, setCompareEventA] = useState<EONETEvent | null>(null);
+  const [compareEventB, setCompareEventB] = useState<EONETEvent | null>(null);
+
+  const handleOpenCompare = () => {
+    if (filteredEvents.length > 0) {
+      setCompareEventA(filteredEvents[0]);
+      if (filteredEvents.length > 1) {
+        setCompareEventB(filteredEvents[1]);
+      }
+      setCompareModalOpen(true);
+    }
+  };
+
   return (
     <>
     <Navbar />
@@ -157,7 +172,14 @@ export default function EventsExplorerPage() {
         <ShareSession />
       </div>
       <EventsHeader eventCount={filteredEvents.length} isLoading={isLoading} />
-      <div className="flex justify-end px-4 sm:px-6 lg:px-8 mt-2 -mb-4 relative z-40">
+      <div className="flex justify-end items-center gap-3 px-4 sm:px-6 lg:px-8 mt-2 -mb-4 relative z-40">
+        <button
+          onClick={handleOpenCompare}
+          disabled={filteredEvents.length === 0}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan text-xs font-semibold hover:bg-electric-cyan/20 transition-colors disabled:opacity-50"
+        >
+          Compare Events
+        </button>
         <SavedViews currentFilters={currentFilters} onApplyView={handleApplyView} />
       </div>
       <EventFilters
@@ -187,6 +209,14 @@ export default function EventsExplorerPage() {
         onLoadMore={handleLoadMore}
         onClearFilters={clearAllFilters}
         totalEvents={data?.events?.length}
+      />
+      <EventCompareModal
+        eventA={compareEventA}
+        eventB={compareEventB}
+        isOpen={compareModalOpen}
+        onClose={() => setCompareModalOpen(false)}
+        allEvents={filteredEvents}
+        onSelectEventB={setCompareEventB}
       />
     </main>
     </>

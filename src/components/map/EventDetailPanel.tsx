@@ -12,6 +12,8 @@ import {
 } from '@/lib/utils';
 import { formatCoordinates } from '@/lib/utils';
 import { StatusBadge } from '@/components/ui/StatusBadge';
+import { SeverityBadge } from '@/components/ui/SeverityBadge';
+import { DistanceCalculator } from '@/components/features/DistanceCalculator';
 import type { EONETEvent } from '@/lib/types';
 import { slideUp } from '@/lib/motion-presets';
 
@@ -73,10 +75,13 @@ export function EventDetailPanel({ event, onClose }: EventDetailPanelProps) {
               <h2 className="text-lg font-display font-bold text-text-primary leading-snug mb-2">
                 {event.title}
               </h2>
-              <StatusBadge
-                status={selectedStatus}
-                closedDate={event.closed ?? undefined}
-              />
+              <div className="flex items-center gap-2 flex-wrap">
+                <StatusBadge
+                  status={selectedStatus}
+                  closedDate={event.closed ?? undefined}
+                />
+                <SeverityBadge event={event} size="sm" />
+              </div>
             </div>
 
             {/* Description */}
@@ -170,6 +175,9 @@ export function EventDetailPanel({ event, onClose }: EventDetailPanelProps) {
                 </div>
               </div>
             )}
+
+            {/* Distance Proximity Calculator */}
+            <DistanceCalculator event={event} />
 
             {/* Sources */}
             {event.sources.length > 0 && (

@@ -15,6 +15,7 @@ import {
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { CategoryIcon } from "@/components/ui/CategoryIcon";
 import { StatusBadge } from "@/components/ui/StatusBadge";
+import { SeverityBadge } from "@/components/ui/SeverityBadge";
 import { WatchlistButton } from "@/components/features/WatchlistButton";
 import { audioSynth } from "@/lib/audio";
 
@@ -65,6 +66,7 @@ export function EventCard({ event, className, index = 0 }: EventCardProps) {
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <SeverityBadge event={event} size="sm" showText={false} />
           <WatchlistButton eventId={event.id} />
           <StatusBadge status={status} closedDate={event.closed ?? undefined} />
         </div>
