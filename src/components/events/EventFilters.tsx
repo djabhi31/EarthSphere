@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Search, X, SlidersHorizontal, Grid3X3, List } from "lucide-react";
+import { Search, X, SlidersHorizontal, Grid3X3, List, Download } from "lucide-react";
 import {
   CATEGORY_CONFIG,
   getCategoryColor,
@@ -11,7 +11,8 @@ import {
 } from "@/lib/utils";
 import { durations } from "@/lib/design-tokens";
 import { CategoryIcon } from "@/components/ui/CategoryIcon";
-import type { EventStatus } from "@/lib/types";
+import { DateRangePicker } from "@/components/ui/DateRangePicker";
+import type { EventStatus, DateRange } from "@/lib/types";
 
 export interface EventFiltersProps {
   /** Current search input value */
@@ -22,6 +23,12 @@ export interface EventFiltersProps {
   status: EventStatus;
   /** Callback when status filter changes */
   onStatusChange: (status: EventStatus) => void;
+  /** Current date range filter */
+  dateRange: DateRange;
+  /** Callback when date range changes */
+  onDateRangeChange: (start: string | null, end: string | null) => void;
+  /** Callback for export */
+  onExport?: () => void;
   /** List of selected category IDs */
   selectedCategories: string[];
   /** Callback to toggle a category selection */
@@ -95,6 +102,9 @@ export function EventFilters({
   onSearchChange,
   status,
   onStatusChange,
+  dateRange,
+  onDateRangeChange,
+  onExport,
   selectedCategories,
   onToggleCategory,
   viewMode,
@@ -188,7 +198,16 @@ export function EventFilters({
               ))}
             </div>
 
-            {/* View toggle */}
+            {/* Date Range Picker */}
+            <div className="hidden lg:block">
+              <DateRangePicker 
+                startDate={dateRange.start} 
+                endDate={dateRange.end} 
+                onDateChange={onDateRangeChange} 
+              />
+            </div>
+
+            {/* View & Export toggle */}
             <div className="hidden items-center gap-0.5 rounded-lg border border-white/10 bg-white/5 p-0.5 sm:flex">
               <button
                 onClick={() => onViewModeChange("grid")}
@@ -216,6 +235,18 @@ export function EventFilters({
               >
                 <List size={16} />
               </button>
+              {onExport && (
+                <>
+                  <div className="h-4 w-px bg-white/10 mx-0.5" />
+                  <button
+                    onClick={onExport}
+                    className="rounded-md p-1.5 text-white/30 hover:text-white/60 transition-all"
+                    aria-label="Export Data"
+                  >
+                    <Download size={16} />
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -288,6 +319,13 @@ export function EventFilters({
                   <FilterBadge
                     label={`Status: ${status}`}
                     onRemove={() => onStatusChange("open")}
+                  />
+                )}
+
+                {(dateRange.start || dateRange.end) && (
+                  <FilterBadge
+                    label={`${dateRange.start || "..."} to ${dateRange.end || "..."}`}
+                    onRemove={() => onDateRangeChange(null, null)}
                   />
                 )}
 

@@ -8,10 +8,12 @@ import { Navbar } from "@/components/layout/Navbar";
 import { MapSidebar } from "@/components/map/MapSidebar";
 import { MapLegend } from "@/components/map/MapLegend";
 import { EventDetailPanel } from "@/components/map/EventDetailPanel";
+import { TimelinePlayer } from "@/components/map/TimelinePlayer";
 import { CATEGORY_CONFIG } from "@/lib/utils";
 import type { TileLayerType } from "@/components/map/EventMap";
 import type { EONETEvent } from "@/lib/types";
 import maplibregl from "maplibre-gl";
+import { useEarthSphereStore } from "@/lib/store";
 
 const EventMap = dynamic(() => import("@/components/map/EventMap"), {
   ssr: false,
@@ -31,7 +33,15 @@ export default function MapPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedEvent, setSelectedEvent] = useState<EONETEvent | null>(null);
   const [tileLayer, setTileLayer] = useState<TileLayerType>("dark");
+  const [timeFilteredEvents, setTimeFilteredEvents] = useState<EONETEvent[] | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
+
+  const { dateRange, setDateRange, heatmapEnabled, toggleHeatmap } = useEarthSphereStore((state) => ({
+    dateRange: state.dateRange,
+    setDateRange: state.setDateRange,
+    heatmapEnabled: state.heatmapEnabled,
+    toggleHeatmap: state.toggleHeatmap,
+  }));
 
   const { data: eventsData, isLoading, isError } = useEvents({
     status: "all", // Fetch all and filter locally so we have full data for sidebar search
@@ -58,9 +68,27 @@ export default function MapPage() {
       const matchesCategory = selectedCategories.length === 0 || 
         event.categories.some(c => selectedCategories.includes(c.id));
         
-      return matchesSearch && matchesStatus && matchesCategory;
+      // Date Range
+      let matchesDate = true;
+      if (dateRange.start || dateRange.end) {
+        const latestGeo = event.geometry[event.geometry.length - 1];
+        if (latestGeo) {
+          const eventDate = new Date(latestGeo.date);
+          const start = dateRange.start ? new Date(dateRange.start) : null;
+          const end = dateRange.end ? new Date(dateRange.end) : null;
+          if (start && end) {
+            matchesDate = eventDate >= start && eventDate <= end;
+          } else if (start) {
+            matchesDate = eventDate >= start;
+          } else if (end) {
+            matchesDate = eventDate <= end;
+          }
+        }
+      }
+
+      return matchesSearch && matchesStatus && matchesCategory && matchesDate;
     });
-  }, [allEvents, searchQuery, statusFilter, selectedCategories]);
+  }, [allEvents, searchQuery, statusFilter, selectedCategories, dateRange]);
 
   const activeCount = useMemo(
     () => filteredEvents.filter((e) => e.closed === null).length,
@@ -69,6 +97,8 @@ export default function MapPage() {
 
   const handleZoomIn = useCallback(() => mapRef.current?.zoomIn(), []);
   const handleZoomOut = useCallback(() => mapRef.current?.zoomOut(), []);
+
+  const displayEvents = timeFilteredEvents ?? filteredEvents;
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-canvas">
@@ -82,10 +112,10 @@ export default function MapPage() {
           </div>
         ) : (
           <EventMap
-            events={filteredEvents}
+            events={displayEvents}
             tileLayer={tileLayer}
             onEventClick={(id) => {
-              const ev = filteredEvents.find(e => e.id === id);
+              const ev = displayEvents.find(e => e.id === id);
               if (ev) setSelectedEvent(ev);
             }}
             selectedEventId={selectedEvent?.id}
@@ -93,6 +123,7 @@ export default function MapPage() {
             center={[0, 20]}
             onMapLoad={(map) => { mapRef.current = map; }}
             className="h-full w-full !rounded-none"
+            heatmapEnabled={heatmapEnabled}
           />
         )}
       </div>
@@ -109,9 +140,17 @@ export default function MapPage() {
         setStatusFilter={setStatusFilter}
         selectedCategories={selectedCategories}
         setSelectedCategories={setSelectedCategories}
+        dateStart={dateRange.start}
+        dateEnd={dateRange.end}
+        onDateChange={(start, end) => setDateRange({ start, end })}
       />
 
       <MapLegend categories={CATEGORY_CONFIG} />
+
+      <TimelinePlayer 
+        events={filteredEvents} 
+        onTimelineFilter={setTimeFilteredEvents} 
+      />
 
       <div className="absolute bottom-6 right-4 z-30">
         <MapControls
@@ -120,6 +159,8 @@ export default function MapPage() {
           onTileChange={setTileLayer}
           activeTile={tileLayer}
           showLegend={false}
+          heatmapEnabled={heatmapEnabled}
+          onToggleHeatmap={toggleHeatmap}
         />
       </div>
 

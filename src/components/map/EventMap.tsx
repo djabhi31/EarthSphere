@@ -20,6 +20,7 @@ interface EventMapProps {
   selectedEventId?: string | null;
   tileLayer?: TileLayerType;
   onMapLoad?: (map: maplibregl.Map) => void;
+  heatmapEnabled?: boolean;
 }
 
 export default function EventMap({
@@ -31,6 +32,7 @@ export default function EventMap({
   selectedEventId,
   tileLayer = "dark",
   onMapLoad,
+  heatmapEnabled = false,
 }: EventMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -155,6 +157,36 @@ export default function EventMap({
     };
   };
 
+  const setupHeatmapLayer = (map: maplibregl.Map) => {
+    if (map.getSource("events-heatmap")) return;
+    
+    map.addSource("events-heatmap", {
+      type: "geojson",
+      data: { type: "FeatureCollection", features: [] }
+    });
+
+    map.addLayer({
+      id: "events-heatmap-layer",
+      type: "heatmap",
+      source: "events-heatmap",
+      paint: {
+        "heatmap-weight": ["interpolate", ["linear"], ["get", "magnitude"], 0, 0.3, 10, 1],
+        "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 0, 1, 9, 3],
+        "heatmap-color": [
+          "interpolate", ["linear"], ["heatmap-density"],
+          0, "rgba(0,0,0,0)",
+          0.1, "rgba(0,212,170,0.15)",
+          0.3, "rgba(0,212,170,0.4)",
+          0.5, "rgba(56,189,248,0.6)",
+          0.7, "rgba(255,107,53,0.8)",
+          1, "rgba(239,68,68,1)"
+        ],
+        "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 15, 5, 30, 10, 50],
+        "heatmap-opacity": 0
+      }
+    });
+  };
+
   // ── Init Map ──────────────────────────────────────────────────────────────
   useEffect(() => {
     if (!containerRef.current) return;
@@ -174,6 +206,7 @@ export default function EventMap({
     map.on("load", () => {
       // Enable 3D Globe projection
       map.setProjection({ type: "globe" });
+      setupHeatmapLayer(map);
 
       if (onMapLoad) {
         onMapLoad(map);
@@ -196,6 +229,7 @@ export default function EventMap({
     map.once("style.load", () => {
       // Re-enable globe projection on new style load
       map.setProjection({ type: "globe" });
+      setupHeatmapLayer(map);
     });
   }, [tileLayer]);
 
@@ -207,6 +241,8 @@ export default function EventMap({
     // Clear previous markers
     markersRef.current.forEach((m) => m.remove());
     markersRef.current = [];
+
+    const heatmapFeatures: any[] = [];
 
     // Create fresh markers
     events.forEach((event) => {
@@ -235,6 +271,12 @@ export default function EventMap({
       const color = getCategoryColor(categoryId);
       const categoryLabel = getCategoryLabel(categoryId);
       const dateStr = formatDate(geo.date);
+
+      heatmapFeatures.push({
+        type: "Feature",
+        geometry: { type: "Point", coordinates: [lng, lat] },
+        properties: { magnitude: geo.magnitudeValue ?? 1 }
+      });
 
       // Create Custom DOM marker element
       const el = document.createElement("div");
@@ -319,11 +361,39 @@ export default function EventMap({
       markersRef.current.push(marker);
     });
 
+    const heatmapSource = map.getSource("events-heatmap") as maplibregl.GeoJSONSource;
+    if (heatmapSource) {
+      heatmapSource.setData({
+        type: "FeatureCollection",
+        features: heatmapFeatures
+      });
+    }
+
     return () => {
       markersRef.current.forEach((m) => m.remove());
       markersRef.current = [];
     };
   }, [events, onEventClick]);
+
+  // ── Sync Heatmap Visibility ───────────────────────────────────────────────
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    if (map.getLayer("events-heatmap-layer")) {
+      map.setPaintProperty("events-heatmap-layer", "heatmap-opacity", heatmapEnabled ? 0.8 : 0);
+    }
+    
+    // Toggle marker opacity
+    markersRef.current.forEach(marker => {
+      const el = marker.getElement();
+      if (heatmapEnabled) {
+        el.style.opacity = "0.2";
+      } else {
+        el.style.opacity = "1";
+      }
+    });
+  }, [heatmapEnabled, events]);
 
   // ── FlyTo Selected Event ─────────────────────────────────────────────────
   useEffect(() => {

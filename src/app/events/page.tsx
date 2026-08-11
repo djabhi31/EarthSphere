@@ -25,6 +25,9 @@ export default function EventsExplorerPage() {
   const setCategories = useEarthSphereStore((state) => state.setCategories);
   const toggleCategory = useEarthSphereStore((state) => state.toggleCategory);
 
+  const dateRange = useEarthSphereStore((state) => state.dateRange);
+  const setDateRange = useEarthSphereStore((state) => state.setDateRange);
+
   const status = useEarthSphereStore((state) => state.status);
   const setStatus = useEarthSphereStore((state) => state.setStatus);
 
@@ -65,6 +68,8 @@ export default function EventsExplorerPage() {
     if (debouncedSearch.trim()) {
       params.set("search", debouncedSearch.trim());
     }
+    if (dateRange.start) params.set("start", dateRange.start);
+    if (dateRange.end) params.set("end", dateRange.end);
 
     const qs = params.toString();
     const newPath = qs ? `/events?${qs}` : "/events";
@@ -72,14 +77,15 @@ export default function EventsExplorerPage() {
     if (qs !== searchParams.toString()) {
       router.replace(newPath, { scroll: false });
     }
-  }, [selectedCategories, status, debouncedSearch, router, searchParams]);
+  }, [selectedCategories, status, debouncedSearch, dateRange, router, searchParams]);
 
   const apiFilters = useMemo(
     () => ({
       status: status as EventStatus,
       limit,
+      dateRange,
     }),
-    [status, limit]
+    [status, limit, dateRange]
   );
 
   const { data, isLoading, isError, error } = useEvents(apiFilters);
@@ -114,7 +120,9 @@ export default function EventsExplorerPage() {
   const hasActiveFilters =
     selectedCategories.length > 0 ||
     status !== "open" ||
-    debouncedSearch.trim().length > 0;
+    debouncedSearch.trim().length > 0 ||
+    dateRange.start !== null ||
+    dateRange.end !== null;
 
   const handleLoadMore = useCallback(() => {
     setLimit((prev) => prev + LOAD_MORE_INCREMENT);
@@ -124,7 +132,7 @@ export default function EventsExplorerPage() {
     categories: selectedCategories,
     status: status as EventStatus,
     searchQuery: debouncedSearch,
-    dateRange: { start: null, end: null },
+    dateRange: dateRange,
     source: null,
     magID: null,
     magMin: null,
@@ -138,7 +146,8 @@ export default function EventsExplorerPage() {
     if (filters.categories) setCategories([...filters.categories]);
     if (filters.status) setStatus(filters.status);
     if (filters.searchQuery !== undefined) setSearchInput(filters.searchQuery);
-  }, [setCategories, setStatus, setSearchInput]);
+    if (filters.dateRange) setDateRange(filters.dateRange);
+  }, [setCategories, setStatus, setSearchInput, setDateRange]);
 
   return (
     <>
@@ -156,6 +165,8 @@ export default function EventsExplorerPage() {
         onSearchChange={setSearchInput}
         status={status}
         onStatusChange={setStatus}
+        dateRange={dateRange}
+        onDateRangeChange={(start, end) => setDateRange({ start, end })}
         selectedCategories={selectedCategories}
         onToggleCategory={toggleCategory}
         viewMode={viewMode}

@@ -2,7 +2,7 @@
 
 import { getCategoryColor, getCategoryLabel, CATEGORY_CONFIG } from "@/lib/utils";
 import { cn } from "@/lib/utils";
-import { Plus, Minus, Map, Satellite, Mountain } from "lucide-react";
+import { Plus, Minus, Map, Satellite, Mountain, Flame } from "lucide-react";
 import type { TileLayerType } from "./EventMap";
 
 interface MapControlsProps {
@@ -12,6 +12,8 @@ interface MapControlsProps {
   activeTile?: TileLayerType;
   className?: string;
   showLegend?: boolean;
+  heatmapEnabled?: boolean;
+  onToggleHeatmap?: () => void;
 }
 
 export function MapControls({
@@ -21,6 +23,8 @@ export function MapControls({
   activeTile = "dark",
   className,
   showLegend = true,
+  heatmapEnabled = false,
+  onToggleHeatmap,
 }: MapControlsProps) {
   const tiles: { id: TileLayerType; label: string; icon: React.ReactNode }[] = [
     { id: "dark", label: "Dark", icon: <Map className="w-3.5 h-3.5" /> },
@@ -48,6 +52,25 @@ export function MapControls({
           <Minus className="w-4 h-4" />
         </button>
       </div>
+
+      {/* Heatmap Toggle */}
+      {onToggleHeatmap && (
+        <div className="glass rounded-xl overflow-hidden flex flex-col">
+          <button
+            onClick={onToggleHeatmap}
+            className={cn(
+              "p-2.5 flex justify-center transition-colors",
+              heatmapEnabled
+                ? "text-[#00d4aa] bg-white/10 shadow-[inset_0_0_8px_rgba(0,212,170,0.2)]"
+                : "text-white/70 hover:text-white hover:bg-white/10"
+            )}
+            aria-label="Toggle Heatmap"
+            title="Toggle Heatmap"
+          >
+            <Flame className="w-4 h-4" />
+          </button>
+        </div>
+      )}
 
       {/* Tile Switcher */}
       <div className="glass rounded-xl overflow-hidden flex flex-col">

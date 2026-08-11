@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from "motion/react";
-import { Menu, Radio } from "lucide-react";
+import { Menu, Radio, Bell } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Sheet,
@@ -15,6 +15,7 @@ import {
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { SoundToggle } from "@/components/ui/SoundToggle";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { WatchlistPanel } from "@/components/features/WatchlistPanel";
 import { audioSynth } from "@/lib/audio";
 
 // ---------------------------------------------------------------------------
@@ -42,6 +43,7 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
   const pathname = usePathname();
   const prefersReduced = useReducedMotion();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [watchlistOpen, setWatchlistOpen] = useState(false);
 
   // Scroll-based opacity
   const { scrollY } = useScroll();
@@ -133,6 +135,16 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
         {/* ── Right: Event count badge & Toggles ────────────── */}
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="flex items-center">
+            <button
+              onClick={() => {
+                setWatchlistOpen(true);
+                audioSynth.playClick();
+              }}
+              className="p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4aa]"
+              aria-label="Open Watchlist"
+            >
+              <Bell size={20} />
+            </button>
             <ThemeToggle />
             <SoundToggle />
           </div>
@@ -215,6 +227,11 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
           </Sheet>
         </div>
       </nav>
+
+      <WatchlistPanel 
+        isOpen={watchlistOpen} 
+        onClose={() => setWatchlistOpen(false)} 
+      />
     </motion.header>
   );
 }

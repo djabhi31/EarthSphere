@@ -4,6 +4,7 @@ import { X, Search, Filter, Menu } from 'lucide-react';
 import { cn, getCategoryColor, getCategoryLabel, formatDate } from '@/lib/utils';
 import type { EONETEvent } from '@/lib/types';
 import { CategoryIcon } from '@/components/ui/CategoryIcon';
+import { DateRangePicker } from '@/components/ui/DateRangePicker';
 import { slideUp } from '@/lib/motion-presets';
 
 /**
@@ -21,6 +22,9 @@ export interface MapSidebarProps {
   selectedCategories: string[];
   setSelectedCategories: (categories: string[]) => void;
   filteredEvents: readonly EONETEvent[];
+  dateStart?: string | null;
+  dateEnd?: string | null;
+  onDateChange?: (start: string | null, end: string | null) => void;
 }
 
 /**
@@ -38,7 +42,10 @@ export function MapSidebar({
   setStatusFilter,
   selectedCategories,
   setSelectedCategories,
-  filteredEvents
+  filteredEvents,
+  dateStart = null,
+  dateEnd = null,
+  onDateChange = () => {},
 }: MapSidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   
@@ -135,6 +142,15 @@ export function MapSidebar({
                 {status}
               </button>
             ))}
+          </div>
+          
+          {/* Date Range Picker */}
+          <div className="flex">
+            <DateRangePicker 
+              startDate={dateStart} 
+              endDate={dateEnd} 
+              onDateChange={onDateChange} 
+            />
           </div>
         </div>
 
