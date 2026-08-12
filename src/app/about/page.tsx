@@ -169,10 +169,10 @@ export default function AboutPage() {
                     <span className="px-3 py-1 rounded-full text-xs font-medium bg-surface-elevated border border-border-subtle text-solar-orange">Tech Enthusiast</span>
                   </div>
                   <div className="text-text-secondary text-base leading-relaxed font-light space-y-3">
-                    <p>Hi, I’m Abhilash Ghosh — the mind behind EarthSphere.</p>
-                    <p>By day, I’m a commerce student and working professional. By night, I dive into creativity — whether it’s producing music as <strong className="text-white font-medium">DJ ABHI-Maheshtala</strong> or building meaningful digital experiences like this one. I enjoy creating things that people can actually use, explore, or relate to.</p>
-                    <p>The idea for EarthSphere came from a simple thought: NASA's critical global event data is powerful, but it shouldn't just be locked inside raw JSON feeds. So why not create a place where people can seamlessly visualize wildfires, storms, and volcanoes in a beautiful, cinematic way?</p>
-                    <p>I’m always exploring new ideas, mixing creativity with practicality, and trying to build things that stand out on the internet.</p>
+                    <p>Hi, I&apos;m Abhilash Ghosh — the mind behind EarthSphere.</p>
+                    <p>By day, I&apos;m a commerce student and working professional. By night, I dive into creativity — whether it&apos;s producing music as <strong className="text-white font-medium">DJ ABHI-Maheshtala</strong> or building meaningful digital experiences like this one. I enjoy creating things that people can actually use, explore, or relate to.</p>
+                    <p>The idea for EarthSphere came from a simple thought: NASA&apos;s critical global event data is powerful, but it shouldn&apos;t just be locked inside raw JSON feeds. So why not create a place where people can seamlessly visualize wildfires, storms, and volcanoes in a beautiful, cinematic way?</p>
+                    <p>I&apos;m always exploring new ideas, mixing creativity with practicality, and trying to build things that stand out on the internet.</p>
                   </div>
                 </div>
                 

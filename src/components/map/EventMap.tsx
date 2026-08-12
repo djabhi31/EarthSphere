@@ -78,6 +78,7 @@ export default function EventMap({
     if (layer === "satellite") {
       return {
         version: 8,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         sky: sky as any,
         sources: {
           "satellite-tiles": {
@@ -116,6 +117,7 @@ export default function EventMap({
     } else if (layer === "terrain") {
       return {
         version: 8,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         sky: sky as any,
         sources: {
           "terrain-tiles": {
@@ -160,6 +162,7 @@ export default function EventMap({
 
     return {
       version: 8,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       sky: sky as any,
       sources: {
         "raster-tiles": {
@@ -266,6 +269,7 @@ export default function EventMap({
     markersRef.current.forEach((m) => m.remove());
     markersRef.current = [];
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const heatmapFeatures: any[] = [];
 
     // Create fresh markers
