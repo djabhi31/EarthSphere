@@ -21,8 +21,8 @@ export default function FireballsPageClient() {
   const parsedData = useMemo(() => {
     if (!data?.fields || !data?.data) return [];
     
-    return data.data.map((row: any[]) => {
-      const obj: any = {};
+    return data.data.map((row: readonly (string | null)[]) => {
+      const obj: Record<string, string | null> = {};
       data.fields.forEach((field: string, index: number) => {
         obj[field] = row[index];
       });
@@ -34,13 +34,16 @@ export default function FireballsPageClient() {
     const sortableItems = [...parsedData];
     if (sortConfig !== null) {
       sortableItems.sort((a, b) => {
-        let aVal = a[sortConfig.key];
-        let bVal = b[sortConfig.key];
+        const rawA = a[sortConfig.key];
+        const rawB = b[sortConfig.key];
         
+        let aVal: number | string = rawA ?? '';
+        let bVal: number | string = rawB ?? '';
+
         // Handle numeric parsing
         if (sortConfig.key !== 'date') {
-          aVal = parseFloat(aVal) || 0;
-          bVal = parseFloat(bVal) || 0;
+          aVal = parseFloat(String(rawA)) || 0;
+          bVal = parseFloat(String(rawB)) || 0;
         }
 
         if (aVal < bVal) return sortConfig.direction === 'asc' ? -1 : 1;
@@ -59,7 +62,8 @@ export default function FireballsPageClient() {
     setSortConfig({ key, direction });
   };
 
-  const getEnergyColor = (energyStr: string) => {
+  const getEnergyColor = (energyStr: string | null) => {
+    if (!energyStr) return "bg-gray-500/20 text-gray-400";
     const energy = parseFloat(energyStr);
     if (!energy) return "bg-gray-500/20 text-gray-400";
     if (energy < 1) return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30";
@@ -77,9 +81,9 @@ export default function FireballsPageClient() {
     let maxAltitude = 0;
 
     parsedData.forEach(item => {
-      const energy = parseFloat(item.energy) || 0;
-      const velocity = parseFloat(item.vel) || 0;
-      const altitude = parseFloat(item.alt) || 0;
+      const energy = parseFloat(item.energy || '') || 0;
+      const velocity = parseFloat(item.vel || '') || 0;
+      const altitude = parseFloat(item.alt || '') || 0;
 
       if (energy > maxEnergy) maxEnergy = energy;
       if (velocity > 0) {

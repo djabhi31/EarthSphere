@@ -19,7 +19,7 @@ export default function MediaPageClient() {
   const { data, isLoading, error } = useNASAMedia({
     q: searchTerm,
     media_type: mediaType || undefined,
-    page: page.toString(),
+    page: page,
   });
 
   const handleSearch = (e: React.FormEvent) => {
