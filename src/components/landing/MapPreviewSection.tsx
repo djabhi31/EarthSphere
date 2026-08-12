@@ -37,7 +37,7 @@ export function MapPreviewSection({ events }: MapPreviewSectionProps) {
         <div className="hidden lg:block lg:col-span-5 h-[400px]" />
 
         {/* Right column: Analytics emerging */}
-        <div className="lg:col-span-7 bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-8 rounded-3xl border border-[var(--border-default)] shadow-2xl shadow-black/10">
+        <div className="lg:col-span-7 dark:bg-transparent dark:border-none dark:shadow-none dark:backdrop-blur-none dark:p-0 bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-8 rounded-3xl border border-[var(--border-default)] shadow-2xl shadow-black/10">
           <span className="text-xs font-bold uppercase tracking-wider text-[var(--electric-cyan)] mb-2 block">
             Geospatial Insights
           </span>

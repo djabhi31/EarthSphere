@@ -22,7 +22,7 @@ interface HeroSectionProps {
 export function HeroSection({ stats }: HeroSectionProps) {
   return (
     <div className="max-w-4xl pt-16">
-      <div className="backdrop-blur-2xl bg-[var(--surface-overlay)]/85 border border-[var(--border-default)] p-6 sm:p-10 md:p-12 rounded-3xl shadow-2xl shadow-black/10 text-center transition-all">
+      <div className="dark:bg-transparent dark:border-none dark:shadow-none dark:backdrop-blur-none dark:p-0 backdrop-blur-2xl bg-[var(--surface-overlay)]/85 border border-[var(--border-default)] p-6 sm:p-10 md:p-12 rounded-3xl shadow-2xl shadow-black/10 text-center transition-all">
         <motion.div
           className="mb-8 inline-flex items-center gap-3 rounded-full border border-[var(--electric-cyan)]/30 bg-[var(--electric-cyan)]/10 px-4 py-2 backdrop-blur-md shadow-lg shadow-[var(--electric-cyan)]/10 hud-corner"
           initial={{ opacity: 0, scale: 0.9 }}

@@ -39,7 +39,7 @@ export const LANDMARK_EVENTS = [
 export function TimelineSection() {
   return (
     <div className="mx-auto w-full max-w-7xl z-10 relative">
-      <div className="text-center max-w-2xl mx-auto mb-16 bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-8 rounded-3xl border border-[var(--border-default)] shadow-2xl shadow-black/10">
+      <div className="text-center max-w-2xl mx-auto mb-16 dark:bg-transparent dark:border-none dark:shadow-none dark:backdrop-blur-none dark:p-0 bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-8 rounded-3xl border border-[var(--border-default)] shadow-2xl shadow-black/10">
         <span className="text-xs font-bold uppercase tracking-wider text-[var(--cosmic-purple)] mb-2 block">
           Temporal Analysis
         </span>
@@ -77,7 +77,7 @@ export function TimelineSection() {
                 }}
               />
 
-              <div className="bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-6 rounded-2xl border border-[var(--border-default)] shadow-lg shadow-black/5">
+              <div className="dark:bg-transparent dark:border-none dark:shadow-none dark:backdrop-blur-none dark:p-0 bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-6 rounded-2xl border border-[var(--border-default)] shadow-lg shadow-black/5">
                 <span 
                   className="text-[11px] font-extrabold uppercase tracking-widest block mb-1"
                   style={{ color }}
