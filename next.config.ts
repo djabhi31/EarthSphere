@@ -9,6 +9,27 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      // NASA APOD images
+      { protocol: 'https', hostname: 'apod.nasa.gov' },
+      // EPIC Earth images
+      { protocol: 'https', hostname: 'epic.gsfc.nasa.gov' },
+      // Mars Rover photos
+      { protocol: 'http', hostname: 'mars.jpl.nasa.gov' },
+      { protocol: 'https', hostname: 'mars.nasa.gov' },
+      // NASA Image Library
+      { protocol: 'https', hostname: 'images-assets.nasa.gov' },
+      { protocol: 'https', hostname: 'images-api.nasa.gov' },
+      // General NASA domains
+      { protocol: 'https', hostname: '*.nasa.gov' },
+      // YouTube thumbnails (for video APODs)
+      { protocol: 'https', hostname: 'img.youtube.com' },
+      { protocol: 'https', hostname: 'i.ytimg.com' },
+      // Vimeo thumbnails
+      { protocol: 'https', hostname: 'i.vimeocdn.com' },
+    ],
+  },
   async headers() {
     return [
       {

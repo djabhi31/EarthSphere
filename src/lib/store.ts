@@ -14,6 +14,30 @@ import type { DateRange, EventStatus, MapViewport, ViewMode } from './types';
 const WATCHLIST_KEY = 'earthsphere-watchlist';
 const LAST_VISIT_KEY = 'earthsphere-last-visit';
 const NOTES_KEY = 'earthsphere-event-notes';
+const ACCENT_KEY = 'earthsphere-accent-theme';
+
+export type AccentTheme = 'cyan' | 'pink' | 'orange' | 'emerald';
+
+function loadAccentTheme(): AccentTheme {
+  if (typeof window === 'undefined') return 'cyan';
+  try {
+    const raw = localStorage.getItem(ACCENT_KEY) as AccentTheme | null;
+    if (raw && ['cyan', 'pink', 'orange', 'emerald'].includes(raw)) {
+      document.documentElement.setAttribute('data-accent', raw);
+      return raw;
+    }
+  } catch { /* ignore */ }
+  return 'cyan';
+}
+
+function saveAccentTheme(theme: AccentTheme) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(ACCENT_KEY, theme);
+    document.documentElement.setAttribute('data-accent', theme);
+  } catch { /* ignore */ }
+}
+
 
 export interface EventNoteData {
   note: string;
@@ -209,6 +233,7 @@ export const useEarthSphereStore = create<EarthSphereState>()(
       const initialWatchlist = loadWatchlist();
       const initialLastVisit = loadLastVisit();
       const initialNotes = loadEventNotes();
+      const initialAccent = loadAccentTheme();
 
       return {
       // -----------------------------------------------------------------------
@@ -224,7 +249,7 @@ export const useEarthSphereStore = create<EarthSphereState>()(
       dayNightEnabled: false,
       tectonicEnabled: false,
       layerOpacity: 1,
-      accentTheme: 'cyan' as const,
+      accentTheme: initialAccent,
       recentEvents: [],
       eventNotes: initialNotes,
       watchedCategories: initialWatchlist.categories,
@@ -243,8 +268,10 @@ export const useEarthSphereStore = create<EarthSphereState>()(
       setLayerOpacity: (layerOpacity) =>
         set({ layerOpacity }, undefined, 'setLayerOpacity'),
 
-      setAccentTheme: (accentTheme) =>
-        set({ accentTheme }, undefined, 'setAccentTheme'),
+      setAccentTheme: (accentTheme) => {
+        saveAccentTheme(accentTheme);
+        set({ accentTheme }, undefined, 'setAccentTheme');
+      },
 
       addRecentEvent: (eventId) =>
         set((state) => {

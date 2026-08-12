@@ -261,6 +261,32 @@
   --sidebar-ring: var(--electric-cyan);
 }
 
+/* Accent Theme Overrides */
+[data-accent="pink"] {
+  --electric-cyan: #ec4899;
+  --text-accent: #ec4899;
+  --border-accent: rgba(236, 72, 153, 0.38);
+  --primary: #ec4899;
+  --ring: #ec4899;
+}
+
+[data-accent="orange"] {
+  --electric-cyan: #ff6b35;
+  --text-accent: #ff6b35;
+  --border-accent: rgba(255, 107, 53, 0.38);
+  --primary: #ff6b35;
+  --ring: #ff6b35;
+}
+
+[data-accent="emerald"] {
+  --electric-cyan: #10b981;
+  --text-accent: #10b981;
+  --border-accent: rgba(16, 185, 129, 0.38);
+  --primary: #10b981;
+  --ring: #10b981;
+}
+
+
 /* -----------------------------------------------------------------------------
    Tailwind v4 @theme Inline
    ----------------------------------------------------------------------------- */
@@ -1018,4 +1044,185 @@ pre {
 .animate-text-glow {
   animation: text-glow-shimmer 4s ease-in-out infinite;
 }
+
+/* -----------------------------------------------------------------------------
+   NASA API Integration — Extended Design Tokens
+   ----------------------------------------------------------------------------- */
+
+/* Mars palette */
+:root {
+  --mars-rust: #C1440E;
+  --mars-terracotta: #E07A5F;
+  --mars-dust: #D4A574;
+  --mars-sky: #E8C4A0;
+
+  --solar-yellow: #FFD60A;
+  --solar-corona: #FFBE0B;
+  --solar-flare-orange: #FF6B00;
+
+  --nebula-purple: #6B21A8;
+  --quasar-blue: #1E40AF;
+  --fireball-red: #DC2626;
+  --fireball-orange: #EA580C;
+
+  --exoplanet-teal: #0D9488;
+  --satellite-blue: #0EA5E9;
+}
+
+.dark {
+  --mars-rust: #E85D30;
+  --mars-terracotta: #F09070;
+  --mars-dust: #E8C8A0;
+  --mars-sky: #F5DFC5;
+
+  --solar-yellow: #FFE066;
+  --solar-corona: #FFD43B;
+  --solar-flare-orange: #FF8C38;
+
+  --nebula-purple: #A855F7;
+  --quasar-blue: #3B82F6;
+  --fireball-red: #F87171;
+  --fireball-orange: #FB923C;
+
+  --exoplanet-teal: #2DD4BF;
+  --satellite-blue: #38BDF8;
+}
+
+@theme inline {
+  --color-mars-rust: var(--mars-rust);
+  --color-mars-terracotta: var(--mars-terracotta);
+  --color-mars-dust: var(--mars-dust);
+  --color-solar-yellow: var(--solar-yellow);
+  --color-solar-corona: var(--solar-corona);
+  --color-solar-flare: var(--solar-flare-orange);
+  --color-nebula-purple: var(--nebula-purple);
+  --color-fireball-red: var(--fireball-red);
+  --color-fireball-orange: var(--fireball-orange);
+  --color-exoplanet-teal: var(--exoplanet-teal);
+  --color-satellite-blue: var(--satellite-blue);
+}
+
+/* Category Glow Utilities — NASA APIs */
+.glow-mars { box-shadow: 0 0 24px rgba(232, 93, 48, 0.25); }
+.glow-solar { box-shadow: 0 0 24px rgba(255, 190, 11, 0.25); }
+.glow-asteroid { box-shadow: 0 0 24px rgba(251, 146, 60, 0.25); }
+.glow-fireball { box-shadow: 0 0 24px rgba(248, 113, 113, 0.25); }
+.glow-satellite { box-shadow: 0 0 24px rgba(56, 189, 248, 0.25); }
+
+/* Solar pulse animation for space weather */
+@keyframes solar-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 190, 11, 0.3), 0 0 40px rgba(255, 107, 0, 0.15);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 190, 11, 0.5), 0 0 60px rgba(255, 107, 0, 0.25);
+    transform: scale(1.02);
+  }
+}
+.animate-solar-pulse {
+  animation: solar-pulse 3s var(--ease-emphasized) infinite;
+}
+
+/* Orbital spin animation */
+@keyframes orbit-spin {
+  0% { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+}
+.animate-orbit {
+  animation: orbit-spin 8s linear infinite;
+}
+
+/* Meteor streak animation */
+@keyframes meteor-streak {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px) translateY(-100px);
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(400px) translateY(400px);
+  }
+}
+.animate-meteor {
+  animation: meteor-streak 2s var(--ease-premium) infinite;
+}
+
+/* Warp drive animation for transitions */
+@keyframes warp-drive {
+  0% {
+    transform: scale(1) translateZ(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5) translateZ(200px);
+    opacity: 0;
+  }
+}
+
+/* Mars dust particle float */
+@keyframes mars-dust {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-15px) translateX(5px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-8px) translateX(-3px);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(-20px) translateX(8px);
+    opacity: 0.5;
+  }
+}
+.animate-mars-dust {
+  animation: mars-dust 6s var(--ease-emphasized) infinite;
+}
+
+/* Gradient backgrounds for NASA pages */
+.bg-gradient-mars {
+  background: linear-gradient(135deg, rgba(232, 93, 48, 0.1), rgba(224, 122, 95, 0.05), transparent);
+}
+
+.bg-gradient-solar {
+  background: linear-gradient(135deg, rgba(255, 190, 11, 0.1), rgba(255, 107, 0, 0.05), transparent);
+}
+
+.bg-gradient-deep-space {
+  background: linear-gradient(135deg, rgba(107, 33, 168, 0.1), rgba(30, 64, 175, 0.08), transparent);
+}
+
+.bg-gradient-fireball {
+  background: linear-gradient(135deg, rgba(248, 113, 113, 0.1), rgba(251, 146, 60, 0.05), transparent);
+}
+
+/* Hazardous asteroid pulse */
+@keyframes hazard-pulse {
+  0%, 100% {
+    box-shadow: 0 0 4px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(239, 68, 68, 0.7), 0 0 32px rgba(239, 68, 68, 0.3);
+  }
+}
+.animate-hazard-pulse {
+  animation: hazard-pulse 2s var(--ease-emphasized) infinite;
+}
+
+/* Kp Index bar colors */
+.kp-low { background-color: #22c55e; }
+.kp-moderate { background-color: #eab308; }
+.kp-high { background-color: #f97316; }
+.kp-severe { background-color: #ef4444; }
+.kp-extreme { background-color: #dc2626; }
 

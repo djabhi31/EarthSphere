@@ -11,16 +11,14 @@ interface UserClockProps {
 }
 
 export function UserClock({ className, compact = false }: UserClockProps) {
-  const [tzInfo, setTzInfo] = useState<UserTimezoneInfo | null>(() => {
-    if (typeof window === 'undefined') return null;
-    return getUserTimezoneInfo();
-  });
+  const [tzInfo, setTzInfo] = useState<UserTimezoneInfo | null>(null);
 
   useEffect(() => {
-    const updateTz = () => {
+    // Set immediately on mount to avoid flash
+    setTzInfo(getUserTimezoneInfo());
+    const interval = setInterval(() => {
       setTzInfo(getUserTimezoneInfo());
-    };
-    const interval = setInterval(updateTz, 1000);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 

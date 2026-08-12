@@ -39,23 +39,27 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://earthsphere.in'),
   title: {
-    default: 'EarthSphere — Real-time Earth Event Intelligence',
+    default: 'EarthSphere — NASA Data Explorer & Earth Intelligence',
     template: '%s | EarthSphere',
   },
   applicationName: 'EarthSphere',
   description:
-    'Track wildfires, storms, earthquakes, and natural events worldwide in real time with NASA EONET data & AI insights.',
+    'Explore NASA\'s universe of data — track natural events, browse Mars rover photos, discover exoplanets, monitor space weather, and more. Powered by 13+ NASA APIs.',
   keywords: [
     'NASA',
     'EONET',
+    'APOD',
+    'Mars Rover',
+    'exoplanets',
+    'space weather',
+    'asteroids',
+    'EPIC',
     'natural events',
-    'wildfires',
-    'earthquakes',
-    'volcanoes',
-    'severe storms',
+    'satellite tracker',
     'earth observation',
-    'satellite data',
-    'real-time tracker',
+    'NASA API',
+    'space exploration',
+    'astronomy',
   ],
   authors: [{ name: 'EarthSphere' }],
   creator: 'EarthSphere',
@@ -121,10 +125,15 @@ export default function RootLayout({
             __html: `
               try {
                 const storedTheme = localStorage.getItem('earthsphere-theme');
-                if (storedTheme === 'dark' || (storedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches) || !storedTheme) {
-                  document.documentElement.classList.add('dark');
-                } else if (storedTheme === 'light' || (storedTheme === 'system' && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                if (storedTheme === 'light') {
                   document.documentElement.classList.add('light');
+                } else {
+                  document.documentElement.classList.add('dark');
+                }
+
+                const storedAccent = localStorage.getItem('earthsphere-accent-theme');
+                if (storedAccent) {
+                  document.documentElement.setAttribute('data-accent', storedAccent);
                 }
               } catch (e) {}
             `,

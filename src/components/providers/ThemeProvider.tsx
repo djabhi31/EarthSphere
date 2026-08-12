@@ -18,7 +18,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = 'system',
+  defaultTheme = 'dark',
   storageKey = 'earthsphere-theme',
 }: {
   children: React.ReactNode;
@@ -33,6 +33,9 @@ export function ThemeProvider({
     if (savedTheme) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme(savedTheme);
+    } else {
+      // Default unconditionally to dark
+      setTheme('dark');
     }
   }, [storageKey]);
 
@@ -42,12 +45,7 @@ export function ThemeProvider({
     root.classList.remove('light', 'dark');
 
     if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light';
-
-      root.classList.add(systemTheme);
+      root.classList.add('dark');
       return;
     }
 

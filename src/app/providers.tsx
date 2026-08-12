@@ -41,7 +41,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="system" storageKey="earthsphere-theme">
+      <ThemeProvider defaultTheme="dark" storageKey="earthsphere-theme">
         {children}
       </ThemeProvider>
     </QueryClientProvider>

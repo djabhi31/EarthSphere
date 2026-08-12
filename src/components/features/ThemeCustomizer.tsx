@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Palette, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useEarthSphereStore } from '@/lib/store';
@@ -16,6 +16,13 @@ const ACCENTS = [
 export function ThemeCustomizer() {
   const [isOpen, setIsOpen] = useState(false);
   const { accentTheme, setAccentTheme } = useEarthSphereStore();
+
+  // Sync data-accent attribute on DOM
+  useEffect(() => {
+    if (accentTheme) {
+      document.documentElement.setAttribute('data-accent', accentTheme);
+    }
+  }, [accentTheme]);
 
   return (
     <div className="relative">
