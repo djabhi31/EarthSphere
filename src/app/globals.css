@@ -20,70 +20,70 @@
 :root {
   color-scheme: light;
 
-  /* Brand colors */
-  --space-black: #fafaf8;
-  --deep-blue: #dceafa;
-  --electric-cyan: #00a884;
-  --electric-blue: #2196f3;
-  --solar-orange: #ea580c;
-  --cosmic-purple: #6d28d9;
-  --ice-blue: #0ea5e9;
-  --warning-red: #dc2626;
-  --aurora-mint: #34d399;
+  /* Executive Brand Colors */
+  --space-black: #FAFBFD;
+  --deep-blue: #EFF6FF;
+  --electric-cyan: #008C72;
+  --electric-blue: #2563EB;
+  --solar-orange: #EA580C;
+  --cosmic-purple: #7C3AED;
+  --ice-blue: #0284C7;
+  --warning-red: #DC2626;
+  --aurora-mint: #059669;
 
-  /* Canvas — warm whites */
-  --canvas: #FAFAF8;
+  /* Canvas — Platinum & Alabaster */
+  --canvas: #FAFBFD;
   --canvas-raised: #FFFFFF;
-  --canvas-ambient: #F5F5F0;
+  --canvas-ambient: #F1F5F9;
   --surface-primary: #FFFFFF;
-  --surface-secondary: #F7F7F5;
+  --surface-secondary: #F8FAFC;
   --surface-elevated: #FFFFFF;
-  --surface-overlay: rgba(250, 250, 248, 0.88);
-  --surface-sunken: rgba(240, 240, 235, 0.6);
+  --surface-overlay: rgba(255, 255, 255, 0.88);
+  --surface-sunken: rgba(241, 245, 249, 0.7);
 
-  /* Text — high contrast */
-  --text-primary: #1a1a2e;
-  --text-secondary: #4a5568;
-  --text-muted: #9ca3af;
-  --text-accent: #00a884;
+  /* High-Contrast Obsidian & Slate Typography */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-accent: #008C72;
 
-  /* Borders */
-  --border-default: rgba(0, 0, 0, 0.08);
-  --border-subtle: rgba(0, 0, 0, 0.04);
-  --border-hover: rgba(0, 0, 0, 0.15);
-  --border-accent: rgba(0, 168, 132, 0.3);
-  --border-glow: rgba(33, 150, 243, 0.25);
+  /* Precise Slate Hairline Borders */
+  --border-default: rgba(15, 23, 42, 0.08);
+  --border-subtle: rgba(15, 23, 42, 0.04);
+  --border-hover: rgba(15, 23, 42, 0.16);
+  --border-accent: rgba(0, 140, 114, 0.28);
+  --border-glow: rgba(37, 99, 235, 0.22);
 
-  /* Gradients */
-  --gradient-canvas: linear-gradient(180deg, #FAFAF8 0%, #F0F0EB 100%);
-  --gradient-aurora: linear-gradient(125deg, #00a884 0%, #2196f3 50%, #6d28d9 100%);
-  --gradient-border: linear-gradient(135deg, rgba(0, 168, 132, 0.32), rgba(33, 150, 243, 0.18) 46%, rgba(109, 40, 217, 0.24));
-  --gradient-border-subtle: linear-gradient(135deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.02));
+  /* Executive Daylight Gradients */
+  --gradient-canvas: radial-gradient(circle at 50% -20%, rgba(37, 99, 235, 0.06), transparent 55%), linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+  --gradient-aurora: linear-gradient(125deg, #008C72 0%, #2563EB 50%, #7C3AED 100%);
+  --gradient-border: linear-gradient(135deg, rgba(0, 140, 114, 0.3), rgba(37, 99, 235, 0.18) 46%, rgba(124, 58, 237, 0.22));
+  --gradient-border-subtle: linear-gradient(135deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.02));
 
-  /* Glass system */
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-bg-strong: rgba(255, 255, 255, 0.88);
-  --glass-bg-subtle: rgba(255, 255, 255, 0.5);
-  --glass-border: rgba(0, 0, 0, 0.06);
-  --glass-border-strong: rgba(0, 0, 0, 0.1);
+  /* Refined Frosted Glass system */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-bg-strong: rgba(255, 255, 255, 0.94);
+  --glass-bg-subtle: rgba(248, 250, 252, 0.65);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-border-strong: rgba(15, 23, 42, 0.14);
   --glass-blur: 16px;
   --glass-blur-strong: 24px;
-  --glass-saturation: 180%;
+  --glass-saturation: 190%;
 
-  /* Layered depth */
-  --depth-1: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --depth-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
-  --depth-3: 0 12px 32px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
-  --depth-4: 0 24px 64px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 0, 0, 0.06);
-  --depth-5: 0 40px 100px rgba(0, 0, 0, 0.15), 0 16px 40px rgba(0, 0, 0, 0.08);
+  /* Layered Executive Depth */
+  --depth-1: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+  --depth-2: 0 4px 14px rgba(15, 23, 42, 0.06), 0 2px 5px rgba(15, 23, 42, 0.03);
+  --depth-3: 0 12px 32px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --depth-4: 0 24px 60px rgba(15, 23, 42, 0.10), 0 8px 20px rgba(15, 23, 42, 0.05);
+  --depth-5: 0 40px 90px rgba(15, 23, 42, 0.12), 0 16px 36px rgba(15, 23, 42, 0.06);
   
-  --shadow-cyan: 0 14px 42px rgba(0, 168, 132, 0.15);
-  --shadow-blue: 0 16px 48px rgba(33, 150, 243, 0.14);
-  --shadow-violet: 0 16px 48px rgba(109, 40, 217, 0.13);
+  --shadow-cyan: 0 14px 42px rgba(0, 140, 114, 0.12);
+  --shadow-blue: 0 16px 48px rgba(37, 99, 235, 0.12);
+  --shadow-violet: 0 16px 48px rgba(124, 58, 237, 0.12);
   
-  --glow-cyan: 0 0 20px rgba(0, 168, 132, 0.12);
-  --glow-blue: 0 0 20px rgba(33, 150, 243, 0.12);
-  --glow-violet: 0 0 20px rgba(109, 40, 217, 0.12);
+  --glow-cyan: 0 0 20px rgba(0, 140, 114, 0.12);
+  --glow-blue: 0 0 20px rgba(37, 99, 235, 0.12);
+  --glow-violet: 0 0 20px rgba(124, 58, 237, 0.12);
 
   /* Four-point rhythm with responsive page primitives */
   --space-1: 0.25rem;
@@ -131,9 +131,9 @@
   --duration-cinematic: 900ms;
 
   /* Decorative particles */
-  --particle-cyan: 0, 168, 132;
-  --particle-blue: 33, 150, 243;
-  --particle-violet: 109, 40, 217;
+  --particle-cyan: 0, 140, 114;
+  --particle-blue: 37, 99, 235;
+  --particle-violet: 124, 58, 237;
   --particle-warm: 234, 88, 12;
 
   /* Shadcn aliases (Light Mode) */
@@ -147,9 +147,9 @@
   --primary-foreground: #ffffff;
   --secondary: var(--deep-blue);
   --secondary-foreground: var(--text-primary);
-  --muted: var(--surface-elevated);
+  --muted: var(--surface-secondary);
   --muted-foreground: var(--text-secondary);
-  --accent: #e3effb;
+  --accent: #E2E8F0;
   --accent-foreground: var(--text-primary);
   --destructive: var(--warning-red);
   --destructive-foreground: #ffffff;

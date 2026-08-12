@@ -13,7 +13,7 @@ import { scaleIn, scrollReveal } from "@/lib/motion-presets";
 export function CTASection() {
   return (
     <motion.div 
-      className="max-w-3xl pt-16 z-20 max-md:bg-[#0b101b]/70 max-md:backdrop-blur-md max-md:p-8 max-md:rounded-3xl max-md:border max-md:border-[var(--border-subtle)] max-md:mx-4 max-md:shadow-xl"
+      className="max-w-3xl pt-16 z-20 max-md:bg-[var(--surface-elevated)]/90 max-md:backdrop-blur-md max-md:p-8 max-md:rounded-3xl max-md:border max-md:border-[var(--border-default)] max-md:mx-4 max-md:shadow-xl"
       variants={scaleIn}
       initial="hidden"
       whileInView="visible"
@@ -34,7 +34,7 @@ export function CTASection() {
       >
         <Link
           href="/events"
-          className="group relative inline-flex h-14 items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[var(--electric-cyan)] to-[var(--ice-blue)] px-10 text-base font-bold text-canvas shadow-xl shadow-electric-cyan/25 hover:shadow-2xl hover:shadow-electric-cyan/40 transition-all duration-300 cursor-none"
+          className="group relative inline-flex h-14 items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[var(--electric-cyan)] to-[var(--ice-blue)] px-10 text-base font-bold text-white shadow-xl shadow-[var(--electric-cyan)]/25 hover:shadow-2xl hover:shadow-[var(--electric-cyan)]/40 transition-all duration-300 cursor-none"
           onMouseEnter={() => audioSynth.playHover()}
           onClick={() => audioSynth.playClick()}
         >

@@ -72,7 +72,7 @@ function FilterBadge({
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: durations.fast }}
-      className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-white/70"
+      className="inline-flex items-center gap-1 rounded-full border border-[var(--border-default)] bg-[var(--surface-secondary)] px-2.5 py-1 text-xs font-semibold text-[var(--text-secondary)] shadow-sm"
     >
       {color && (
         <span
@@ -84,7 +84,7 @@ function FilterBadge({
       {label}
       <button
         onClick={onRemove}
-        className="ml-0.5 rounded-full p-0.5 transition-colors hover:bg-white/10"
+        className="ml-0.5 rounded-full p-0.5 transition-colors hover:bg-[var(--surface-sunken)] hover:text-[var(--text-primary)]"
         aria-label={`Remove ${label} filter`}
       >
         <X size={10} />
@@ -129,7 +129,7 @@ export function EventFilters({
   }, []);
 
   return (
-    <section className="sticky top-0 z-30 border-b border-white/5 bg-canvas/80 backdrop-blur-xl">
+    <section className="sticky top-0 z-30 border-b border-[var(--border-subtle)] bg-[var(--surface-overlay)] backdrop-blur-xl transition-colors">
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         {/* Desktop filters */}
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -138,7 +138,7 @@ export function EventFilters({
             <div className="relative min-w-0 flex-1 lg:w-72 lg:flex-none">
               <Search
                 size={16}
-                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/30"
+                className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"
                 aria-hidden="true"
               />
               <input
@@ -147,13 +147,13 @@ export function EventFilters({
                 value={searchInput}
                 onChange={(e) => onSearchChange(e.target.value)}
                 placeholder="Search events... (Press '/')"
-                className="h-9 w-full rounded-lg border border-white/10 bg-white/5 pl-9 pr-8 text-sm text-white placeholder:text-white/30 transition-colors focus:border-electric-cyan/50 focus:outline-none focus:ring-1 focus:ring-electric-cyan/30"
+                className="h-9 w-full rounded-lg border border-[var(--border-default)] bg-[var(--surface-secondary)] pl-9 pr-8 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] transition-colors focus:border-[var(--electric-cyan)] focus:outline-none focus:ring-1 focus:ring-[var(--electric-cyan)]"
                 aria-label="Search events"
               />
               {searchInput && (
                 <button
                   onClick={() => onSearchChange("")}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-0.5 text-white/30 transition-colors hover:text-white/60"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-0.5 text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
                   aria-label="Clear search"
                 >
                   <X size={14} />
@@ -161,21 +161,21 @@ export function EventFilters({
               )}
             </div>
 
-            <span className="hidden xl:inline-flex items-center gap-1 text-[10px] text-white/30 font-mono">
-              <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-electric-cyan font-bold">?</kbd> for shortcuts
+            <span className="hidden xl:inline-flex items-center gap-1 text-[10px] text-[var(--text-muted)] font-mono">
+              <kbd className="px-1.5 py-0.5 rounded bg-[var(--surface-secondary)] border border-[var(--border-default)] text-[var(--electric-cyan)] font-bold">?</kbd> for shortcuts
             </span>
 
             {/* Mobile filter toggle */}
             <button
               onClick={onToggleMobileFilters}
-              className="flex h-9 items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 text-sm text-white/60 transition-colors hover:bg-white/10 lg:hidden"
+              className="flex h-9 items-center gap-1.5 rounded-lg border border-[var(--border-default)] bg-[var(--surface-secondary)] px-3 text-sm text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-primary)] hover:text-[var(--text-primary)] lg:hidden shadow-sm"
               aria-label="Toggle filters"
               aria-expanded={showMobileFilters}
             >
               <SlidersHorizontal size={14} />
               Filters
               {hasActiveFilters && (
-                <span className="ml-1 flex h-4 w-4 items-center justify-center rounded-full bg-electric-cyan text-[10px] font-bold text-canvas">
+                <span className="ml-1 flex h-4 w-4 items-center justify-center rounded-full bg-[var(--electric-cyan)] text-[10px] font-bold text-white">
                   {selectedCategories.length + (status !== "open" ? 1 : 0)}
                 </span>
               )}
@@ -184,16 +184,16 @@ export function EventFilters({
 
           <div className="flex items-center gap-3">
             {/* Status toggle */}
-            <div className="flex rounded-lg border border-white/10 bg-white/5 p-0.5">
+            <div className="flex rounded-lg border border-[var(--border-default)] bg-[var(--surface-secondary)] p-0.5 shadow-sm">
               {STATUS_OPTIONS.map((opt) => (
                 <button
                   key={opt.value}
                   onClick={() => onStatusChange(opt.value)}
                   className={cn(
-                    "rounded-md px-3 py-1.5 text-xs font-medium transition-all",
+                    "rounded-md px-3 py-1.5 text-xs font-semibold transition-all",
                     status === opt.value
-                      ? "bg-electric-cyan/15 text-electric-cyan shadow-sm"
-                      : "text-white/40 hover:text-white/60"
+                      ? "bg-[var(--electric-cyan)]/15 text-[var(--electric-cyan)] shadow-sm border border-[var(--electric-cyan)]/30"
+                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
                   )}
                   aria-pressed={status === opt.value}
                 >
@@ -212,14 +212,14 @@ export function EventFilters({
             </div>
 
             {/* View & Export toggle */}
-            <div className="hidden items-center gap-0.5 rounded-lg border border-white/10 bg-white/5 p-0.5 sm:flex">
+            <div className="hidden items-center gap-0.5 rounded-lg border border-[var(--border-default)] bg-[var(--surface-secondary)] p-0.5 sm:flex shadow-sm">
               <button
                 onClick={() => onViewModeChange("grid")}
                 className={cn(
                   "rounded-md p-1.5 transition-all",
                   viewMode === "grid"
-                    ? "bg-white/10 text-white"
-                    : "text-white/30 hover:text-white/60"
+                    ? "bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-sm"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                 )}
                 aria-label="Grid view"
                 aria-pressed={viewMode === "grid"}
@@ -231,8 +231,8 @@ export function EventFilters({
                 className={cn(
                   "rounded-md p-1.5 transition-all",
                   viewMode === "list"
-                    ? "bg-white/10 text-white"
-                    : "text-white/30 hover:text-white/60"
+                    ? "bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-sm"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                 )}
                 aria-label="List view"
                 aria-pressed={viewMode === "list"}
@@ -241,10 +241,10 @@ export function EventFilters({
               </button>
               {onExport && (
                 <>
-                  <div className="h-4 w-px bg-white/10 mx-0.5" />
+                  <div className="h-4 w-px bg-[var(--border-subtle)] mx-0.5" />
                   <button
                     onClick={onExport}
-                    className="rounded-md p-1.5 text-white/30 hover:text-white/60 transition-all"
+                    className="rounded-md p-1.5 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all"
                     aria-label="Export Data"
                   >
                     <Download size={16} />
@@ -273,15 +273,15 @@ export function EventFilters({
                   key={id}
                   onClick={() => onToggleCategory(id)}
                   className={cn(
-                    "flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-all",
+                    "flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all shadow-sm",
                     isSelected
                       ? "border-transparent shadow-md"
-                      : "border-white/10 bg-white/5 text-white/50 hover:border-white/20 hover:text-white/70"
+                      : "border-[var(--border-default)] bg-[var(--surface-secondary)] text-[var(--text-secondary)] hover:border-[var(--border-hover)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-primary)]"
                   )}
                   style={
                     isSelected
                       ? {
-                          backgroundColor: `${color}20`,
+                          backgroundColor: `${color}18`,
                           color: color,
                           borderColor: `${color}40`,
                         }
@@ -308,7 +308,7 @@ export function EventFilters({
               className="overflow-hidden"
             >
               <div className="flex flex-wrap items-center gap-2 pt-3">
-                <span className="text-xs text-white/30">Active filters:</span>
+                <span className="text-xs text-[var(--text-muted)] font-medium">Active filters:</span>
 
                 {selectedCategories.map((catId) => (
                   <FilterBadge
@@ -342,7 +342,7 @@ export function EventFilters({
 
                 <button
                   onClick={onClearAll}
-                  className="ml-1 text-xs text-white/30 underline underline-offset-2 transition-colors hover:text-white/60"
+                  className="ml-1 text-xs text-[var(--text-muted)] underline underline-offset-2 transition-colors hover:text-[var(--text-primary)]"
                 >
                   Clear all
                 </button>

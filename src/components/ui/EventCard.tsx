@@ -74,13 +74,13 @@ export function EventCard({ event, className, index = 0 }: EventCardProps) {
       </div>
 
       {/* Title */}
-      <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-white/90">
+      <h3 className="line-clamp-2 text-sm font-bold leading-snug text-[var(--text-primary)]">
         {event.title}
       </h3>
 
       {/* Date & Site Time info */}
-      <div className="flex flex-col gap-1 text-xs text-white/40">
-        <div className="flex items-center gap-1.5">
+      <div className="flex flex-col gap-1 text-xs text-[var(--text-secondary)]">
+        <div className="flex items-center gap-1.5 font-medium">
           <Calendar size={12} aria-hidden="true" />
           {startDate && (
             <span>
@@ -93,9 +93,9 @@ export function EventCard({ event, className, index = 0 }: EventCardProps) {
 
       {/* Coordinates */}
       {coords && (
-        <div className="flex items-center gap-1.5 text-xs text-white/30">
+        <div className="flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
           <MapPin size={12} aria-hidden="true" />
-          <span className="font-mono text-[11px]">
+          <span className="font-mono text-[11px] font-medium">
             {formatCoordinates(coords)}
           </span>
         </div>
@@ -131,7 +131,7 @@ export function EventCard({ event, className, index = 0 }: EventCardProps) {
                 audioSynth.playClick();
               }}
               onMouseEnter={() => audioSynth.playHover()}
-              className="pointer-events-auto relative z-20 inline-flex items-center gap-1 rounded-md border border-white/5 bg-white/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/40 transition-colors hover:border-white/15 hover:text-white/60"
+              className="pointer-events-auto relative z-20 inline-flex items-center gap-1 rounded-md border border-[var(--border-subtle)] bg-[var(--surface-secondary)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--text-secondary)] transition-colors hover:border-[var(--border-default)] hover:text-[var(--text-primary)]"
             >
               {source.id}
               <ExternalLink size={8} aria-hidden="true" />

@@ -38,9 +38,9 @@ export function Footer() {
               <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-[var(--electric-cyan)] to-[var(--cosmic-purple)] bg-clip-text text-transparent">
                 EarthSphere
               </span>
-              <span className="ml-1 text-xs font-medium text-white/30">AI</span>
+              <span className="ml-1 text-xs font-bold text-[var(--text-muted)]">AI</span>
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-white/40">
+            <p className="max-w-xs text-sm leading-relaxed text-[var(--text-secondary)]">
               Real-time monitoring and visualization of natural events worldwide.
               Tracking wildfires, storms, earthquakes, and more — because our
               planet&apos;s story matters.
@@ -49,7 +49,7 @@ export function Footer() {
 
           {/* ── Column 2: Quick Links ─────────────────────────────── */}
           <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/50">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-[var(--text-primary)]">
               Quick Links
             </h3>
             <ul className="space-y-2">
@@ -57,7 +57,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/40 transition-colors hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)] rounded"
+                    className="text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--electric-cyan)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)] rounded"
                   >
                     {link.label}
                   </Link>
@@ -68,7 +68,7 @@ export function Footer() {
 
           {/* ── Column 3: Data Sources ────────────────────────────── */}
           <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/50">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-[var(--text-primary)]">
               Data Sources
             </h3>
             <ul className="space-y-2">
@@ -78,20 +78,20 @@ export function Footer() {
                     href={source.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-white/40 transition-colors hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)] rounded"
+                    className="text-sm text-[var(--text-secondary)] transition-colors hover:text-[var(--electric-cyan)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)] rounded"
                   >
                     {source.label}
                   </a>
                 </li>
               ))}
             </ul>
-            <p className="mt-4 flex items-center gap-1.5 text-xs text-white/25">
+            <p className="mt-4 flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
               Powered by{" "}
               <a
                 href="https://eonet.gsfc.nasa.gov/docs/v3"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#00d4aa]/60 underline underline-offset-2 transition-colors hover:text-[#00d4aa]"
+                className="text-[var(--electric-cyan)] underline underline-offset-2 transition-colors hover:text-[var(--text-primary)]"
               >
                 NASA EONET API
               </a>
@@ -100,11 +100,11 @@ export function Footer() {
         </div>
 
         {/* ── Bottom row ────────────────────────────────────────── */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/5 pt-6 sm:flex-row">
-          <p className="text-xs text-white/25">
+        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-[var(--border-subtle)] pt-6 sm:flex-row">
+          <p className="text-xs text-[var(--text-muted)]">
             &copy; {new Date().getFullYear()} EarthSphere. All rights reserved.
           </p>
-          <p className="inline-flex items-center gap-1 text-xs text-white/25">
+          <p className="inline-flex items-center gap-1 text-xs text-[var(--text-muted)]">
             Made with{" "}
             <Heart size={12} className="fill-red-500 text-red-500" aria-label="love" />{" "}
             for Earth

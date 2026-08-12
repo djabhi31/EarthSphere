@@ -57,11 +57,11 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
 
   // Scroll-based opacity
   const { scrollY } = useScroll();
-  const bgOpacity = useTransform(scrollY, [0, 100], [0, 0.8]);
-  const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.1]);
+  const bgOpacity = useTransform(scrollY, [0, 100], [0, 0.88]);
+  const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.08]);
 
-  const motionBgColor = useTransform(bgOpacity, (v: number) => `rgba(10, 14, 23, ${v})`);
-  const motionBorderColor = useTransform(borderOpacity, (v: number) => `rgba(255, 255, 255, ${v})`);
+  const motionBgColor = useTransform(bgOpacity, (v: number) => `rgba(var(--bg-rgb, 10, 14, 23), ${v})`);
+  const motionBorderColor = useTransform(borderOpacity, (v: number) => `rgba(var(--border-rgb, 255, 255, 255), ${v})`);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -70,7 +70,7 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
 
   return (
     <motion.header
-      className="fixed inset-x-0 top-0 z-50"
+      className="fixed inset-x-0 top-0 z-50 transition-colors"
       style={
         prefersReduced
           ? undefined
@@ -83,8 +83,8 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
     >
       <div
         className={cn(
-          "absolute inset-0 backdrop-blur-xl",
-          prefersReduced && "bg-black/60 border-b border-white/10",
+          "absolute inset-0 backdrop-blur-xl bg-[var(--surface-overlay)] border-b border-[var(--border-subtle)]",
+          prefersReduced && "bg-[var(--surface-primary)] border-b border-[var(--border-default)]",
         )}
         aria-hidden="true"
       />
@@ -96,17 +96,17 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
         {/* ── Logo ──────────────────────────────────────────────────── */}
         <Link 
           href="/" 
-          className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4aa] rounded"
+          className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)] rounded"
           onMouseEnter={() => audioSynth.playHover()}
           onClick={() => audioSynth.playClick()}
         >
           <span
-            className="text-xl font-bold tracking-tight bg-gradient-to-r from-[#00d4aa] to-[#7c3aed] bg-clip-text text-transparent"
-            style={{ filter: "drop-shadow(0 0 12px rgba(0,212,170,0.3))" }}
+            className="text-xl font-bold tracking-tight bg-gradient-to-r from-[var(--electric-cyan)] to-[var(--cosmic-purple)] bg-clip-text text-transparent"
+            style={{ filter: "drop-shadow(0 0 12px rgba(0,212,170,0.25))" }}
           >
             EarthSphere
           </span>
-          <span className="text-xs font-medium text-white/30">AI</span>
+          <span className="text-xs font-bold text-[var(--text-muted)]">AI</span>
         </Link>
 
         {/* ── Desktop links ──────────────────────────────────────── */}
@@ -119,8 +119,10 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
                 href={link.href}
                 className={cn(
                   "relative px-3 py-2 text-sm font-medium transition-colors rounded-md",
-                  active ? "text-white" : "text-white/50 hover:text-white/80",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4aa]",
+                  active
+                    ? "text-[var(--text-primary)] font-semibold"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-secondary)]/60",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)]",
                 )}
                 onMouseEnter={() => audioSynth.playHover()}
                 onClick={() => audioSynth.playClick()}
@@ -130,12 +132,12 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
                 {active && !prefersReduced && (
                   <motion.span
                     layoutId="navbar-active"
-                    className="absolute inset-x-1 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-[#00d4aa] to-[#7c3aed]"
+                    className="absolute inset-x-1 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-[var(--electric-cyan)] to-[var(--cosmic-purple)]"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                   />
                 )}
                 {active && prefersReduced && (
-                  <span className="absolute inset-x-1 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-[#00d4aa] to-[#7c3aed]" />
+                  <span className="absolute inset-x-1 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-[var(--electric-cyan)] to-[var(--cosmic-purple)]" />
                 )}
               </Link>
             );
@@ -154,12 +156,12 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
               setCmdPaletteOpen(true);
               audioSynth.playClick();
             }}
-            className="hidden sm:flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/60 hover:border-electric-cyan/40 hover:bg-white/10 hover:text-white transition-all"
+            className="hidden sm:flex items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--surface-secondary)]/80 px-3 py-1.5 text-xs text-[var(--text-secondary)] hover:border-[var(--electric-cyan)] hover:bg-[var(--surface-primary)] hover:text-[var(--text-primary)] transition-all shadow-sm"
             title="Search & Commands (Ctrl+K)"
           >
-            <Search className="h-3.5 w-3.5 text-electric-cyan" />
+            <Search className="h-3.5 w-3.5 text-[var(--electric-cyan)]" />
             <span>Search</span>
-            <kbd className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-mono text-white/40">Ctrl K</kbd>
+            <kbd className="rounded bg-[var(--surface-sunken)] border border-[var(--border-subtle)] px-1.5 py-0.5 text-[10px] font-mono text-[var(--text-muted)]">Ctrl K</kbd>
           </button>
 
           <div className="flex items-center gap-1">
@@ -168,7 +170,7 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
                 setAiBriefingOpen(true);
                 audioSynth.playClick();
               }}
-              className="p-2 text-electric-cyan hover:bg-electric-cyan/10 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4aa]"
+              className="p-2 text-[var(--electric-cyan)] hover:bg-[var(--electric-cyan)]/10 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)]"
               aria-label="Open AI Briefing"
               title="AI Disaster Intelligence Briefing"
             >
@@ -179,7 +181,7 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
                 setWatchlistOpen(true);
                 audioSynth.playClick();
               }}
-              className="p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4aa]"
+              className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-secondary)] rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)]"
               aria-label="Open Watchlist"
             >
               <Bell size={18} />
@@ -190,15 +192,15 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
           </div>
 
           {activeEventCount > 0 && (
-            <div className="hidden items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 sm:flex">
+            <div className="hidden items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1 sm:flex">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
-              <span className="text-xs font-semibold tabular-nums text-emerald-400">
+              <span className="text-xs font-semibold tabular-nums text-emerald-600 dark:text-emerald-400">
                 {activeEventCount}
               </span>
-              <span className="text-xs text-emerald-400/60">live</span>
+              <span className="text-xs text-emerald-600/70 dark:text-emerald-400/60">live</span>
             </div>
           )}
 
@@ -208,13 +210,13 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
             audioSynth.playClick();
           }}>
             <SheetTrigger
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-white/60 transition-colors hover:bg-white/5 hover:text-white md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4aa]"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-secondary)] hover:text-[var(--text-primary)] md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)]"
               aria-label="Open navigation menu"
               onMouseEnter={() => audioSynth.playHover()}
             >
               <Menu size={22} />
             </SheetTrigger>
-            <SheetContent side="right" className="pt-14">
+            <SheetContent side="right" className="pt-14 bg-[var(--surface-primary)] text-[var(--text-primary)] border-l border-[var(--border-default)]">
               <VisuallyHidden.Root>
                 <SheetTitle>Navigation Menu</SheetTitle>
               </VisuallyHidden.Root>
@@ -242,9 +244,9 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
                         className={cn(
                           "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
                           active
-                            ? "bg-white/10 text-white"
-                            : "text-white/50 hover:bg-white/5 hover:text-white/80",
-                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d4aa]",
+                            ? "bg-[var(--surface-secondary)] text-[var(--text-primary)] font-semibold border border-[var(--border-subtle)]"
+                            : "text-[var(--text-secondary)] hover:bg-[var(--surface-sunken)] hover:text-[var(--text-primary)]",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric-cyan)]",
                         )}
                       >
                         {link.label}
@@ -256,9 +258,9 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
 
               {/* Mobile live count */}
               {activeEventCount > 0 && (
-                <div className="mt-6 flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2">
-                  <Radio size={14} className="text-emerald-400" />
-                  <span className="text-sm font-semibold tabular-nums text-emerald-400">
+                <div className="mt-6 flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-4 py-2">
+                  <Radio size={14} className="text-emerald-500" />
+                  <span className="text-sm font-semibold tabular-nums text-emerald-600 dark:text-emerald-400">
                     {activeEventCount} active events
                   </span>
                 </div>

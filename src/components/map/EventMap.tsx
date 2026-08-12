@@ -5,6 +5,7 @@ import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { EONETEvent } from "@/lib/types";
 import { getCategoryColor, getLatestGeometry, formatDate, formatMagnitude, getCategoryLabel } from "@/lib/utils";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 /* ------------------------------------------------------------------ */
 /*  Tile Layer Definition                                             */
@@ -37,28 +38,47 @@ export default function EventMap({
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markersRef = useRef<maplibregl.Marker[]>([]);
+  const { theme } = useTheme();
 
-  // Helper to generate MapLibre style JSON dynamically based on tileLayer type
+  const isLight =
+    theme === "light" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      !window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  // Helper to generate MapLibre style JSON dynamically based on tileLayer type & current theme
   const getStyle = (layer: TileLayerType): maplibregl.StyleSpecification => {
-    // Base sky style configuration representing atmosphere glow
-    const sky = {
-      "sky-color": "#0a0e17",
-      "horizon-color": "#00d4aa",
-      "fog-color": "#0a0e17",
-      "fog-ground-blend": 0.15,
-      "atmosphere-blend": [
-        "interpolate", ["linear"], ["zoom"],
-        0, 1.0,
-        5, 1.0,
-        7, 0.0
-      ]
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } as any;
+    // Atmosphere glow configuration
+    const sky = isLight
+      ? {
+          "sky-color": "#f1f5f9",
+          "horizon-color": "#008c72",
+          "fog-color": "#f8fafc",
+          "fog-ground-blend": 0.15,
+          "atmosphere-blend": [
+            "interpolate", ["linear"], ["zoom"],
+            0, 1.0,
+            5, 1.0,
+            7, 0.0
+          ]
+        }
+      : {
+          "sky-color": "#0a0e17",
+          "horizon-color": "#00d4aa",
+          "fog-color": "#0a0e17",
+          "fog-ground-blend": 0.15,
+          "atmosphere-blend": [
+            "interpolate", ["linear"], ["zoom"],
+            0, 1.0,
+            5, 1.0,
+            7, 0.0
+          ]
+        };
 
     if (layer === "satellite") {
       return {
         version: 8,
-        sky: sky,
+        sky: sky as any,
         sources: {
           "satellite-tiles": {
             type: "raster",
@@ -96,7 +116,7 @@ export default function EventMap({
     } else if (layer === "terrain") {
       return {
         version: 8,
-        sky: sky,
+        sky: sky as any,
         sources: {
           "terrain-tiles": {
             type: "raster",
@@ -133,16 +153,20 @@ export default function EventMap({
       };
     }
 
-    // Default dark theme
+    // Default theme tiles (Positron for light mode, Dark Matter for dark mode)
+    const basemapUrl = isLight
+      ? "https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png"
+      : "https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png";
+
     return {
       version: 8,
-      sky: sky,
+      sky: sky as any,
       sources: {
         "raster-tiles": {
           type: "raster",
-          tiles: ["https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png"],
+          tiles: [basemapUrl],
           tileSize: 256,
-          attribution: "&copy; CartoDB"
+          attribution: "&copy; CartoDB &copy; OpenStreetMap"
         }
       },
       layers: [
@@ -231,7 +255,7 @@ export default function EventMap({
       map.setProjection({ type: "globe" });
       setupHeatmapLayer(map);
     });
-  }, [tileLayer]);
+  }, [tileLayer, isLight]);
 
   // ── Plot Event Markers ────────────────────────────────────────────────────
   useEffect(() => {

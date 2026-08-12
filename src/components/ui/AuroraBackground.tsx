@@ -65,7 +65,7 @@ export function AuroraBackground({
                 cfg.opacity,
                 cfg.blur,
                 cfg.scale,
-                "animate-aurora-2 mix-blend-screen",
+                "animate-aurora-2 dark:mix-blend-screen mix-blend-multiply",
               )}
               style={{ backgroundColor: colors.electricCyan }}
             />
@@ -77,7 +77,7 @@ export function AuroraBackground({
                 cfg.opacity,
                 cfg.blur,
                 cfg.scale,
-                "animate-aurora-3 mix-blend-screen",
+                "animate-aurora-3 dark:mix-blend-screen mix-blend-multiply",
               )}
               style={{ backgroundColor: colors.cosmicPurple }}
             />
@@ -89,7 +89,7 @@ export function AuroraBackground({
                 cfg.opacity,
                 cfg.blur,
                 cfg.scale,
-                "animate-aurora-4 mix-blend-screen",
+                "animate-aurora-4 dark:mix-blend-screen mix-blend-multiply",
               )}
               style={{ backgroundColor: colors.iceBlue }}
             />

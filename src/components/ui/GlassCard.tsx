@@ -56,7 +56,7 @@ export function GlassCard({
     <Component
       className={cn(
         "relative rounded-2xl",
-        hoverEffect && !prefersReduced && "transition-[border-color,box-shadow] duration-300 hover:border-white/20",
+        hoverEffect && !prefersReduced && "transition-[border-color,box-shadow] duration-300 hover:border-[var(--border-hover)] shadow-sm",
         onClick && "cursor-pointer",
         className,
       )}

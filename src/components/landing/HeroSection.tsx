@@ -35,8 +35,8 @@ export function HeroSection({ stats }: HeroSectionProps) {
         <span className="text-xs font-semibold uppercase tracking-wider text-electric-cyan">
           NASA EONET v3 AI Telemetry Active
         </span>
-        <span className="h-3 w-px bg-white/20" />
-        <span className="text-[10px] font-mono text-white/50">
+        <span className="h-3 w-px bg-[var(--border-default)]" />
+        <span className="text-[10px] font-mono text-[var(--text-secondary)] font-medium">
           PING 14ms
         </span>
       </motion.div>
@@ -45,19 +45,19 @@ export function HeroSection({ stats }: HeroSectionProps) {
         <SplitText
           text="Watch Earth Breathe"
           splitBy="word"
-          className="block text-5xl font-black leading-[1.05] tracking-tight md:text-7xl lg:text-8xl"
+          className="block text-5xl font-black leading-[1.05] tracking-tight text-[var(--text-primary)] md:text-7xl lg:text-8xl"
           delay={0.3}
         />
         <SplitText
           text="in Real Time"
           splitBy="word"
-          className="mt-2 block bg-gradient-to-r from-electric-cyan via-ice-blue to-cosmic-purple bg-clip-text text-5xl font-black leading-[1.05] tracking-tight text-transparent md:text-7xl lg:text-8xl animate-text-glow"
+          className="mt-2 block bg-gradient-to-r from-[var(--electric-cyan)] via-[var(--ice-blue)] to-[var(--cosmic-purple)] bg-clip-text text-5xl font-black leading-[1.05] tracking-tight text-transparent md:text-7xl lg:text-8xl animate-text-glow"
           delay={0.6}
         />
       </h1>
 
       <motion.p
-        className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-white/60 sm:text-lg md:text-xl select-text"
+        className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg md:text-xl select-text"
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1.1 }}
@@ -76,7 +76,7 @@ export function HeroSection({ stats }: HeroSectionProps) {
           href="/events?category=wildfires"
           onMouseEnter={() => audioSynth.playHover()}
           onClick={() => audioSynth.playClick()}
-          className="flex items-center gap-1.5 rounded-full border border-solar-orange/30 bg-solar-orange/10 px-3 py-1 text-xs font-semibold text-solar-orange hover:bg-solar-orange/20 transition-colors"
+          className="flex items-center gap-1.5 rounded-full border border-[var(--solar-orange)]/30 bg-[var(--solar-orange)]/10 px-3 py-1 text-xs font-semibold text-[var(--solar-orange)] hover:bg-[var(--solar-orange)]/20 transition-colors"
         >
           🔥 Wildfires
         </Link>
@@ -84,7 +84,7 @@ export function HeroSection({ stats }: HeroSectionProps) {
           href="/events?category=severeStorms"
           onMouseEnter={() => audioSynth.playHover()}
           onClick={() => audioSynth.playClick()}
-          className="flex items-center gap-1.5 rounded-full border border-ice-blue/30 bg-ice-blue/10 px-3 py-1 text-xs font-semibold text-ice-blue hover:bg-ice-blue/20 transition-colors"
+          className="flex items-center gap-1.5 rounded-full border border-[var(--ice-blue)]/30 bg-[var(--ice-blue)]/10 px-3 py-1 text-xs font-semibold text-[var(--ice-blue)] hover:bg-[var(--ice-blue)]/20 transition-colors"
         >
           🌀 Severe Storms
         </Link>
@@ -92,7 +92,7 @@ export function HeroSection({ stats }: HeroSectionProps) {
           href="/events?category=volcanoes"
           onMouseEnter={() => audioSynth.playHover()}
           onClick={() => audioSynth.playClick()}
-          className="flex items-center gap-1.5 rounded-full border border-warning-red/30 bg-warning-red/10 px-3 py-1 text-xs font-semibold text-warning-red hover:bg-warning-red/20 transition-colors"
+          className="flex items-center gap-1.5 rounded-full border border-[var(--warning-red)]/30 bg-[var(--warning-red)]/10 px-3 py-1 text-xs font-semibold text-[var(--warning-red)] hover:bg-[var(--warning-red)]/20 transition-colors"
         >
           🌋 Volcanoes
         </Link>
@@ -100,7 +100,7 @@ export function HeroSection({ stats }: HeroSectionProps) {
           href="/events?category=earthquakes"
           onMouseEnter={() => audioSynth.playHover()}
           onClick={() => audioSynth.playClick()}
-          className="flex items-center gap-1.5 rounded-full border border-cosmic-purple/30 bg-cosmic-purple/10 px-3 py-1 text-xs font-semibold text-cosmic-purple hover:bg-cosmic-purple/20 transition-colors"
+          className="flex items-center gap-1.5 rounded-full border border-[var(--cosmic-purple)]/30 bg-[var(--cosmic-purple)]/10 px-3 py-1 text-xs font-semibold text-[var(--cosmic-purple)] hover:bg-[var(--cosmic-purple)]/20 transition-colors"
         >
           ⚡ Earthquakes
         </Link>
@@ -112,13 +112,13 @@ export function HeroSection({ stats }: HeroSectionProps) {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.35 }}
       >
-        <Activity className="h-4 w-4 text-electric-cyan animate-pulse" />
-        <span className="text-sm text-white/50">Live Global Feed:</span>
+        <Activity className="h-4 w-4 text-[var(--electric-cyan)] animate-pulse" />
+        <span className="text-sm font-medium text-[var(--text-secondary)]">Live Global Feed:</span>
         <AnimatedCounter
           value={stats?.totalActive ?? 0}
-          className="text-base font-extrabold text-electric-cyan tabular-nums"
+          className="text-base font-extrabold text-[var(--electric-cyan)] tabular-nums"
         />
-        <span className="text-sm text-white/50">active disasters tracked</span>
+        <span className="text-sm font-medium text-[var(--text-secondary)]">active disasters tracked</span>
       </motion.div>
 
       <motion.div
@@ -129,7 +129,7 @@ export function HeroSection({ stats }: HeroSectionProps) {
       >
         <Link
           href="/events"
-          className="group relative inline-flex h-12 items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-electric-cyan via-ice-blue to-cosmic-purple px-8 text-sm font-semibold text-canvas shadow-lg shadow-electric-cyan/25 transition-all duration-300 hover:shadow-xl hover:shadow-electric-cyan/40 sm:h-14 sm:px-10 sm:text-base cursor-none border-beam"
+          className="group relative inline-flex h-12 items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[var(--electric-cyan)] via-[var(--ice-blue)] to-[var(--cosmic-purple)] px-8 text-sm font-bold text-white shadow-lg shadow-[var(--electric-cyan)]/25 transition-all duration-300 hover:shadow-xl hover:shadow-[var(--electric-cyan)]/40 sm:h-14 sm:px-10 sm:text-base cursor-none border-beam"
           onMouseEnter={() => audioSynth.playHover()}
           onClick={() => audioSynth.playClick()}
           data-cursor-label="Explore"
@@ -139,7 +139,7 @@ export function HeroSection({ stats }: HeroSectionProps) {
         </Link>
         <Link
           href="/map"
-          className="inline-flex h-12 items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-8 text-sm font-semibold text-white/90 backdrop-blur-md transition-all duration-300 hover:border-electric-cyan/50 hover:bg-white/10 hover:text-white sm:h-14 sm:px-10 sm:text-base cursor-none hud-corner"
+          className="inline-flex h-12 items-center gap-2 rounded-xl border border-[var(--border-default)] bg-[var(--surface-primary)] px-8 text-sm font-bold text-[var(--text-primary)] backdrop-blur-md shadow-sm transition-all duration-300 hover:border-[var(--electric-cyan)] hover:bg-[var(--surface-secondary)] sm:h-14 sm:px-10 sm:text-base cursor-none hud-corner"
           onMouseEnter={() => audioSynth.playHover()}
           onClick={() => audioSynth.playClick()}
           data-cursor-label="Open Map"
