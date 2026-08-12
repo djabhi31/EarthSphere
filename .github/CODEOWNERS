@@ -1,0 +1,13 @@
+# EarthSphere CODEOWNERS
+# https://help.github.com/articles/about-codeowners/
+
+# Global code ownership - all files in repository
+* @djabhi31
+
+# Workflows and CI/CD pipelines
+/.github/workflows/ @djabhi31
+
+# Core application & WebGL 3D graphics
+/src/components/3d/ @djabhi31
+/src/components/map/ @djabhi31
+/src/app/api/ @djabhi31

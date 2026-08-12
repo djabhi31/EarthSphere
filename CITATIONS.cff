@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "EarthSphere — Real-Time Earth Event Intelligence Platform"
+message: "If you use this software in your research or project, please cite it as below."
+type: software
+authors:
+  - family-names: "Abhilash"
+    given-names: "M."
+    alias: "djabhi31"
+repository-code: "https://github.com/djabhi31/EarthSphere"
+url: "https://earthsphere.in"
+abstract: "EarthSphere is a real-time natural event monitoring platform powered by NASA EONET. It visualizes earthquakes, wildfires, severe storms, and volcanoes globally using WebGL 3D graphics, MapLibre GL, and Next.js 15."
+keywords:
+  - nasa-eonet
+  - webgl
+  - threejs
+  - nextjs
+  - earth-monitoring
+  - real-time-intelligence
+license: MIT
+date-released: 2026-01-01

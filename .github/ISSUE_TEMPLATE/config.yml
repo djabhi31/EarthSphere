@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation & Architecture Guidelines
+    url: https://github.com/djabhi31/EarthSphere/tree/master/docs
+    about: Explore the design tokens, architecture plan, and project roadmap.
+  - name: 🛡️ Security Vulnerabilities
+    url: https://github.com/djabhi31/EarthSphere/blob/master/SECURITY.md
+    about: Report sensitive security vulnerabilities privately.

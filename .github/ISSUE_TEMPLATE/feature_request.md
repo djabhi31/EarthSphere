@@ -1,19 +1,22 @@
 ---
-name: Feature Request
-about: Suggest an idea for this project
-title: ''
-labels: enhancement
-assignees: ''
+name: "✨ Feature Request"
+about: "Suggest a new feature, visualization capability, or UI enhancement"
+title: "[FEAT] "
+labels: ["enhancement", "triage"]
+assignees: ""
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## 🚀 Feature Overview
+<!-- Clear description of the proposed feature or enhancement. -->
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## 💡 Motivation & Problem
+<!-- What problem does this solve? Is your feature request related to a problem? -->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## 🛠️ Proposed Solution
+<!-- How would you like this feature to work? Detail the user flow, UI components, or WebGL behaviors. -->
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## 🔄 Alternatives Considered
+<!-- Any alternative solutions or features you've considered. -->
+
+## 🎨 UI/UX Mockups (Optional)
+<!-- Attach design mockups, wireframes, or reference inspirations if available. -->

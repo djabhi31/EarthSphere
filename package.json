@@ -1,12 +1,36 @@
 {
   "name": "earthsphere",
-  "version": "0.1.0",
+  "version": "1.2.0",
+  "description": "Real-time Earth Natural Event Intelligence & Visual Analytics Engine powered by NASA EONET v3.",
+  "homepage": "https://earthsphere.in",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djabhi31/EarthSphere.git"
+  },
+  "bugs": {
+    "url": "https://github.com/djabhi31/EarthSphere/issues"
+  },
+  "keywords": [
+    "nasa",
+    "eonet",
+    "webgl",
+    "threejs",
+    "maplibre",
+    "nextjs",
+    "earth-monitoring",
+    "real-time",
+    "natural-disasters",
+    "spatial-analytics"
+  ],
+  "author": "Abhilash <https://github.com/djabhi31>",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

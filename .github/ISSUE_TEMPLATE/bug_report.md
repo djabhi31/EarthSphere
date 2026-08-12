@@ -1,31 +1,31 @@
 ---
-name: Bug Report
-about: Create a report to help us improve EarthSphere
-title: ''
-labels: bug
-assignees: ''
+name: "🐛 Bug Report"
+about: "Report a bug or unexpected behavior in EarthSphere"
+title: "[BUG] "
+labels: ["bug", "triage"]
+assignees: ""
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## 🐛 Description
+<!-- A clear and concise description of what the bug is. -->
 
-**To Reproduce**
-Steps to reproduce the behavior:
+## 🔁 Steps to Reproduce
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## 🎯 Expected Behavior
+<!-- A clear description of what you expected to happen. -->
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## 🖥️ Environment & Device Info
+- **OS:** [e.g. Windows 11, macOS Sonoma, iOS 17]
+- **Browser:** [e.g. Chrome 125, Firefox 126, Safari 17]
+- **Device:** [e.g. Desktop, iPhone 15 Pro, M2 MacBook]
+- **App Version:** [e.g. v1.2.0]
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## 📸 Screenshots / Video Clips
+<!-- Add screenshots, recordings, or console stack traces if applicable. -->
 
-**Additional context**
-Add any other context about the problem here.
+## 🔬 Additional Context
+<!-- Add any other context about the problem here (e.g. WebGL support status, console log errors). -->
