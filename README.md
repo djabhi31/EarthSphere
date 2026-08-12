@@ -214,6 +214,12 @@ EarthSphere/
 
 ---
 
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=djabhi31/EarthSphere&type=Date)](https://star-history.com/#djabhi31/EarthSphere&Date)
+
+---
+
 ## 🤝 Contributing & Community
 
 Contributions are what make the open-source community an extraordinary place to learn, inspire, and create.
