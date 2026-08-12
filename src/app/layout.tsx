@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   applicationName: 'EarthSphere',
   description:
-    'Track wildfires, storms, volcanoes, earthquakes, and other natural events worldwide in real time with EarthSphere. Powered by NASA EONET data with AI-driven insights. Visit earthsphere.in for more.',
+    'Track wildfires, storms, earthquakes, and natural events worldwide in real time with NASA EONET data & AI insights.',
   keywords: [
     'NASA',
     'EONET',
@@ -64,16 +64,25 @@ export const metadata: Metadata = {
     locale: 'en_US',
     title: 'EarthSphere — Real-time Earth Event Intelligence',
     description:
-      'Track natural events worldwide in real time with NASA EONET data, AI insights, and cinematic visualizations.',
+      'Track wildfires, storms, earthquakes, and natural events worldwide in real time with NASA EONET data.',
     siteName: 'EarthSphere',
     url: 'https://earthsphere.in',
+    images: [
+      {
+        url: 'https://earthsphere.in/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'EarthSphere — Real-time Earth Event Intelligence',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'EarthSphere — Real-time Earth Event Intelligence',
     description:
-      'Track natural events worldwide in real time with NASA EONET data.',
+      'Track wildfires, storms, earthquakes, and natural events worldwide in real time with NASA EONET data.',
     site: '@earthsphere',
+    images: ['https://earthsphere.in/opengraph-image'],
   },
   robots: {
     index: true,

@@ -89,21 +89,46 @@ export default async function Image() {
             Real-time Earth Event Intelligence
           </div>
           
-          {/* URL Tag */}
+          {/* URL Tag & CTA Button */}
           <div
             style={{
-              marginTop: 40,
-              fontSize: 24,
-              color: '#00D2FF',
-              fontWeight: 600,
+              marginTop: 36,
               display: 'flex',
               alignItems: 'center',
-              background: 'rgba(0, 210, 255, 0.1)',
-              padding: '10px 24px',
-              borderRadius: '999px',
+              gap: '20px',
             }}
           >
-            earthsphere.in
+            <div
+              style={{
+                fontSize: 22,
+                color: '#00D2FF',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                background: 'rgba(0, 210, 255, 0.1)',
+                border: '1px solid rgba(0, 210, 255, 0.3)',
+                padding: '10px 24px',
+                borderRadius: '999px',
+              }}
+            >
+              earthsphere.in
+            </div>
+            
+            <div
+              style={{
+                fontSize: 22,
+                color: '#FFFFFF',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                background: 'linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%)',
+                padding: '10px 28px',
+                borderRadius: '999px',
+                boxShadow: '0 4px 14px rgba(37, 99, 235, 0.4)',
+              }}
+            >
+              Explore Live Map →
+            </div>
           </div>
         </div>
       </div>
