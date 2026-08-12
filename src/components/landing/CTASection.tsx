@@ -13,7 +13,7 @@ import { scaleIn, scrollReveal } from "@/lib/motion-presets";
 export function CTASection() {
   return (
     <motion.div 
-      className="max-w-3xl pt-16 z-20 max-md:bg-[var(--surface-elevated)]/90 max-md:backdrop-blur-md max-md:p-8 max-md:rounded-3xl max-md:border max-md:border-[var(--border-default)] max-md:mx-4 max-md:shadow-xl"
+      className="max-w-3xl z-20 bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-8 sm:p-12 rounded-3xl border border-[var(--border-default)] mx-auto shadow-2xl shadow-black/10 text-center"
       variants={scaleIn}
       initial="hidden"
       whileInView="visible"

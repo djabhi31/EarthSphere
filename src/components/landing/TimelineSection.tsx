@@ -39,7 +39,7 @@ export const LANDMARK_EVENTS = [
 export function TimelineSection() {
   return (
     <div className="mx-auto w-full max-w-7xl z-10 relative">
-      <div className="text-center max-w-2xl mx-auto mb-20">
+      <div className="text-center max-w-2xl mx-auto mb-16 bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-8 rounded-3xl border border-[var(--border-default)] shadow-2xl shadow-black/10">
         <span className="text-xs font-bold uppercase tracking-wider text-[var(--cosmic-purple)] mb-2 block">
           Temporal Analysis
         </span>
@@ -49,12 +49,12 @@ export function TimelineSection() {
             Timeline Flight
           </span>
         </h2>
-        <p className="mt-4 text-[var(--text-secondary)] text-sm sm:text-base">
+        <p className="mt-4 text-[var(--text-secondary)] font-medium text-sm sm:text-base">
           Scroll down to fly the globe camera directly to key environmental observations, bridging global history and real geographic coordinates.
         </p>
       </div>
 
-      <div className="relative max-w-3xl mx-auto border-l border-[var(--border-subtle)] pl-6 space-y-36">
+      <div className="relative max-w-3xl mx-auto border-l-2 border-[var(--border-default)] pl-6 space-y-16">
         {LANDMARK_EVENTS.map((landmark, idx) => {
           const color = getCategoryColor(landmark.category);
           const latStr = `${Math.abs(landmark.coords[1]).toFixed(2)}°${landmark.coords[1] >= 0 ? 'N' : 'S'}`;
@@ -70,30 +70,30 @@ export function TimelineSection() {
               viewport={scrollReveal.viewport}
             >
               <div 
-                className="absolute -left-[31px] top-1.5 h-4 w-4 rounded-full border-2 border-canvas transition-all duration-300 group-hover/timeline:scale-125"
+                className="absolute -left-[33px] top-4 h-4 w-4 rounded-full border-2 border-[var(--canvas)] transition-all duration-300 group-hover/timeline:scale-125 shadow-md"
                 style={{
                   backgroundColor: color,
                   boxShadow: `0 0 10px ${color}`
                 }}
               />
 
-              <div className="pl-4 max-md:bg-[var(--surface-elevated)]/70 max-md:backdrop-blur-sm max-md:p-4 max-md:rounded-xl max-md:border max-md:border-[var(--border-subtle)]">
+              <div className="bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-6 rounded-2xl border border-[var(--border-default)] shadow-lg shadow-black/5">
                 <span 
-                  className="text-[11px] font-bold uppercase tracking-widest block mb-1"
+                  className="text-[11px] font-extrabold uppercase tracking-widest block mb-1"
                   style={{ color }}
                 >
                   {landmark.date} · {landmark.location}
                 </span>
                 
-                <h3 className="text-xl font-bold text-[var(--text-primary)] mb-3">
+                <h3 className="text-xl font-extrabold text-[var(--text-primary)] mb-2">
                   {landmark.title}
                 </h3>
                 
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-xl">
+                <p className="text-sm text-[var(--text-secondary)] font-medium leading-relaxed max-w-xl">
                   {landmark.description}
                 </p>
 
-                <div className="mt-4 flex items-center gap-1.5 font-mono text-[10px] text-[var(--text-tertiary)]">
+                <div className="mt-4 flex items-center gap-1.5 font-mono text-[10px] text-[var(--text-muted)] font-semibold">
                   <Globe size={11} />
                   <span>Coordinates: {latStr}, {lngStr}</span>
                 </div>

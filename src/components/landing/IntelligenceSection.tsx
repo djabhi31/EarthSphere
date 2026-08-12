@@ -12,7 +12,7 @@ export function IntelligenceSection() {
     <div className="mx-auto w-full max-w-7xl">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Left text panel */}
-        <div className="max-w-xl max-md:bg-[var(--surface-elevated)]/90 max-md:backdrop-blur-md max-md:p-6 max-md:rounded-2xl max-md:border max-md:border-[var(--border-default)] max-md:shadow-xl">
+        <div className="max-w-xl bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-8 rounded-3xl border border-[var(--border-default)] shadow-2xl shadow-black/10">
           <span className="text-xs font-bold uppercase tracking-wider text-[var(--electric-cyan)] mb-2 block">
             Planetary Sensors
           </span>

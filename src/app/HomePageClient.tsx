@@ -92,7 +92,7 @@ export default function HomePageClient() {
   }, [scrollSmooth]);
 
   return (
-    <div ref={containerRef} className="relative min-h-[650vh] bg-canvas text-white">
+    <div ref={containerRef} className="relative min-h-[650vh] bg-[var(--canvas)] text-[var(--text-primary)]">
       <Navbar activeEventCount={stats?.totalActive} />
 
       {/* ── Fixed Backdrop Canvas Globe & Stars (interaction Layer) ──── */}

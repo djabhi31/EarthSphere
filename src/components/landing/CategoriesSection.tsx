@@ -20,7 +20,7 @@ export function CategoriesSection() {
         <div className="hidden md:block h-[500px]" />
 
         {/* Right panel: Categories Grid */}
-        <div className="max-md:bg-[var(--surface-elevated)]/80 max-md:backdrop-blur-md max-md:p-6 max-md:rounded-2xl max-md:border max-md:border-[var(--border-subtle)] max-md:shadow-xl">
+        <div className="bg-[var(--surface-overlay)]/85 backdrop-blur-xl p-8 rounded-3xl border border-[var(--border-default)] shadow-2xl shadow-black/10">
           <span className="text-xs font-bold uppercase tracking-wider text-[var(--ice-blue)] mb-2 block">
             Visual Spectrum
           </span>

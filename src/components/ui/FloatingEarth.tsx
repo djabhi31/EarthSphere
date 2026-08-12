@@ -6,6 +6,7 @@ import * as THREE from "three";
 import type { EONETEvent } from "@/lib/types";
 import { getCategoryColor, getLatestGeometry } from "@/lib/utils";
 import { audioSynth } from "@/lib/audio";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 interface FloatingEarthProps {
   events: EONETEvent[];
@@ -17,7 +18,14 @@ interface FloatingEarthProps {
 export function FloatingEarth({ events, className, interactive = true, focusCoords = null }: FloatingEarthProps) {
   const prefersReduced = useReducedMotion();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+  const { theme } = useTheme();
+
+  const isLight =
+    theme === "light" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      !window.matchMedia("(prefers-color-scheme: dark)").matches);
+
   // Drag rotation states
   const isDragging = useRef(false);
   const previousMousePosition = useRef({ x: 0, y: 0 });
@@ -96,17 +104,17 @@ export function FloatingEarth({ events, className, interactive = true, focusCoor
     camera.position.z = 10;
 
     // ── Lighting Setup ────────────────────────────────────────────────
-    // Ambient light - deep space dark blue
-    const ambientLight = new THREE.AmbientLight(0x0a1024, 0.95);
+    // Ambient light - bright daylight in light mode, deep space in dark mode
+    const ambientLight = new THREE.AmbientLight(isLight ? 0xffffff : 0x0a1024, isLight ? 1.5 : 0.95);
     scene.add(ambientLight);
 
     // Directional light - Sunlight
-    const sunLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    const sunLight = new THREE.DirectionalLight(0xffffff, isLight ? 2.2 : 1.8);
     sunLight.position.set(10, 5, 10);
     scene.add(sunLight);
 
     // Subtle blue fill light from the opposite side
-    const fillLight = new THREE.DirectionalLight(0x38bdf8, 0.5);
+    const fillLight = new THREE.DirectionalLight(isLight ? 0x0284c7 : 0x38bdf8, isLight ? 0.8 : 0.5);
     fillLight.position.set(-10, -5, -10);
     scene.add(fillLight);
 
@@ -478,7 +486,7 @@ export function FloatingEarth({ events, className, interactive = true, focusCoor
         }
       });
     };
-  }, [stableEvents, prefersReduced]);
+  }, [stableEvents, prefersReduced, isLight]);
 
   // ── Drag rotation mouse event handlers ─────────────────────────────
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
