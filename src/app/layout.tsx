@@ -5,6 +5,7 @@
 
 import type { Metadata, Viewport } from 'next';
 import { Inter, IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
+import Script from 'next/script';
 import { Providers } from './providers';
 import './globals.css';
 
@@ -122,6 +123,20 @@ export default function RootLayout({
         />
       </head>
       <body className="relative flex min-h-dvh flex-col overflow-x-hidden bg-canvas text-[var(--text-primary)] antialiased noise-bg">
+        {/* Google Tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-JDE5MJ43HB"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-JDE5MJ43HB');
+          `}
+        </Script>
         <ScrollProgress />
         <Providers>
           <CustomCursor />
