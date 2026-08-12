@@ -94,6 +94,30 @@ Designed with a cyber-glass sci-fi aesthetic, EarthSphere features a **floating 
 
 ---
 
+## 🌐 Live Modules & Route Directory
+
+Click any module below to explore the live interactive dashboard on **[earthsphere.in](https://earthsphere.in)**:
+
+| Module | Route Path | Live URL | Features & Telemetry |
+| :--- | :--- | :--- | :--- |
+| 🌍 **3D WebGL Globe** | `/` | [earthsphere.in/](https://earthsphere.in/) | Real-time Earth EONET event globe with Three.js shaders |
+| 🗺️ **2D Tactical Map** | `/map` | [earthsphere.in/map](https://earthsphere.in/map) | Vector tiles, marker clustering, MapLibre GL JS |
+| 📊 **Telemetry Analytics** | `/analytics` | [earthsphere.in/analytics](https://earthsphere.in/analytics) | Historical disaster trends & category breakdown |
+| ⚡ **NASA Command Center** | `/dashboard` | [earthsphere.in/dashboard](https://earthsphere.in/dashboard) | Unified multi-API telemetry command dashboard |
+| ☄️ **Asteroid Radar** | `/asteroids` | [earthsphere.in/asteroids](https://earthsphere.in/asteroids) | NASA NeoWs orbital velocity & threat rating |
+| ☀️ **Space Weather** | `/space-weather` | [earthsphere.in/space-weather](https://earthsphere.in/space-weather) | DONKI Solar Flares, CMEs & Geomagnetic Storms |
+| 🔴 **Mars Rover Explorer** | `/mars` | [earthsphere.in/mars](https://earthsphere.in/mars) | Perseverance, Curiosity & Opportunity Sol camera feeds |
+| 🌎 **EPIC Earth Camera** | `/epic` | [earthsphere.in/epic](https://earthsphere.in/epic) | DSCOVR satellite full-disk polychromatic Earth views |
+| 📸 **APOD Archive** | `/apod` | [earthsphere.in/apod](https://earthsphere.in/apod) | Astronomy Picture of the Day HD image viewer |
+| 🛰️ **Satellite Tracker** | `/satellites` | [earthsphere.in/satellites](https://earthsphere.in/satellites) | TLE orbital element telemetry & ISS 3D orbit |
+| 🔍 **NASA Media Search** | `/media` | [earthsphere.in/media](https://earthsphere.in/media) | Official NASA image & video library search engine |
+| 🛰️ **Landsat Surface View**| `/earth-imagery` | [earthsphere.in/earth-imagery](https://earthsphere.in/earth-imagery) | Spectral satellite imagery & land surface tiles |
+| 🪐 **Exoplanet Explorer** | `/exoplanets` | [earthsphere.in/exoplanets](https://earthsphere.in/exoplanets) | Confirmed exoplanets discovery archive |
+| 💥 **Fireballs Telemetry** | `/fireballs` | [earthsphere.in/fireballs](https://earthsphere.in/fireballs) | CNEOS atmospheric bolide energy impact data |
+| 🔬 **TechPort Patents** | `/techport` | [earthsphere.in/techport](https://earthsphere.in/techport) | NASA space tech innovation & patent portfolio |
+
+---
+
 ## 📡 Integrated NASA Open APIs (13)
 
 | API Service | NASA API Endpoint | Key Features & Route |
