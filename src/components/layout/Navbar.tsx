@@ -10,7 +10,7 @@ import {
   Telescope, Camera, Rocket, Star,
   Sun, Satellite, Beaker, LayoutDashboard,
   Image, Crosshair, Sparkles, Command,
-  Compass, Orbit, Layers
+  Compass, Orbit, Layers, Info
 } from "lucide-react";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { cn } from "@/lib/utils";
@@ -105,6 +105,7 @@ const DIRECT_LINKS = [
   { href: "/", label: "Home", icon: <Compass size={14} /> },
   { href: "/dashboard", label: "Dashboard", icon: <LayoutDashboard size={14} /> },
   { href: "/analytics", label: "Analytics", icon: <Orbit size={14} /> },
+  { href: "/about", label: "About", icon: <Info size={14} /> },
 ];
 
 // ---------------------------------------------------------------------------

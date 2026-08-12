@@ -13,6 +13,7 @@ import { audioSynth } from "@/lib/audio";
 // ---------------------------------------------------------------------------
 
 const EARTH_LINKS = [
+  { href: "/about", label: "About EarthSphere & Creator" },
   { href: "/events", label: "EONET Live Events" },
   { href: "/map", label: "Interactive Event Map" },
   { href: "/epic", label: "EPIC Earth Camera" },
