@@ -182,7 +182,7 @@ export function CommandPalette({ isOpen, onClose }: CommandPaletteProps) {
                               {evt.title}
                             </p>
                             <span className="text-[10px] text-[var(--text-secondary)]">
-                              {evt.categories[0]?.title} • {new Date(evt.geometry[0]?.date || Date.now()).toLocaleDateString()}
+                              {evt.categories[0]?.title} • {evt.geometry[0]?.date ? new Date(evt.geometry[0].date).toLocaleDateString() : 'N/A'}
                             </span>
                           </div>
                         </div>

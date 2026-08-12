@@ -47,8 +47,8 @@ export function TimelinePlayer({
     });
     // Add some padding to bounds
     if (min === Infinity || max === -Infinity) {
-       const now = Date.now();
-       return { minTime: now - 30 * 24 * 3600 * 1000, maxTime: now };
+       const fallbackMax = new Date('2026-01-01').getTime();
+       return { minTime: fallbackMax - 30 * 24 * 3600 * 1000, maxTime: fallbackMax };
     }
     return { minTime: min, maxTime: max };
   }, [events]);
