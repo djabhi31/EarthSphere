@@ -81,6 +81,9 @@ export function FloatingEarth({ events, className, interactive = true, focusCoor
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const stableEvents = useMemo(() => events, [eventIdsString]);
 
+  // Boot sequence state
+  const bootProgress = useRef(0);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -357,9 +360,23 @@ export function FloatingEarth({ events, className, interactive = true, focusCoor
       const tiltXValue = globeTiltX.get();
       const shiftXValue = window.innerWidth < 768 ? 0 : globeShift3DX.get();
 
-      // 2. Update camera distance and viewport shift
-      camera.position.z = 9.0 / scaleValue;
+      // Cinematic Boot Sequence
+      if (bootProgress.current < 1.0) {
+        bootProgress.current += 0.012; // Approx 1.5 seconds at 60fps
+        if (bootProgress.current > 1.0) bootProgress.current = 1.0;
+      }
+      
+      // Easing function for boot (easeOutQuart)
+      const easeBoot = 1 - Math.pow(1 - bootProgress.current, 4);
+
+      // 2. Update camera distance and viewport shift with Boot-up Tween
+      const targetZ = 9.0 / scaleValue;
+      const startZ = 25.0; // Start far away
+      camera.position.z = startZ + (targetZ - startZ) * easeBoot;
+      
       earthGroup.position.x = shiftXValue;
+      // Slight rise up effect during boot
+      earthGroup.position.y = -2.0 * (1 - easeBoot);
 
       // 3. Auto-rotation or Coordinate Locking
       if (focusCoordsRef.current && !isDragging.current) {
@@ -377,10 +394,12 @@ export function FloatingEarth({ events, className, interactive = true, focusCoor
         const scrollVal = scrollSmooth.get();
         // Spin Y faster in the middle transitions
         const baseSpeed = scrollVal > 0.35 && scrollVal < 0.55 ? 0.015 : 0.003;
+        // Add a fast spin during boot sequence
+        const bootSpin = (1 - easeBoot) * 0.05;
         // Calculate scroll velocity and apply it as Y rotation burst spin
         const velocityVal = Math.abs(scrollVelocity.get());
         const velocitySpin = Math.min(velocityVal * 0.12, 0.08); // cap it
-        targetRotation.current.y += baseSpeed + velocitySpin;
+        targetRotation.current.y += baseSpeed + velocitySpin + bootSpin;
       }
 
       // Smooth interpolation
@@ -443,8 +462,14 @@ export function FloatingEarth({ events, className, interactive = true, focusCoor
         const swell = 1.0 + Math.min(velocityVal * 0.08, 0.06); // swell up to 6% larger
         atmosphereMesh.scale.set(swell, swell, swell);
         
-        // Also increase brightness/opacity of the atmosphere when scrolling fast
-        atmosphereMaterial.opacity = 0.08 + Math.min(velocityVal * 0.12, 0.10); // increase opacity up to 0.18
+        // Also increase brightness/opacity of the atmosphere when scrolling fast, starting at 0 during boot
+        const targetOpacity = 0.08 + Math.min(velocityVal * 0.12, 0.10); 
+        atmosphereMaterial.opacity = targetOpacity * easeBoot;
+        
+        // Fade in Earth material during boot
+        earthMaterial.opacity = easeBoot;
+        earthMaterial.transparent = easeBoot < 1.0;
+        
       } else {
         atmosphereMesh.scale.set(1.0, 1.0, 1.0);
         atmosphereMaterial.opacity = 0.08;

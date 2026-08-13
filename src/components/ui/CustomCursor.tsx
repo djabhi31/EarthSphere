@@ -185,7 +185,7 @@ export function CustomCursor() {
         className="pointer-events-none fixed top-0 left-0 z-[9999] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors duration-300"
         style={{
           backgroundColor: cursorColor,
-          boxShadow: `0 0 10px ${cursorColor}, 0 0 20px ${cursorColor}40`,
+          boxShadow: `0 0 12px ${cursorColor}, 0 0 24px ${cursorColor}80`,
         }}
       />
 
@@ -195,14 +195,14 @@ export function CustomCursor() {
         className="pointer-events-none fixed top-0 left-0 z-[9998] flex -translate-x-1/2 -translate-y-1/2 items-center justify-start"
       >
         <div
-          className="rounded-full border transition-all duration-300 ease-out"
+          className="rounded-full border transition-all duration-300 ease-out backdrop-blur-sm"
           style={{
             borderColor: cursorColor,
-            backgroundColor: isHoveringInteractive ? `${cursorColor}12` : "transparent",
+            backgroundColor: isHoveringInteractive ? `${cursorColor}20` : "transparent",
             width: isHoveringInteractive ? (label ? "80px" : "36px") : "20px",
             height: isHoveringInteractive ? (label ? "32px" : "36px") : "20px",
             borderRadius: isHoveringInteractive && label ? "12px" : "50%",
-            boxShadow: isHoveringInteractive ? `0 0 14px ${cursorColor}33` : "none",
+            boxShadow: isHoveringInteractive ? `0 0 20px ${cursorColor}40` : "none",
           }}
         />
         

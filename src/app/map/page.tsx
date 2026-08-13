@@ -4,7 +4,6 @@ import { useState, useCallback, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useEvents } from "@/hooks/useEvents";
 import { MapControls } from "@/components/map/MapControls";
-import { Navbar } from "@/components/layout/Navbar";
 import { MapSidebar } from "@/components/map/MapSidebar";
 import { MapLegend } from "@/components/map/MapLegend";
 import { EventDetailPanel } from "@/components/map/EventDetailPanel";
@@ -113,8 +112,6 @@ export default function MapPage() {
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-canvas">
-      <Navbar activeEventCount={activeCount} />
-
       {/* Main Map */}
       <div className="absolute inset-0" style={{ opacity: layerOpacity }}>
         <RadarOverlay enabled={radarEnabled} />

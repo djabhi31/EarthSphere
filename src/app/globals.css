@@ -509,6 +509,110 @@ pre {
 }
 
 /* -----------------------------------------------------------------------------
+   Premium Navbar System
+   ----------------------------------------------------------------------------- */
+
+/* ── Navbar glassmorphism states ──────────────────────────────────────────── */
+
+.navbar-glass-top {
+  background: var(--surface-overlay);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid var(--border-subtle);
+}
+
+.navbar-glass-scrolled {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid var(--glass-border-strong);
+}
+
+/* ── Aurora accent gradient line ─────────────────────────────────────────── */
+
+.navbar-aurora-line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--electric-cyan) 20%,
+    var(--electric-blue) 50%,
+    var(--cosmic-purple) 80%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: navbar-aurora-shimmer 4s ease-in-out infinite;
+}
+
+@keyframes navbar-aurora-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ── Orbital ring animation for logo ─────────────────────────────────────── */
+
+.navbar-orbit {
+  animation: navbar-orbit-rotate 12s linear infinite;
+}
+
+@keyframes navbar-orbit-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ── Cursor-following spotlight for mega-menu items ──────────────────────── */
+
+.navbar-spotlight {
+  --spotlight-x: 50%;
+  --spotlight-y: 50%;
+}
+
+.navbar-spotlight:hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    120px circle at var(--spotlight-x) var(--spotlight-y),
+    var(--electric-cyan, #00d4aa) 0%,
+    transparent 100%
+  );
+  opacity: 0.06;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+/* ── Live beacon pulse rings ─────────────────────────────────────────────── */
+
+.navbar-live-beacon {
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.navbar-live-beacon:hover {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.12);
+}
+
+.navbar-beacon-ping {
+  animation: navbar-beacon-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.navbar-beacon-ring {
+  animation: navbar-beacon-ring-expand 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes navbar-beacon-pulse {
+  0% { transform: scale(1); opacity: 0.75; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes navbar-beacon-ring-expand {
+  0% { transform: scale(0.5) translate(25%, 25%); opacity: 0.5; }
+  80%, 100% { transform: scale(1.5) translate(25%, 25%); opacity: 0; }
+}
+
+/* -----------------------------------------------------------------------------
    Keyframe Animations
    ----------------------------------------------------------------------------- */
 

@@ -107,6 +107,7 @@ export const viewport: Viewport = {
 
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
+import { Navbar } from '@/components/layout/Navbar';
 
 export default function RootLayout({
   children,
@@ -157,6 +158,7 @@ export default function RootLayout({
         </Script>
         <ScrollProgress />
         <Providers>
+          <Navbar />
           <CustomCursor />
           {children}
         </Providers>
