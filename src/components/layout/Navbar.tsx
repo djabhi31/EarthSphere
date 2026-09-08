@@ -43,6 +43,7 @@ interface NavItem {
   icon: React.ReactNode;
   description: string;
   tag?: string;
+  external?: boolean;
 }
 
 interface NavGroup {
@@ -62,6 +63,7 @@ const NAV_GROUPS: NavGroup[] = [
       { href: "/map", label: "Interactive Event Map", icon: <Globe size={16} className="text-cyan-400" />, description: "Geospatial WebGL map engine", tag: "2D/3D" },
       { href: "/epic", label: "EPIC Earth Camera", icon: <Camera size={16} className="text-sky-400" />, description: "Full-disc imagery from DSCOVR", tag: "L1 Orbit" },
       { href: "/earth-imagery", label: "Landsat Satellite", icon: <Crosshair size={16} className="text-emerald-400" />, description: "High-res Earth observation photos", tag: "Landsat 8" },
+      { href: "https://godseyeview.earthsphere.in", label: "God's Eye View", icon: <Orbit size={16} className="text-purple-400" />, description: "Live 3D spy satellite simulator & telemetry", tag: "3D Live", external: true },
     ],
   },
   {
@@ -94,6 +96,7 @@ const NAV_GROUPS: NavGroup[] = [
     label: "Explore",
     icon: <Telescope size={14} className="text-cyan-400" />,
     items: [
+      { href: "https://godseyeview.earthsphere.in", label: "God's Eye View (Live 3D)", icon: <Orbit size={16} className="text-purple-400" />, description: "Live 3D spy satellite simulator on a photorealistic globe", tag: "3D Globe", external: true },
       { href: "/media", label: "NASA Media Library", icon: <Image size={16} className="text-blue-400" />, description: "140,000+ photos, videos & audio", tag: "Archive" },
       { href: "/satellites", label: "Satellite Orbit Tracker", icon: <Satellite size={16} className="text-teal-400" />, description: "Two-Line Element (TLE) orbit tracking", tag: "NORAD" },
       { href: "/techport", label: "NASA Techport", icon: <Beaker size={16} className="text-emerald-400" />, description: "Active NASA technology R&D projects", tag: "R&D" },
@@ -362,6 +365,8 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
                                   <Link
                                     key={item.href}
                                     href={item.href}
+                                    target={item.external ? "_blank" : undefined}
+                                    rel={item.external ? "noopener noreferrer" : undefined}
                                     onClick={() => {
                                       setActiveMenu(null);
                                       audioSynth.playClick();
@@ -439,6 +444,8 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
                                   <Link
                                     key={item.href}
                                     href={item.href}
+                                    target={item.external ? "_blank" : undefined}
+                                    rel={item.external ? "noopener noreferrer" : undefined}
                                     onClick={() => {
                                       setActiveMenu(null);
                                       audioSynth.playClick();
@@ -517,6 +524,8 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
                                   <Link
                                     key={item.href}
                                     href={item.href}
+                                    target={item.external ? "_blank" : undefined}
+                                    rel={item.external ? "noopener noreferrer" : undefined}
                                     onClick={() => {
                                       setActiveMenu(null);
                                       audioSynth.playClick();
@@ -805,6 +814,8 @@ export function Navbar({ activeEventCount = 0 }: NavbarProps) {
                                 >
                                   <Link
                                     href={item.href}
+                                    target={item.external ? "_blank" : undefined}
+                                    rel={item.external ? "noopener noreferrer" : undefined}
                                     onClick={() => setMobileOpen(false)}
                                     className={cn(
                                       "flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-all duration-200",
