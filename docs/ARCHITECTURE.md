@@ -74,3 +74,19 @@ sequenceDiagram
 ### 3. Responsive Theme System (`src/app/globals.css` & `ThemeCustomizer.tsx`)
 - Default dark-mode sci-fi aesthetic with dynamic CSS custom properties (`--electric-cyan`, `--solar-orange`, `--emerald-green`, `--cosmic-purple`).
 - Zero-FOUC inline script prevention in `RootLayout`.
+
+### 4. God's Eye View Geospatial Intelligence Suite Architecture (`gods-eye-view/`)
+- **CesiumJS & Photorealistic 3D Engine**:
+  - High-performance WebGL 3D globe with sub-meter elevation terrain, procedural sky atmospheres, and Google 3D Tiles.
+- **WebSocket & Proxy Feeds**:
+  - Live aircraft tracking via ADS-B proxies (OpenSky Network & adsb.lol).
+  - Live maritime vessel positions via AISStream WebSocket adapter.
+  - Live satellite orbits via CelesTrak Two-Line Elements (TLE) math propagation.
+  - NASA FIRMS VIIRS active-fire detection data trailing 24 hours.
+  - Live CCTV traffic cameras and Open-Meteo weather layers.
+- **BYOK (Bring Your Own Key) Security Flow**:
+  - Client-side credentials stored in browser `localStorage` (`gev_cesium_token`, `gev_google_maps_key`, `gev_openai_key`).
+  - OpenAI Realtime voice secret minting passes user key via `x-openai-key` request header without persistent server writes.
+- **Production Server & Monorepo Bridge**:
+  - `server.mjs` binds to `0.0.0.0` and dynamic `$PORT` for container and cloud hosting on Azure App Service / Render.
+  - Isolated via `.vercelignore` so Next.js builds on Vercel remain ultra-fast and lightweight.

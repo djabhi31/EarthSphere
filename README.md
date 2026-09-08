@@ -12,11 +12,12 @@
 
   <p>
     <a href="https://earthsphere.in"><b>🌐 Live Demo</b></a> •
+    <a href="https://godseyeview.earthsphere.in"><b>🛰️ God's Eye View 3D</b></a> •
     <a href="#-system-architecture"><b>🏗️ Architecture</b></a> •
     <a href="#-features"><b>✨ Features</b></a> •
     <a href="#-integrated-nasa-open-apis-13"><b>📡 NASA APIs</b></a> •
+    <a href="#-gods-eye-view-tactical-3d-intelligence-suite"><b>🛰️ 3D Tactical Globe</b></a> •
     <a href="#-quick-start"><b>🚀 Quick Start</b></a> •
-    <a href="#-performance-scorecard"><b>📈 Performance</b></a> •
     <a href="https://github.com/djabhi31/EarthSphere/issues"><b>🐛 Report Bug</b></a>
   </p>
 
@@ -25,6 +26,7 @@
     <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 19" />
     <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
     <img src="https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js" />
+    <img src="https://img.shields.io/badge/CesiumJS-Photorealistic_3D-6842FF?style=for-the-badge&logo=cesium&logoColor=white" alt="CesiumJS 3D" />
     <img src="https://img.shields.io/badge/MapLibre_GL-1E293B?style=for-the-badge&logo=mapbook&logoColor=00D4AA" alt="MapLibre GL" />
     <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
   </p>
@@ -33,6 +35,7 @@
     <a href="https://github.com/djabhi31/EarthSphere/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/djabhi31/EarthSphere/ci.yml?branch=master&style=flat-square&color=00d4aa&label=CI%20Build" alt="CI Status" /></a>
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&color=00d4aa" alt="License: MIT" /></a>
     <a href="https://api.nasa.gov/"><img src="https://img.shields.io/badge/Data-13_NASA_APIs-112244.svg?style=flat-square&color=00d4aa" alt="13 NASA APIs" /></a>
+    <a href="https://github.com/djabhi31/gods-eye-view"><img src="https://img.shields.io/badge/Suite-God's_Eye_View-purple.svg?style=flat-square&color=6842ff" alt="God's Eye View" /></a>
     <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square&color=00d4aa" alt="PRs Welcome" />
   </p>
 </div>
@@ -50,6 +53,12 @@ Designed with a cyber-glass sci-fi aesthetic, EarthSphere features a **floating 
 ## ✨ Features
 
 <table>
+  <tr>
+    <td colspan="2" valign="top" style="background: rgba(104, 66, 255, 0.06); border: 1px solid rgba(104, 66, 255, 0.3); border-radius: 8px; padding: 16px;">
+      <h3>🛰️ God's Eye View — Live 3D Tactical Intelligence Suite (<a href="https://godseyeview.earthsphere.in">godseyeview.earthsphere.in</a>)</h3>
+      <p>A photorealistic 3D Earth console powered by <b>CesiumJS</b>, <b>Google 3D Tiles</b>, and real-time planetary intelligence. Ingests live aircraft state vectors (OpenSky / adsb.lol), maritime vessels (AISStream), orbital satellite constellations (CelesTrak TLEs), NASA FIRMS active fires, global traffic CCTV streams, and hands-free voice control via OpenAI Realtime WebRTC. Architected with <b>BYOK (Bring Your Own Key)</b> stored securely in client-side <code>localStorage</code>.</p>
+    </td>
+  </tr>
   <tr>
     <td width="50%" valign="top">
       <h3>🌍 Interactive 3D WebGL Globe</h3>
@@ -100,6 +109,7 @@ Click any module below to explore the live interactive dashboard on **[earthsphe
 
 | Module | Route Path | Live URL | Features & Telemetry |
 | :--- | :--- | :--- | :--- |
+| 🛰️ **God's Eye View (Live 3D)** | `Subdomain` | [godseyeview.earthsphere.in](https://godseyeview.earthsphere.in) | Photorealistic 3D spy globe, live flights, ships, satellites, CCTV, voice HUD |
 | 🌍 **3D WebGL Globe** | `/` | [earthsphere.in/](https://earthsphere.in/) | Real-time Earth EONET event globe with Three.js shaders |
 | 🗺️ **2D Tactical Map** | `/map` | [earthsphere.in/map](https://earthsphere.in/map) | Vector tiles, marker clustering, MapLibre GL JS |
 | 📊 **Telemetry Analytics** | `/analytics` | [earthsphere.in/analytics](https://earthsphere.in/analytics) | Historical disaster trends & category breakdown |
@@ -200,10 +210,11 @@ graph TD
 | :--- | :--- | :--- |
 | **Framework** | [Next.js 15](https://nextjs.org/) | App Router, Server Components, Edge Proxy API Routes |
 | **UI Library** | [React 19](https://react.dev/) | Concurrent rendering, hooks, modular component trees |
-| **3D Graphics** | [Three.js](https://threejs.org/) | Custom WebGL Earth globe, orbital paths, shaders |
+| **3D Graphics** | [Three.js](https://threejs.org/) + [CesiumJS](https://cesium.com/) | Custom WebGL Earth globe + Photorealistic 3D planetary tiles |
 | **2D Mapping** | [MapLibre GL JS](https://maplibre.org/) | Vector tile mapping, clustering, custom markers |
 | **Styling** | [Tailwind CSS](https://tailwindcss.com/) | Custom design tokens, glassmorphism, accent themes |
 | **Animation** | [Framer Motion](https://www.framer.com/motion/) | Page transitions, floating pill dock, scroll reveals |
+| **Realtime Telemetry**| WebSockets + Proxy Engine | Live flights (ADS-B), ships (AIS), satellites (TLE), CCTV |
 | **State & Query** | [Zustand](https://zustand-demo.pmnd.rs/) + [TanStack Query](https://tanstack.com/query) | Client state, SWR caching, retry logic |
 | **Charts** | [Recharts](https://recharts.org/) | Interactive telemetry charts for space weather & asteroids |
 | **Icons** | [Lucide React](https://lucide.dev/) | Accessible icon system across 15+ routes |
@@ -215,8 +226,16 @@ graph TD
 ```
 EarthSphere/
 ├── .github/                  # CI/CD Workflows, Dependabot, Issue & PR Templates
+├── .vercelignore             # Isolates Next.js build from the GEV 3D suite
 ├── docs/                     # Architecture Specs, Design System, Changelog
+├── gods-eye-view/            # 🛰️ God's Eye View Photorealistic 3D Tactical Suite
+│   ├── src/                  # Cesium 3D engine, flight/ship/satellite layers, voice HUD
+│   ├── server.mjs            # Standalone cloud production server (0.0.0.0 & dynamic PORT)
+│   ├── Dockerfile            # Container deployment for Azure App Service & Render
+│   └── package.json          # GEV dependencies & scripts
 ├── public/                   # Static assets, OG images, favicons
+├── scripts/
+│   └── sync-gev.mjs          # 1-click sync script to mirror updates from gods-eye-view fork
 ├── src/
 │   ├── app/                  # 15+ Next.js App Router Pages & API Routes
 │   │   ├── analytics/        # EONET Historical telemetry dashboard
@@ -237,7 +256,7 @@ EarthSphere/
 │   ├── components/           # Modular components (40+ components)
 │   │   ├── 3d/               # WebGL Earth, ParticleField, Orbital Canvas
 │   │   ├── features/         # ThemeCustomizer, SearchPalettes
-│   │   ├── layout/           # Sci-Fi Floating Pill Dock Navbar, Footer
+│   │   ├── layout/           # Sci-Fi Floating Pill Dock Navbar (with GEV 3D link), Footer
 │   │   ├── map/              # EventMap, MapControls, Clustering
 │   │   └── ui/               # GlassCard, StatusBadge, CustomCursor
 │   ├── hooks/                # useNasaApi, useEvents, useTheme custom hooks
@@ -246,6 +265,32 @@ EarthSphere/
 ├── CONTRIBUTING.md           # Developer guidelines & Conventional Commits rules
 ├── LICENSE                   # MIT Open Source License
 └── SECURITY.md               # Enterprise vulnerability disclosure policy
+```
+
+---
+
+## 🛰️ God's Eye View — Tactical 3D Intelligence Suite
+
+EarthSphere includes the complete **[God's Eye View](https://godseyeview.earthsphere.in)** photorealistic 3D console under `gods-eye-view/`, deployed at **[godseyeview.earthsphere.in](https://godseyeview.earthsphere.in)**.
+
+### ✨ Tactical Capabilities
+- **Photorealistic 3D Planet:** Powered by Google Photorealistic 3D Tiles and Cesium ion with sub-meter global terrain elevation.
+- **Live Planetary Feeds (Zero Keys Required):** 
+  - Live global flights via OpenSky Network and adsb.lol
+  - Real-time maritime cargo and vessel tracking via AISStream WebSockets
+  - Live orbital satellite constellations via CelesTrak TLE elements
+  - Active global wildfire detections via NASA FIRMS VIIRS (trailing 24h)
+  - Public traffic CCTV camera feeds across major metropolitan cities
+- **BYOK (Bring Your Own Key) Security:**
+  - Visitors can unlock photorealistic Google/Cesium 3D tiles and OpenAI Realtime voice HUD by entering their own keys in the **POWER UP** panel.
+  - Keys are saved safely in the visitor's browser `localStorage` (`gev_cesium_token`, `gev_google_maps_key`, `gev_openai_key`) — zero hosting cost, zero credential leaks.
+- **Cloud-Ready Server:** Standalone `server.mjs` and `Dockerfile` ready for instant deployment on Azure App Service ($100 GitHub Student credits) or Render ($0 free tier).
+
+### 🔄 Monorepo Sync Workflow
+God's Eye View is also maintained as an upstream-synced fork at **[djabhi31/gods-eye-view](https://github.com/djabhi31/gods-eye-view)**. To sync new commits from upstream into the EarthSphere repository:
+```bash
+# Sync files from the gods-eye-view repo into EarthSphere/gods-eye-view
+npm run sync:gev
 ```
 
 ---
@@ -265,8 +310,9 @@ EarthSphere/
 - [x] **v1.0 Release** — Next.js 15 Migration, Three.js 3D Globe, MapLibre GL Integration.
 - [x] **v1.2 Release** — Cyber-Glass Design System overhaul, Edge API Proxy with caching.
 - [x] **v2.0 Release** — 13 NASA Open APIs Integration, 11 New Interactive Pages, Floating Mega-Menu Pill Dock, Accent Theme Customizer.
-- [ ] **v2.1 (Upcoming)** — AI-powered Natural Disaster Impact & Solar Storm Forecasting.
-- [ ] **v2.2 (Upcoming)** — Custom Geofence Satellite Alerts & PWA Push Notifications.
+- [x] **v2.1 Release** — 🛰️ God's Eye View Photorealistic 3D Tactical Globe Suite, BYOK (localStorage) Architecture & Monorepo Integration.
+- [ ] **v2.2 (Upcoming)** — AI-powered Natural Disaster Impact & Solar Storm Forecasting.
+- [ ] **v2.3 (Upcoming)** — Custom Geofence Satellite Alerts & PWA Push Notifications.
 
 ---
 
