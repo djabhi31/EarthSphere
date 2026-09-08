@@ -2,6 +2,18 @@
 
 # dependencies
 /node_modules
+gods-eye-view/node_modules/
+gods-eye-view/dist/
+gods-eye-view/*.log
+gods-eye-view/.gev-cache/
+gods-eye-view/.gev-logs/
+gods-eye-view/.gstack/
+gods-eye-view/3d-models/
+gods-eye-view/pinokio/ENVIRONMENT
+gods-eye-view/pinokio/.installed
+gods-eye-view/screenshots/
+gods-eye-view/qa-shots/
+gods-eye-view/output/
 /.pnp
 .pnp.*
 .yarn/*
