@@ -37,7 +37,19 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
    ```bash
    npm run dev
    ```
-6. Open your browser and navigate to `http://localhost:3000`.
+   Open your browser and navigate to `http://localhost:3000`.
+
+6. **(Optional) Run God's Eye View 3D Tactical Console Locally:**
+   ```bash
+   npm run gev:start
+   ```
+   Open your browser and navigate to `http://localhost:4173`.
+
+7. **Synchronizing God's Eye View Fork:**
+   If you contribute upstream features to our companion repo [`djabhi31/gods-eye-view`](https://github.com/djabhi31/gods-eye-view), sync changes into EarthSphere with:
+   ```bash
+   npm run sync:gev
+   ```
 
 ---
 

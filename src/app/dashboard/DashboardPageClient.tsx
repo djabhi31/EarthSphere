@@ -21,7 +21,7 @@ import { staggerContainer, staggerItem, scaleIn } from '@/lib/motion-presets';
 
 function WidgetCard({ title, icon: Icon, href, children, loading, className }: { 
   title: string; 
-  icon: React.ElementType; 
+  icon: any; 
   href: string; 
   children: React.ReactNode;
   loading?: boolean;

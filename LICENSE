@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 EarthSphere Contributors
+Copyright (c) 2026 Abhilash (djabhi31) and EarthSphere Contributors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,46 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## Third-Party Software, Data & Intellectual Property Attributions
+
+EarthSphere incorporates and interfaces with the following open-source libraries, public data services, and geospatial platforms:
+
+### 1. NASA Open APIs & Public Domain Data
+- **Provider:** National Aeronautics and Space Administration (NASA).
+- **APIs:** EONET v3, APOD, DONKI Space Weather, NeoWs Asteroids, DSCOVR EPIC, Mars Rover Photos, NASA Image & Video Library, Landsat Surface Reflectance, CNEOS Fireballs, TechPort.
+- **License / Terms:** NASA data, photographs, and scientific datasets are in the public domain and provided under the [NASA Open Data Policy](https://www.nasa.gov/open/data.html).
+
+### 2. God's Eye View (GEV) Tactical 3D Suite
+- **Original Author:** Bilawal Sidhu ([@bilawalsidhu](https://github.com/bilawalsidhu/gods-eye-view)).
+- **License:** MIT License.
+- **Copyright:** (c) 2024-2026 Bilawal Sidhu. Included under MIT terms.
+
+### 3. CesiumJS
+- **Provider:** Cesium GS, Inc.
+- **License:** Apache License, Version 2.0 ([https://github.com/CesiumGS/cesium/blob/main/LICENSE.md](https://github.com/CesiumGS/cesium/blob/main/LICENSE.md)).
+- **Cesium ion & Google 3D Tiles:** Subject to the Cesium ion Terms of Service and Google Maps Platform Terms of Service.
+
+### 4. MapLibre GL JS
+- **Provider:** MapLibre Organization.
+- **License:** BSD 3-Clause "New" or "Revised" License.
+- **Copyright:** (c) 2020-2026 MapLibre contributors.
+
+### 5. Three.js
+- **Author:** Ricardo Cabello (Mr.doob) and Three.js authors.
+- **License:** MIT License.
+- **Copyright:** (c) 2010-2026 Three.js authors.
+
+### 6. Real-Time Telemetry Providers
+- **OpenSky Network & adsb.lol:** Global ADS-B aircraft vector streams provided for open-source research and educational usage.
+- **AISStream:** Real-time global maritime vessel transponder streams via WebSockets.
+- **CelesTrak:** Two-Line Element (TLE) satellite orbital mechanics and ephemerides provided courtesy of Dr. T.S. Kelso.
+- **NASA FIRMS:** Active Fire Information for Resource Management System (VIIRS / MODIS satellite heat detection).
+
+### 7. Core Frontend Frameworks
+- **Next.js & React:** Copyright (c) Vercel, Inc. and Meta Platforms, Inc. (MIT License).
+- **Tailwind CSS:** Copyright (c) Tailwind Labs, Inc. (MIT License).
+- **Lucide Icons:** Copyright (c) Lucide Contributors (ISC License).
+

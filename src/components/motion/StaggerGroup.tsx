@@ -36,7 +36,7 @@ export function StaggerGroup({
   const prefersReduced = useReducedMotion();
 
   if (prefersReduced) {
-    const Component = as as React.ElementType;
+    const Component = as as any;
     return <Component className={className}>{children}</Component>;
   }
 
@@ -50,7 +50,7 @@ export function StaggerGroup({
     };
   }
 
-  const MotionComponent = (motion as unknown as Record<string, React.ElementType>)[as] || motion.div;
+  const MotionComponent = ((motion as any)[as] || motion.div) as any;
 
   return (
     <MotionComponent

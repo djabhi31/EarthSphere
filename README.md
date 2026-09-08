@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
   <img src="https://raw.githubusercontent.com/djabhi31/EarthSphere/master/public/og-image.jpg" alt="EarthSphere Header Banner" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,212,170,0.2);" />
 
   <br />
@@ -240,53 +240,89 @@ graph TD
 
 ```
 EarthSphere/
-├── .github/                  # CI/CD Workflows, Dependabot, Issue & PR Templates
-├── .vercelignore             # Isolates Next.js build from the GEV 3D suite
-├── docs/                     # Architecture Specs, Design System, Changelog
-│   ├── ARCHITECTURE.md       # Comprehensive system architecture & data pipeline specs
-│   ├── CHANGELOG.md          # Version release history and updates
-│   └── DESIGN_SYSTEM.md      # Cyber-glass sci-fi UI design tokens & specifications
-├── gods-eye-view/            # 🛰️ God's Eye View Photorealistic 3D Tactical Suite
-│   ├── src/                  # Cesium 3D engine, flight/ship/satellite layers, voice HUD
-│   │   ├── main.js           # Viewer bootstrap & BYOK localStorage loader
-│   │   ├── keySetup.js       # POWER UP dialog & browser storage controller
-│   │   └── voice/            # WebRTC audio visualizer, cost meter, OpenAI runner
-│   ├── server.mjs            # Standalone cloud production server (0.0.0.0 & dynamic PORT)
-│   ├── Dockerfile            # Container deployment specification
-│   ├── package.json          # GEV dependencies & scripts
-│   └── vite.config.js        # High-performance telemetry proxy engine
-├── public/                   # Static assets, OG images, textures, favicons
+├── .github/                      # CI/CD Workflows (ci.yml), Dependabot, Issue/PR Templates
+├── .vercelignore                 # Isolates Next.js build from gods-eye-view 3D assets
+├── docs/                         # System Specs, Changelogs & Cyber-Glass Design System
+│   ├── ARCHITECTURE.md           # Unified EarthSphere & God's Eye View system architecture
+│   ├── CHANGELOG.md              # Detailed release history (v2.1.0, v2.0.0, v1.2.0)
+│   ├── DESIGN_SYSTEM.md          # Cyber-glass UI tokens, colors, typography & glow specs
+│   └── design_inspiration.md     # Sci-Fi / NORAD UI research & design moodboards
+├── gods-eye-view/                # 🛰️ God's Eye View Photorealistic 3D Tactical Suite
+│   ├── src/                      # CesiumJS 3D engine, telemetry layers & HUD
+│   │   ├── data/                 # Telemetry ingestion (ADS-B, AIS, FIRMS, CelesTrak, CCTV)
+│   │   ├── overlays/             # 3D tactical markers, flight vectors & radar rings
+│   │   ├── scenes/               # Planetary bookmarks & cinematic camera transitions
+│   │   ├── voice/                # OpenAI Realtime WebRTC voice agent & audio visualizer
+│   │   ├── main.js               # Viewer bootstrap & BYOK localStorage loader
+│   │   ├── keySetup.js           # POWER UP modal & browser credentials manager
+│   │   ├── hud.js                # Heads-up display, search & telemetry status indicators
+│   │   └── ui.js                 # Cyberpunk glass control panels & layer toggles
+│   ├── server.mjs                # Standalone cloud production server (0.0.0.0 & dynamic $PORT)
+│   ├── Dockerfile                # Production container deployment specification
+│   ├── package.json              # GEV dependencies & scripts
+│   └── vite.config.js            # Telemetry proxy engine (bypasses browser CORS)
+├── public/                       # Static assets, textures, favicons & social preview
+│   ├── textures/                 # 8K/4K Earth Blue Marble, clouds, topology & water maps
+│   ├── og-image.jpg              # Open Graph high-res social preview banner (1200x630)
+│   └── *.svg                     # Planetary icons & UI vector graphics
 ├── scripts/
-│   └── sync-gev.mjs          # 1-click sync script to mirror updates from gods-eye-view fork
+│   └── sync-gev.mjs              # 1-click script mirroring updates from djabhi31/gods-eye-view
 ├── src/
-│   ├── app/                  # 15+ Next.js App Router Pages & API Routes
-│   │   ├── analytics/        # EONET Historical telemetry dashboard
-│   │   ├── apod/             # Astronomy Picture of the Day
-│   │   ├── asteroids/        # NeoWs Near-Earth Asteroid tracking
-│   │   ├── dashboard/        # NASA Command Center Telemetry
-│   │   ├── earth-imagery/    # Landsat & MODIS satellite surface view
-│   │   ├── epic/             # DSCOVR EPIC Earth polychromatic imagery
-│   │   ├── events/           # Live EONET Natural Disaster list & detail
-│   │   ├── exoplanets/       # Exoplanet Archive discovery explorer
-│   │   ├── fireballs/        # CNEOS Fireball & Bolide energy impact data
-│   │   ├── map/              # Fullscreen 2D/3D Tactical Vector Map
-│   │   ├── mars/             # Perseverance, Curiosity & Opportunity rover feeds
-│   │   ├── media/            # NASA Official Image & Video search library
-│   │   ├── satellites/       # Live ISS & Satellite TLE orbit engine
-│   │   ├── space-weather/    # DONKI Solar flares, CMEs & geomagnetic storms
-│   │   └── techport/         # NASA Space Technology & Innovation portfolio
-│   ├── components/           # Modular components (40+ components)
-│   │   ├── 3d/               # WebGL Earth, ParticleField, Orbital Canvas
-│   │   ├── features/         # ThemeCustomizer, SearchPalettes, Watchlist
-│   │   ├── layout/           # Sci-Fi Floating Pill Dock Navbar, Footer
-│   │   ├── map/              # EventMap, MapControls, Clustering
-│   │   └── ui/               # GlassCard, StatusBadge, CustomCursor
-│   ├── hooks/                # useNasaApi, useEvents, useTheme custom hooks
-│   ├── lib/                  # nasa-api.ts client, design-tokens, store.ts
-│   └── types/                # nasa.ts TypeScript interfaces for 13 APIs
-├── CONTRIBUTING.md           # Developer guidelines & Conventional Commits rules
-├── LICENSE                   # MIT Open Source License
-└── SECURITY.md               # Enterprise vulnerability disclosure policy
+│   ├── app/                      # 18 Next.js 15 App Router Pages & API Routes
+│   │   ├── about/                # Mission overview, tech stack & project philosophy
+│   │   ├── analytics/            # EONET Historical natural disaster trend analytics
+│   │   ├── api/                  # Serverless API routes & NASA rate-limit caching proxies
+│   │   ├── apod/                 # Astronomy Picture of the Day with date navigator
+│   │   ├── asteroids/            # NeoWs Near-Earth Asteroid tracking & hazard radar
+│   │   ├── dashboard/            # Executive NASA Command Center operations dashboard
+│   │   ├── earth-imagery/        # Landsat & MODIS satellite surface imagery viewer
+│   │   ├── epic/                 # DSCOVR EPIC daily full-disk Earth photography
+│   │   ├── events/               # Live EONET Natural Disaster list & detail telemetry
+│   │   ├── exoplanets/           # NASA Exoplanet Archive discoveries explorer
+│   │   ├── explore/              # Interactive 3D Earth planetary globe (GIBS & orbits)
+│   │   ├── fireballs/            # CNEOS atmospheric bolide energy impact telemetry
+│   │   ├── map/                  # Fullscreen 2D/3D tactical disaster response vector map
+│   │   ├── mars/                 # Perseverance, Curiosity & Opportunity rover feeds
+│   │   ├── media/            # NASA Official Image & Video searchable library
+│   │   ├── satellites/           # Live ISS & satellite orbital propagation engine
+│   │   ├── space-weather/        # DONKI Solar flares, CMEs & geomagnetic storms
+│   │   └── techport/             # NASA Space Technology & Innovation portfolio
+│   ├── components/               # Modular Cyber-Glass Component Architecture
+│   │   ├── about/                # Mission, architecture & developer profile cards
+│   │   ├── analytics/            # Recharts metrics, temporal histograms & status breakdown
+│   │   ├── events/               # Disaster filters, category selectors & event list cards
+│   │   ├── explore/              # 3D Canvas, GIBS imagery layer controls & orbital paths
+│   │   ├── features/             # ThemeCustomizer, Watchlist, Calculators & AI Briefing
+│   │   ├── landing/              # HeroSection, Categories, Intelligence, Timeline & CTA
+│   │   ├── layout/               # Sci-Fi Floating Pill Dock Navbar, Footer & PageTransitions
+│   │   ├── map/                  # EventMap, MapControls, Radar & Tectonic Overlays
+│   │   ├── motion/               # ParallaxSection, ScrollReveal, StaggerGroup animations
+│   │   ├── providers/            # ThemeProvider & global client state contexts
+│   │   └── ui/                   # GlassCard, StatusBadge, CustomCursor, FloatingEarth, ParticleField
+│   ├── hooks/                    # Custom React Hooks (useNasaApi, useEvents, useDebouncedValue)
+│   └── lib/                      # Utilities, Design Tokens & Data Pipelines
+│       ├── explore/              # nasaGibs.ts tile provider & orbits.ts Keplerian math
+│       ├── types/                # nasa.ts comprehensive TypeScript schemas for 13 APIs
+│       ├── api.ts                # EONET API client & query builders
+│       ├── audio.ts              # Sci-fi tactical audio cues & Web Audio synthesizers
+│       ├── design-tokens.ts      # Tailwind cyber-glass color palettes & glow constants
+│       ├── motion-presets.ts     # Framer Motion animation variants & transitions
+│       ├── nasa-api.ts           # Unified 13-endpoint NASA Open API client engine
+│       ├── severity.ts           # Disaster severity scoring & threat ranking algorithms
+│       ├── store.ts              # Zustand global client-side state store
+│       ├── timezone.ts           # UTC / Local astronomical time helpers
+│       ├── types.ts              # Core UI, filter & event TypeScript interfaces
+│       └── utils.ts              # Class merging (cn) & utility functions
+├── .editorconfig                 # Multi-editor formatting standards
+├── .env.example                  # Environment variable schema template
+├── CHANGELOG.md                  # Root release changelog (v2.1.0)
+├── CITATIONS.cff                 # Academic & research citation metadata
+├── CODE_OF_CONDUCT.md            # Contributor Covenant v2.1 standards
+├── CONTRIBUTING.md               # Contribution guidelines & Conventional Commits
+├── LICENSE                       # MIT License with comprehensive third-party attributions
+├── package.json                  # Next.js 15, React 19, Cesium & Three.js dependencies
+├── README.md                     # Executive documentation & tactical user guide
+└── SECURITY.md                   # Enterprise vulnerability disclosure & BYOK privacy policy
 ```
 
 ---

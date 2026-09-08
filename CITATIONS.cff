@@ -1,20 +1,31 @@
 cff-version: 1.2.0
-title: "EarthSphere — Real-Time Earth Event Intelligence Platform"
-message: "If you use this software in your research or project, please cite it as below."
+title: "EarthSphere & God's Eye View Suite — Executive NASA Earth & Deep Space Intelligence Platform"
+message: "If you use this software in your research, tactical systems, or academic projects, please cite it as below."
 type: software
+version: "2.1.0"
 authors:
   - family-names: "Abhilash"
     given-names: "M."
     alias: "djabhi31"
 repository-code: "https://github.com/djabhi31/EarthSphere"
 url: "https://earthsphere.in"
-abstract: "EarthSphere is a real-time natural event monitoring platform powered by NASA EONET. It visualizes earthquakes, wildfires, severe storms, and volcanoes globally using WebGL 3D graphics, MapLibre GL, and Next.js 15."
+abstract: "EarthSphere is an executive planetary and deep space intelligence platform uniting 13 official NASA Open APIs with the God's Eye View photorealistic 3D tactical console. Visualizes active natural disasters, solar storms, near-Earth asteroids, live global aircraft ADS-B vectors, AIS maritime vessels, orbital satellite constellations, and hands-free voice operations using Next.js 15, Three.js, CesiumJS, and Google Photorealistic 3D Tiles."
 keywords:
-  - nasa-eonet
-  - webgl
+  - nasa-open-apis
+  - eonet
+  - space-weather
+  - asteroids-neows
+  - gods-eye-view
+  - cesiumjs
+  - google-3d-tiles
   - threejs
-  - nextjs
-  - earth-monitoring
-  - real-time-intelligence
+  - maplibre-gl
+  - nextjs-15
+  - webgl
+  - live-telemetry
+  - adsb-tracking
+  - ais-maritime
+  - byok-architecture
 license: MIT
-date-released: 2026-01-01
+date-released: 2026-09-09
+
