@@ -31,7 +31,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "sync:gev": "node scripts/sync-gev.mjs"
+    "sync:gev": "node scripts/sync-gev.mjs",
+    "gev:start": "node gods-eye-view/server.mjs",
+    "gev:dev": "npm --prefix gods-eye-view run dev"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
