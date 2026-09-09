@@ -1,3 +1,5 @@
+'use client';
+
 import { Dispatch, SetStateAction } from 'react';
 import { Activity, Thermometer, CloudFog, Droplets, Eye } from 'lucide-react';
 

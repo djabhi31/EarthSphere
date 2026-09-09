@@ -1,3 +1,5 @@
+'use client';
+
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { Play, Pause, FastForward, Clock, RotateCcw } from 'lucide-react';
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { Dispatch, SetStateAction } from 'react';
 import { SATELLITE_CONSTELLATION } from '@/lib/explore/orbits';
 import { Satellite, Crosshair } from 'lucide-react';

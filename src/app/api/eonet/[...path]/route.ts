@@ -8,7 +8,7 @@ const EONET_API_BASE = 'https://eonet.gsfc.nasa.gov/api/v3';
  * Proxy route for NASA EONET v3 API
  * Handles CORS and adds caching for all EONET endpoints
  */
-export async function GET(request: Request, { params }: { params: Promise<{ path: string[] }> | { path: string[] } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ path: string[] }> }) {
   try {
     const { searchParams } = new URL(request.url);
     const apiParams = new URLSearchParams();

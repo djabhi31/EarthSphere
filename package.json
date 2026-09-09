@@ -31,6 +31,10 @@
   "author": "Abhilash <https://github.com/djabhi31>",
   "license": "MIT",
   "private": true,
+  "allowScripts": {
+    "sharp": true,
+    "unrs-resolver": true
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -57,7 +61,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "recharts": "^3.8.1",
-    "satellite.js": "^7.1.0",
+    "satellite.js": "^5.0.0",
     "shadcn": "^4.11.0",
     "tailwind-merge": "^3.6.0",
     "three": "^0.184.0",
