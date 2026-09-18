@@ -4,20 +4,19 @@
   <br />
   <br />
 
-  <h1>🌍 EarthSphere & 🛰️ God's Eye View Suite</h1>
+  <h1>🌍 EarthSphere, 🛰️ God's Eye View & 🌐 World Monitor</h1>
   
   <p>
-    <strong>The Executive NASA Earth & Deep Space Intelligence Engine — Photorealistic 3D Tactical Globe, 13 NASA Open APIs, Live Aircraft/Maritime/Satellite Telemetry, and Realtime AI Voice Operations.</strong>
+    <strong>The Executive Planetary & Global Intelligence Suite — Photorealistic 3D Tactical Globe, Real-Time OSINT News & Conflict Monitoring, 13 NASA Open APIs, Live Aircraft/Maritime/Satellite Telemetry, and Realtime AI Voice Operations.</strong>
   </p>
 
   <p>
     <a href="https://earthsphere.in"><b>🌐 Live EarthSphere</b></a> •
     <a href="https://godseyeview.earthsphere.in"><b>🛰️ Live God's Eye View (3D)</b></a> •
-    <a href="#-dual-suite-architecture"><b>🏗️ Architecture</b></a> •
-    <a href="#-tactical-features-matrix"><b>✨ Features</b></a> •
-    <a href="#-integrated-data-streams-19"><b>📡 Telemetry Sources</b></a> •
-    <a href="#-byok-security-architecture"><b>🔑 BYOK Security</b></a> •
-    <a href="#-quick-start"><b>🚀 Quick Start</b></a> •
+    <a href="https://worldmonitor.earthsphere.in"><b>🌐 Live World Monitor</b></a> •
+    <a href="https://earthsphere.in/intel"><b>🛡️ In-App Intel Hub</b></a> •
+    <a href="#-the-vision"><b>🏗️ Architecture</b></a> •
+    <a href="#-tactical-highlights"><b>✨ Features</b></a> •
     <a href="https://github.com/djabhi31/EarthSphere/issues"><b>🐛 Report Bug</b></a>
   </p>
 
@@ -43,13 +42,14 @@
 ---
 
 ## 🌌 The Vision
-
+ 
 > *"Half the magic is that it looks like a forbidden NORAD planetary command center. The other half is that every single byte of data is real, live, and public."*
-
-**EarthSphere** bridges deep planetary science with real-time geospatial tactical intelligence into a single unified monorepo suite:
-
+ 
+**EarthSphere** bridges deep planetary science, live orbital telemetry, and real-time geopolitical intelligence into a single unified monorepo suite:
+ 
 1. **EarthSphere Core Web ([earthsphere.in](https://earthsphere.in))**: An executive space intelligence portal consuming **13 official NASA Open APIs** across 15+ interactive pages — tracking everything from active natural disasters (wildfires, volcanoes, tsunamis) to solar flares, geomagnetic storms, near-Earth asteroids, and Mars rover camera feeds.
 2. **God's Eye View Tactical Console ([godseyeview.earthsphere.in](https://godseyeview.earthsphere.in))**: A cinematic 3D spy-satellite simulator powered by **CesiumJS** and **Google Photorealistic 3D Tiles** that renders live global aircraft cockpits, real-time cargo vessels, orbital satellite constellations, city CCTV camera projections, and hands-free voice control.
+3. **World Monitor Global Intelligence Dashboard ([worldmonitor.earthsphere.in](https://worldmonitor.earthsphere.in) & [/intel](https://earthsphere.in/intel))**: A real-time global intelligence console combining **100+ AI-synthesized news feeds**, geopolitical conflict monitoring, subsea internet cable mapping, transit chokepoints, and dual WebGL globes (`globe.gl` + `deck.gl`).
 
 Designed with an ultra-clean **cyber-glass aesthetic**, the suite operates with **zero cost for the host** via an air-gapped **BYOK (Bring Your Own Key)** architecture saved safely in the visitor's private browser `localStorage`.
 
@@ -128,6 +128,8 @@ Explore the complete multi-dashboard intelligence suite across **[earthsphere.in
 | Module | Route / Host | Live Access | Intelligence Feeds & Telemetry |
 | :--- | :--- | :--- | :--- |
 | 🛰️ **God's Eye View (3D)** | `Subdomain` | [godseyeview.earthsphere.in](https://godseyeview.earthsphere.in) | Photorealistic 3D spy globe, live cockpits, ships, satellites, CCTV, voice HUD |
+| 🌐 **World Monitor (Live)** | `Subdomain` | [worldmonitor.earthsphere.in](https://worldmonitor.earthsphere.in) | Real-time global intelligence, 100+ OSINT news feeds, conflict zones, subsea cables |
+| 🛡️ **Intel Command Hub** | `/intel` | [earthsphere.in/intel](https://earthsphere.in/intel) | In-app situational dashboard, fullscreen mode, tech & financial variant switcher |
 | 🌍 **3D WebGL Globe** | `/` | [earthsphere.in/](https://earthsphere.in/) | Real-time Earth EONET natural disaster globe with Three.js shaders |
 | 🗺️ **2D Tactical Map** | `/map` | [earthsphere.in/map](https://earthsphere.in/map) | Vector tile mapping, spatial marker clustering, MapLibre GL JS |
 | 📊 **Telemetry Analytics** | `/analytics` | [earthsphere.in/analytics](https://earthsphere.in/analytics) | Historical disaster trends & category breakdown |

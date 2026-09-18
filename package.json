@@ -42,6 +42,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "sync:gev": "node scripts/sync-gev.mjs",
+    "sync:wm": "node scripts/sync-wm.mjs",
     "gev:start": "node gods-eye-view/server.mjs",
     "gev:dev": "npm --prefix gods-eye-view run dev"
   },
