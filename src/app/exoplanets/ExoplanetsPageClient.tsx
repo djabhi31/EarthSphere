@@ -3,16 +3,16 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useExoplanets } from '@/hooks/useNasaApi';
-import type { Exoplanet } from '@/lib/types/nasa';
 import { cn } from '@/lib/utils';
-import { Search, Orbit, Star, Telescope, Globe2, ChevronDown, ChevronUp, Database, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Star, Telescope, Globe2, Database, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { DataState } from "@/components/site/DataState";
 import { Skeleton } from '@/components/ui/skeleton';
 
 type SortField = 'pl_name' | 'hostname' | 'discoverymethod' | 'disc_year' | 'pl_rade' | 'pl_bmasse' | 'sy_dist';
 type SortOrder = 'asc' | 'desc';
 
 export default function ExoplanetsPageClient() {
-  const { data: exoplanets = [], isLoading } = useExoplanets();
+  const { data: exoplanets = [], isLoading, error, refetch } = useExoplanets();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [methodFilter, setMethodFilter] = useState<string>('All');
@@ -20,7 +20,7 @@ export default function ExoplanetsPageClient() {
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   const [page, setPage] = useState(1);
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
-  
+
   const ITEMS_PER_PAGE = 25;
 
   const discoveryMethods = useMemo(() => {
@@ -34,7 +34,7 @@ export default function ExoplanetsPageClient() {
     if (!exoplanets.length) return null;
     const years = exoplanets.map(p => p.disc_year).filter(y => y);
     const maxYear = years.length ? Math.max(...years) : 0;
-    
+
     const methodsCount = exoplanets.reduce((acc, p) => {
       acc[p.discoverymethod] = (acc[p.discoverymethod] || 0) + 1;
       return acc;
@@ -52,8 +52,8 @@ export default function ExoplanetsPageClient() {
 
     if (searchQuery) {
       const lowerQ = searchQuery.toLowerCase();
-      result = result.filter(p => 
-        p.pl_name.toLowerCase().includes(lowerQ) || 
+      result = result.filter(p =>
+        p.pl_name.toLowerCase().includes(lowerQ) ||
         p.hostname.toLowerCase().includes(lowerQ)
       );
     }
@@ -65,11 +65,11 @@ export default function ExoplanetsPageClient() {
     result.sort((a, b) => {
       const aVal = a[sortField];
       const bVal = b[sortField];
-      
+
       if (aVal === null && bVal !== null) return 1;
       if (bVal === null && aVal !== null) return -1;
       if (aVal === null && bVal === null) return 0;
-      
+
       if (aVal! < bVal!) return sortOrder === 'asc' ? -1 : 1;
       if (aVal! > bVal!) return sortOrder === 'asc' ? 1 : -1;
       return 0;
@@ -78,7 +78,7 @@ export default function ExoplanetsPageClient() {
     return result;
   }, [exoplanets, searchQuery, methodFilter, sortField, sortOrder]);
 
-  const totalPages = Math.ceil(filteredAndSortedData.length / ITEMS_PER_PAGE);
+  const totalPages = Math.max(1, Math.ceil(filteredAndSortedData.length / ITEMS_PER_PAGE));
   const currentData = filteredAndSortedData.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
   const toggleSort = (field: SortField) => {
@@ -95,64 +95,14 @@ export default function ExoplanetsPageClient() {
     return <ArrowUpDown className={cn("inline-block w-3 h-3 ml-1", sortField === field ? "text-[var(--cosmic-purple)]" : "text-gray-500 opacity-0 group-hover:opacity-100")} />;
   };
 
+  if (error) return <DataState error={error} retry={() => { void refetch(); }} />;
+
   return (
     <div className="min-h-screen pb-20 relative overflow-hidden">
-      {/* Animated Star Field Hero Background */}
-      <div className="absolute top-0 left-0 right-0 h-[600px] -z-10 bg-gradient-to-b from-black via-black/90 to-[var(--surface-primary)] overflow-hidden">
-        {/* Simple CSS-based stars generation */}
-        {Array.from({ length: 150 }).map((_, i) => (
-          <div 
-            key={i}
-            className="absolute rounded-full bg-white"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              width: `${Math.random() * 3}px`,
-              height: `${Math.random() * 3}px`,
-              opacity: Math.random(),
-              animation: `twinkle ${Math.random() * 4 + 2}s infinite alternate`
-            }}
-          />
-        ))}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(112,0,255,0.15),transparent_50%)]" />
-      </div>
+      <div className="ep-container">
 
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes twinkle {
-          0% { opacity: 0.2; transform: scale(0.8); }
-          100% { opacity: 1; transform: scale(1.2); }
-        }
-      `}} />
-
-      <div className="pt-32 px-6 ep-container">
-        
         {/* Hero Section */}
-        <div className="text-center mb-16 space-y-4">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="ep-eyebrow justify-center text-[var(--cosmic-purple)]"
-          >
-            <Orbit className="w-4 h-4 mr-2" />
-            Exoplanet Archive
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[var(--cosmic-purple)] to-fuchsia-400"
-          >
-            Worlds Beyond
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto"
-          >
-            Explore confirmed exoplanets discovered by Kepler, TESS, and other observatories across the galaxy.
-          </motion.p>
-        </div>
+
 
         {/* Stats Cards */}
         {isLoading ? (
@@ -160,7 +110,7 @@ export default function ExoplanetsPageClient() {
             {[1,2,3].map(i => <Skeleton key={i} className="h-32 rounded-2xl w-full glass" />)}
           </div>
         ) : stats && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -177,7 +127,7 @@ export default function ExoplanetsPageClient() {
                 </div>
               </div>
             </div>
-            
+
             <div className="glass rounded-2xl p-6 border border-[var(--border-default)] hover:border-[var(--cosmic-purple)]/50 transition-colors">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-fuchsia-500/20 rounded-xl">
@@ -208,7 +158,7 @@ export default function ExoplanetsPageClient() {
         <div className="glass rounded-t-2xl p-4 md:p-6 border border-[var(--border-default)] border-b-0 flex flex-col md:flex-row gap-4 justify-between items-center z-10 relative">
           <div className="relative w-full md:w-96">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input 
+            <input
               type="text"
               placeholder="Search planet or host star..."
               value={searchQuery}
@@ -216,7 +166,7 @@ export default function ExoplanetsPageClient() {
               className="w-full bg-black/40 border border-[var(--border-default)] rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-[var(--cosmic-purple)] transition-colors"
             />
           </div>
-          
+
           <div className="flex gap-4 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
             <select
               value={methodFilter}
@@ -243,25 +193,25 @@ export default function ExoplanetsPageClient() {
                 <table className="w-full text-left text-sm whitespace-nowrap">
                   <thead className="bg-black/40 text-[var(--text-secondary)] border-b border-[var(--border-default)] uppercase text-xs tracking-wider">
                     <tr>
-                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors" onClick={() => toggleSort('pl_name')}>
+                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors" onClick={() => toggleSort('pl_name')} tabIndex={0} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleSort('pl_name'); } }} aria-sort={sortField === 'pl_name' ? sortOrder === 'asc' ? 'ascending' : 'descending' : 'none'}>
                         Planet Name {renderSortIcon('pl_name')}
                       </th>
-                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors" onClick={() => toggleSort('hostname')}>
+                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors" onClick={() => toggleSort('hostname')} tabIndex={0} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleSort('hostname'); } }} aria-sort={sortField === 'hostname' ? sortOrder === 'asc' ? 'ascending' : 'descending' : 'none'}>
                         Host Star {renderSortIcon('hostname')}
                       </th>
-                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors" onClick={() => toggleSort('discoverymethod')}>
+                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors" onClick={() => toggleSort('discoverymethod')} tabIndex={0} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleSort('discoverymethod'); } }} aria-sort={sortField === 'discoverymethod' ? sortOrder === 'asc' ? 'ascending' : 'descending' : 'none'}>
                         Method {renderSortIcon('discoverymethod')}
                       </th>
-                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors" onClick={() => toggleSort('disc_year')}>
+                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors" onClick={() => toggleSort('disc_year')} tabIndex={0} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleSort('disc_year'); } }} aria-sort={sortField === 'disc_year' ? sortOrder === 'asc' ? 'ascending' : 'descending' : 'none'}>
                         Year {renderSortIcon('disc_year')}
                       </th>
-                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors text-right" onClick={() => toggleSort('pl_rade')}>
+                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors text-right" onClick={() => toggleSort('pl_rade')} tabIndex={0} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleSort('pl_rade'); } }} aria-sort={sortField === 'pl_rade' ? sortOrder === 'asc' ? 'ascending' : 'descending' : 'none'}>
                         Radius (R⊕) {renderSortIcon('pl_rade')}
                       </th>
-                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors text-right" onClick={() => toggleSort('pl_bmasse')}>
+                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors text-right" onClick={() => toggleSort('pl_bmasse')} tabIndex={0} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleSort('pl_bmasse'); } }} aria-sort={sortField === 'pl_bmasse' ? sortOrder === 'asc' ? 'ascending' : 'descending' : 'none'}>
                         Mass (M⊕) {renderSortIcon('pl_bmasse')}
                       </th>
-                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors text-right" onClick={() => toggleSort('sy_dist')}>
+                      <th className="px-6 py-4 cursor-pointer group hover:text-white transition-colors text-right" onClick={() => toggleSort('sy_dist')} tabIndex={0} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleSort('sy_dist'); } }} aria-sort={sortField === 'sy_dist' ? sortOrder === 'asc' ? 'ascending' : 'descending' : 'none'}>
                         Distance (pc) {renderSortIcon('sy_dist')}
                       </th>
                     </tr>
@@ -277,12 +227,12 @@ export default function ExoplanetsPageClient() {
                     ) : (
                       currentData.map((planet, idx) => (
                         <React.Fragment key={`${planet.pl_name}-${idx}`}>
-                          <tr 
+                          <tr
                             onClick={() => setExpandedRow(expandedRow === planet.pl_name ? null : planet.pl_name)}
                             className="hover:bg-white/5 cursor-pointer transition-colors group"
                           >
                             <td className="px-6 py-4 font-semibold text-[var(--cosmic-purple)] group-hover:text-fuchsia-300 transition-colors">
-                              {planet.pl_name}
+                              <button aria-expanded={expandedRow === planet.pl_name} onClick={event => { event.stopPropagation(); setExpandedRow(expandedRow === planet.pl_name ? null : planet.pl_name); }}>{planet.pl_name}</button>
                             </td>
                             <td className="px-6 py-4 text-gray-300">{planet.hostname}</td>
                             <td className="px-6 py-4">
@@ -346,14 +296,14 @@ export default function ExoplanetsPageClient() {
                     Showing {(page - 1) * ITEMS_PER_PAGE + 1} to {Math.min(page * ITEMS_PER_PAGE, filteredAndSortedData.length)} of {filteredAndSortedData.length} entries
                   </span>
                   <div className="flex gap-2">
-                    <button 
+                    <button
                       onClick={() => setPage(p => Math.max(1, p - 1))}
                       disabled={page === 1}
                       className="p-2 rounded-lg bg-white/5 hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-white/5 transition-colors"
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
-                    <button 
+                    <button
                       onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                       disabled={page === totalPages}
                       className="p-2 rounded-lg bg-white/5 hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-white/5 transition-colors"

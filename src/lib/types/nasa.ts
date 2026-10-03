@@ -409,6 +409,7 @@ export interface MarsPhotosParams {
 }
 
 export interface NASAMediaSearchParams {
+  readonly page_size?: number;
   readonly q?: string;
   readonly media_type?: 'image' | 'video' | 'audio';
   readonly year_start?: string;

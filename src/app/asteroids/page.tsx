@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import AsteroidsPageClient from './AsteroidsPageClient';
 
 export const metadata: Metadata = {
-  title: 'Near-Earth Object Tracker | EarthSphere',
-  description: 'Track and visualize near-Earth asteroids using real-time NASA NeoWs data.',
+  title: 'Near-Earth Object Tracker',
+  description: 'Track and visualize near-Earth asteroids using dated NASA NeoWs close-approach records.',
 };
 
 export default function AsteroidsPage() {

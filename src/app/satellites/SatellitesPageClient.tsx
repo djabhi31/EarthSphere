@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { useTLESearch } from '@/hooks/useNasaApi';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Satellite, Activity, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Search, Satellite, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
 import { TLESatellite } from '@/lib/types/nasa';
 
 const QUICK_SEARCHES = ['ISS', 'Hubble', 'NOAA', 'GPS', 'Starlink'];
@@ -12,44 +11,44 @@ const QUICK_SEARCHES = ['ISS', 'Hubble', 'NOAA', 'GPS', 'Starlink'];
 function parseTLE(line2: string) {
   try {
     if (!line2 || line2.length < 63) return null;
-    
+
     const incStr = line2.substring(8, 16).trim();
     const eccStr = line2.substring(26, 33).trim();
     const mmStr = line2.substring(52, 63).trim();
-    
+
     const inclination = parseFloat(incStr);
     const eccentricity = parseFloat('0.' + eccStr);
     const meanMotion = parseFloat(mmStr);
-    
+
     const period = meanMotion > 0 ? (1440 / meanMotion) : 0;
-    
-    return { 
+
+    return {
       inclination: isNaN(inclination) ? 'N/A' : `${inclination.toFixed(2)}°`,
       eccentricity: isNaN(eccentricity) ? 'N/A' : eccentricity.toFixed(6),
       period: isNaN(period) ? 'N/A' : `${period.toFixed(2)} min`,
       meanMotion: isNaN(meanMotion) ? 'N/A' : `${meanMotion.toFixed(2)} revs/day`
     };
-  } catch (e) {
+  } catch {
     return null;
   }
 }
 
 function SatelliteCard({ satellite }: { satellite: TLESatellite }) {
   const [expanded, setExpanded] = useState(false);
-  
+
   const stats = parseTLE(satellite.line2);
 
   return (
-    <motion.div 
+    <motion.div
       layout
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="glass rounded-2xl p-5 border border-[var(--border-default)] overflow-hidden transition-colors hover:border-[var(--ice-blue)]"
+      className="es-orbit-card glass rounded-2xl p-5 border border-[var(--border-default)] overflow-hidden transition-colors hover:border-[var(--ice-blue)]"
     >
-      <div 
+      <div
         className="flex items-center justify-between cursor-pointer"
-        onClick={() => setExpanded(!expanded)}
+        onClick={() => setExpanded(!expanded)} role="button" tabIndex={0} aria-expanded={expanded} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setExpanded(value => !value); } }}
       >
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 rounded-full bg-[var(--ice-blue)]/10 flex items-center justify-center text-[var(--ice-blue)]">
@@ -96,7 +95,7 @@ function SatelliteCard({ satellite }: { satellite: TLESatellite }) {
                   <div className="font-mono font-medium text-[var(--ice-blue)]">{stats?.meanMotion || 'N/A'}</div>
                 </div>
               </div>
-              
+
               <div>
                 <div className="text-xs text-[var(--text-secondary)] uppercase tracking-wider mb-2">Raw TLE Data</div>
                 <div className="bg-black/50 p-4 rounded-xl border border-white/5 font-mono text-sm overflow-x-auto whitespace-pre text-white/80">
@@ -114,41 +113,34 @@ function SatelliteCard({ satellite }: { satellite: TLESatellite }) {
 }
 
 export default function SatellitesPageClient() {
-  const [searchInput, setSearchInput] = useState('');
-  const [query, setQuery] = useState('');
+  const [searchInput, setSearchInput] = useState('ISS');
+  const [query, setQuery] = useState('ISS');
+  const [page, setPage] = useState(1);
 
-  const { data, isLoading, isError } = useTLESearch(query);
+  const { data, isLoading, isFetching, isError, refetch } = useTLESearch(query, page);
 
   const handleSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (searchInput.trim().length >= 2) {
+      setPage(1);
       setQuery(searchInput.trim());
     }
   };
 
   const handleQuickSearch = (term: string) => {
     setSearchInput(term);
+    setPage(1);
     setQuery(term);
   };
 
   return (
-    <div className="ep-container pb-20">
-      <div className="ep-section pt-24 md:pt-32 pb-8">
-        <motion.div 
+    <div className="es-satellite-catalog ep-container pb-20">
+      <div className="es-orbit-search ep-section pb-8">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-4xl mx-auto text-center"
         >
-          <div className="w-16 h-16 bg-[var(--ice-blue)]/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[var(--ice-blue)]/20 shadow-[0_0_30px_rgba(var(--ice-blue-rgb),0.2)]">
-            <Activity className="text-[var(--ice-blue)]" size={32} />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
-            Satellite <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--ice-blue)] to-[var(--electric-cyan)]">Tracker</span>
-          </h1>
-          <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto mb-10">
-            Track Earth-orbiting satellites in real-time. Search by name to retrieve the latest Two-Line Element (TLE) data and orbital parameters.
-          </p>
-
           <form onSubmit={handleSearch} className="relative max-w-2xl mx-auto mb-6">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="text-[var(--text-tertiary)]" size={24} />
@@ -157,10 +149,10 @@ export default function SatellitesPageClient() {
               type="text"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
-              placeholder="Search satellites (e.g. ISS, Hubble, NOAA...)"
+              aria-label="Search satellite catalog" placeholder="Search satellites (e.g. ISS, Hubble, NOAA...)"
               className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-32 text-lg focus:outline-none focus:ring-2 focus:ring-[var(--ice-blue)]/50 focus:border-transparent transition-all placeholder:text-[var(--text-tertiary)]"
             />
-            <button 
+            <button
               type="submit"
               disabled={searchInput.length < 2 || isLoading}
               className="absolute inset-y-2 right-2 px-6 bg-[var(--ice-blue)] text-black font-semibold rounded-xl hover:bg-[var(--ice-blue)]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -204,20 +196,19 @@ export default function SatellitesPageClient() {
             <AlertCircle size={48} className="text-red-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">Search Failed</h3>
             <p className="text-[var(--text-secondary)]">Unable to fetch satellite data. Please try a different search term.</p>
+            <button className="es-button es-button-secondary mt-4" onClick={() => { void refetch(); }}>Try again</button>
           </div>
         )}
 
         {!isLoading && !isError && data && (
-          <motion.div 
-            initial={{ opacity: 0 }} 
+          <motion.div
+            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="space-y-6"
           >
             <div className="flex items-center justify-between text-sm text-[var(--text-secondary)] border-b border-white/10 pb-4 mb-4">
-              <span>Found {data.totalItems} result{data.totalItems !== 1 ? 's' : ''} for "{query}"</span>
-              {data.totalItems > 50 && (
-                <span className="text-yellow-400/80">Showing first 50 items</span>
-              )}
+              <span>Found {data.totalItems} result{data.totalItems !== 1 ? 's' : ''} for “{query}”</span>
+              <span className="text-xs">Page {page} · {data.member.length} shown</span>
             </div>
 
             {data.member.length === 0 ? (
@@ -227,12 +218,13 @@ export default function SatellitesPageClient() {
               </div>
             ) : (
               <div className="space-y-4">
-                {/* API can return many results, limit to 50 for performance */}
-                {data.member.slice(0, 50).map((satellite) => (
+
+                {data.member.map((satellite) => (
                   <SatelliteCard key={satellite.satelliteId} satellite={satellite} />
                 ))}
               </div>
             )}
+            {data.totalItems > 20 && <nav className="es-pagination" aria-label="Satellite search pages"><button className="es-button es-button-secondary" disabled={page === 1 || isFetching} onClick={() => setPage(value => value - 1)}>Previous</button><span>Page {page} of {Math.ceil(data.totalItems / 20)}</span><button className="es-button es-button-secondary" disabled={page * 20 >= data.totalItems || isFetching} onClick={() => setPage(value => value + 1)}>Next</button></nav>}
           </motion.div>
         )}
 

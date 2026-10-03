@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Radio,
@@ -10,12 +10,8 @@ import {
   RefreshCw,
   Orbit,
   Shield,
-  Activity,
-  Layers,
-  Globe2,
-  Wifi,
-  Sparkles,
-  Zap,
+  Activity, Globe2,
+  Wifi
 } from 'lucide-react';
 import Link from 'next/link';
 import { audioSynth } from '@/lib/audio';
@@ -101,7 +97,7 @@ export default function IntelPageClient() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--background-deep)] text-[var(--text-primary)] pt-24 pb-16 px-4 md:px-8">
+    <div className="es-intelligence-workspace min-h-screen text-[var(--text-primary)]">
       {/* Fullscreen Overlay Mode */}
       <AnimatePresence>
         {isFullscreen && (
@@ -152,28 +148,10 @@ export default function IntelPageClient() {
         )}
       </AnimatePresence>
 
-      <div className="max-w-7xl mx-auto space-y-6">
+      <div className="es-intelligence-panels max-w-7xl mx-auto space-y-6">
         {/* Header Banner */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-2 border-b border-[var(--border-subtle)]">
-          <div>
-            <div className="flex items-center gap-2.5 mb-1.5">
-              <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
-                <Radio className="w-5 h-5 animate-pulse" />
-              </div>
-              <span className="px-2.5 py-0.5 text-[10px] font-mono font-bold tracking-wider rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 uppercase">
-                Global Situational Intelligence
-              </span>
-              <span className="px-2 py-0.5 text-[10px] font-mono rounded bg-white/5 text-[var(--text-muted)] border border-white/5">
-                AGPL-3.0 Engine
-              </span>
-            </div>
-            <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white via-neutral-200 to-[var(--text-secondary)] bg-clip-text text-transparent">
-              World Monitor Dashboard
-            </h1>
-            <p className="text-xs md:text-sm text-[var(--text-secondary)] max-w-3xl mt-1">
-              Real-time AI-powered news aggregation, geopolitical conflict tracking, subsea internet cables, and critical transit chokepoints in a unified situational awareness console.
-            </p>
-          </div>
+
 
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">

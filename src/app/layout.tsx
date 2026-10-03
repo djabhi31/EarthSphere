@@ -8,6 +8,7 @@ import { Inter, IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { Providers } from './providers';
 import './globals.css';
+import '@/components/site/site.css';
 
 // -----------------------------------------------------------------------------
 // Font Configuration
@@ -105,9 +106,7 @@ export const viewport: Viewport = {
 // Root Layout
 // -----------------------------------------------------------------------------
 
-import { CustomCursor } from '@/components/ui/CustomCursor';
-import { ScrollProgress } from '@/components/ui/ScrollProgress';
-import { Navbar } from '@/components/layout/Navbar';
+import { SiteShell } from '@/components/site/SiteShell';
 
 export default function RootLayout({
   children,
@@ -156,11 +155,8 @@ export default function RootLayout({
             gtag('config', 'G-JDE5MJ43HB');
           `}
         </Script>
-        <ScrollProgress />
         <Providers>
-          <Navbar />
-          <CustomCursor />
-          {children}
+          <SiteShell>{children}</SiteShell>
         </Providers>
       </body>
     </html>

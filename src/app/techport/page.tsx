@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import TechportPageClient from './TechportPageClient';
 
 export const metadata: Metadata = {
-  title: 'Technology Portfolio | EarthSphere',
+  title: 'Technology Portfolio',
   description: 'Explore NASA\'s Technology Portfolio (Techport) of active projects.',
 };
 

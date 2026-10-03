@@ -44,7 +44,8 @@
     "sync:gev": "node scripts/sync-gev.mjs",
     "sync:wm": "node scripts/sync-wm.mjs",
     "gev:start": "node gods-eye-view/server.mjs",
-    "gev:dev": "npm --prefix gods-eye-view run dev"
+    "gev:dev": "npm --prefix gods-eye-view run dev",
+    "test:site": "node --test scripts/test-site-data.mjs scripts/test-landing-flight.mjs scripts/test-explorer.mjs scripts/test-map-observatory.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

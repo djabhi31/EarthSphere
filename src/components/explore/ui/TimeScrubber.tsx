@@ -1,7 +1,7 @@
 'use client';
 
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
-import { Play, Pause, FastForward, Clock, RotateCcw } from 'lucide-react';
+import { Play, Pause, FastForward, RotateCcw } from 'lucide-react';
 
 interface TimeScrubberProps {
   time: Date;
@@ -17,6 +17,7 @@ export function TimeScrubber({ time, setTime, isPlaying, setIsPlaying }: TimeScr
   useEffect(() => {
     if (isPlaying) {
       intervalRef.current = setInterval(() => {
+        if (document.hidden) return;
         // Advance time by 1 minute per tick (fast forwarding to see satellite movement)
         setTime(prev => new Date(prev.getTime() + 60000));
       }, 50); // Tick every 50ms (so ~20 mins per second)
@@ -50,32 +51,35 @@ export function TimeScrubber({ time, setTime, isPlaying, setIsPlaying }: TimeScr
             </span>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <button 
+            <button
               onClick={() => jumpTime(-1)}
+              aria-label="Move simulation back one day"
               className="text-white/40 hover:text-white transition-colors p-1"
             >
               <RotateCcw size={16} />
             </button>
-            <button 
+            <button
               onClick={() => setIsPlaying(!isPlaying)}
+              aria-label={isPlaying ? "Pause orbital simulation" : "Play orbital simulation"}
               className="w-10 h-10 rounded-full flex items-center justify-center bg-white text-black hover:bg-emerald-400 transition-colors"
             >
               {isPlaying ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" className="ml-1" />}
             </button>
-            <button 
+            <button
               onClick={() => jumpTime(1)}
+              aria-label="Move simulation forward one day"
               className="text-white/40 hover:text-white transition-colors p-1"
             >
               <FastForward size={16} />
             </button>
           </div>
-          
+
           <div className="flex flex-col gap-1 w-32 border-l border-white/10 pl-6">
             <span className="text-[9px] font-mono text-white/40 uppercase tracking-[0.2em]">Playback Rate</span>
-            <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest">{isPlaying ? '10X SPEED' : 'REAL-TIME'}</span>
+            <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest">{isPlaying ? '1200× speed' : 'Paused'}</span>
           </div>
         </div>
       </div>

@@ -30,7 +30,7 @@ const REQUEST_TIMEOUT = 15_000;
  * Build a URLSearchParams string from a partial FilterState.
  * Skips null, undefined, empty strings, and empty arrays.
  */
-function buildQueryString(params?: Partial<FilterState>): string {
+export function buildQueryString(params?: Partial<FilterState>): string {
   if (!params) return '';
 
   const searchParams = new URLSearchParams();
@@ -41,7 +41,7 @@ function buildQueryString(params?: Partial<FilterState>): string {
   }
 
   // Status
-  if (params.status && params.status !== 'all') {
+  if (params.status) {
     searchParams.set('status', params.status);
   }
 
@@ -81,7 +81,8 @@ function buildQueryString(params?: Partial<FilterState>): string {
 
   // Bounding box: [min_lon, min_lat, max_lon, max_lat]
   if (params.bbox) {
-    searchParams.set('bbox', params.bbox.join(','));
+    const [west, south, east, north] = params.bbox;
+    searchParams.set('bbox', [west, north, east, south].join(','));
   }
 
   const qs = searchParams.toString();

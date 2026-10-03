@@ -125,8 +125,9 @@ export const nasaQueryKeys = {
 // APOD Hooks
 // =============================================================================
 
-export function useAPOD(params?: APODParams): UseQueryResult<APODResponse | APODResponse[]> {
+export function useAPOD(params?: APODParams, enabled = true): UseQueryResult<APODResponse | APODResponse[]> {
   return useQuery({
+    enabled,
     queryKey: params?.count
       ? nasaQueryKeys.apod.random(params.count)
       : params?.start_date
@@ -331,10 +332,10 @@ export function useFireballs(params?: FireballParams): UseQueryResult<FireballRe
 // TLE / Satellite Hooks
 // =============================================================================
 
-export function useTLESearch(search: string): UseQueryResult<TLESearchResponse> {
+export function useTLESearch(search: string, page = 1): UseQueryResult<TLESearchResponse> {
   return useQuery({
-    queryKey: nasaQueryKeys.tle.search(search),
-    queryFn: () => fetchTLESearch(search),
+    queryKey: [...nasaQueryKeys.tle.search(search), page],
+    queryFn: () => fetchTLESearch(search, page),
     staleTime: STALE_30MIN,
     enabled: search.length >= 2,
     placeholderData: keepPreviousData,

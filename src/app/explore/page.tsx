@@ -1,15 +1,11 @@
+import type { Metadata } from 'next';
 import { ExploreClient } from '@/components/explore/ExploreClient';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Eyes on the Earth Explorer',
-  description: 'Interactive 3D visualization of Earth, Vital Signs, and Satellite Orbits',
+  title: 'Earth Explorer',
+  description: 'An original 3D Earth explorer. Follow spacecraft, explore NASA Earth science observations, travel through the archive, and discover our changing planet.',
 };
 
 export default function ExplorePage() {
-  return (
-    <main className="fixed inset-0 z-50 bg-black overflow-hidden">
-      <ExploreClient />
-    </main>
-  );
+  return <main className="h-dvh overflow-hidden bg-black"><ExploreClient /></main>;
 }

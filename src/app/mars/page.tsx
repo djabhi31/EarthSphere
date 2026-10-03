@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import MarsPageClient from './MarsPageClient';
 
 export const metadata: Metadata = {
-  title: 'Mars Rover Explorer | EarthSphere',
-  description: 'Explore the latest photos from NASA Mars Rovers (Curiosity, Perseverance, Opportunity, Spirit).',
+  title: 'Mars Image Archive',
+  description: 'Explore Mars through the NASA Image and Video Library: rover photographs, landscapes, and mission stories.',
 };
 
 export default function MarsPage() {

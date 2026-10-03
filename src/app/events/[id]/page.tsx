@@ -6,10 +6,9 @@
 
 import { useMemo, useState } from "react";
 import { useParams } from "next/navigation";
+import { DataState } from "@/components/site/DataState";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { useEvent, useEvents } from "@/hooks/useEvents";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
@@ -21,7 +20,6 @@ import {
   computeDuration,
   getPointCoordinates,
 } from "@/lib/utils";
-import type { EONETEvent } from "@/lib/types";
 import { Activity, Globe, ExternalLink } from "lucide-react";
 
 import { EventDetailHeader } from "@/components/events/EventDetailHeader";
@@ -44,7 +42,7 @@ const EventMap = dynamic(() => import("@/components/map/EventMap"), {
 
 function DetailSkeleton() {
   return (
-    <main className="min-h-screen bg-canvas text-white">
+    <section className="min-h-screen bg-canvas text-white">
       <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-center gap-2">
           <Skeleton className="h-4 w-4 bg-white/10" />
@@ -60,7 +58,7 @@ function DetailSkeleton() {
         </div>
         <Skeleton className="mb-8 h-[450px] w-full rounded-xl bg-white/10" />
       </div>
-    </main>
+    </section>
   );
 }
 
@@ -69,7 +67,7 @@ export default function EventDetailPage() {
   const eventId = typeof params.id === "string" ? params.id : "";
 
   // Fetch Event
-  const { data: event, isLoading, isError } = useEvent(eventId);
+  const { data: event, isLoading, isError, refetch } = useEvent(eventId);
 
   // Fetch related events
   const primaryCategoryId = event?.categories[0]?.id;
@@ -111,9 +109,10 @@ export default function EventDetailPage() {
   const mapZoom = sortedGeometry.length > 1 ? 5 : 7;
 
   if (isLoading) return <DetailSkeleton />;
-  if (isError || !event) {
+  if (isError) return <><h1 className="es-detail-error-title">Observation unavailable</h1><DataState error retry={() => { void refetch(); }}>This record may no longer be available, or EONET may be temporarily unreachable.</DataState><Link className="es-button es-button-secondary mt-6" href="/events">Browse Earth events</Link></>;
+  if (!event) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-canvas px-4 text-center">
+      <section className="flex min-h-screen flex-col items-center justify-center bg-canvas px-4 text-center">
         <Globe size={40} className="text-white/20 animate-pulse mb-4" />
         <h1 className="text-xl font-bold text-white mb-2">Event Not Found</h1>
         <Link
@@ -124,20 +123,19 @@ export default function EventDetailPage() {
         >
           Return to Events
         </Link>
-      </main>
+      </section>
     );
   }
 
   return (
     <div className="relative min-h-screen bg-canvas text-white">
-      <Navbar activeEventCount={relatedData?.events?.length} />
 
       <EventDetailHeader event={event} duration={duration} />
 
       {/* ── Documentary Split View ─────────────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 py-12 z-10 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
+
           {/* Left Column: Sticky Map */}
           <div className="col-span-1 lg:col-span-5 lg:sticky lg:top-24 h-[350px] lg:h-[calc(100vh-140px)] rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50">
             <EventMap
@@ -151,7 +149,7 @@ export default function EventDetailPage() {
 
           {/* Right Column: Scrolling details & observation nodes */}
           <div className="col-span-1 lg:col-span-7 space-y-12">
-            
+
             {/* Observation timeline */}
             <div>
               <h2 className="mb-6 flex items-center gap-2 text-lg font-bold uppercase tracking-wider text-white/70">
@@ -159,17 +157,17 @@ export default function EventDetailPage() {
                 Milestone Observations
               </h2>
 
-              <EventTimeline 
-                geometry={sortedGeometry} 
-                activeCoords={activeCoords} 
-                onFocus={setActiveCoords} 
-                categoryColor={categoryColor} 
+              <EventTimeline
+                geometry={sortedGeometry}
+                activeCoords={activeCoords}
+                onFocus={setActiveCoords}
+                categoryColor={categoryColor}
               />
             </div>
 
             {/* Sources & Metadata sidebar details */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-white/5">
-              
+
               {/* Sources spotlights */}
               <div>
                 <h3 className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white/40">
@@ -198,7 +196,7 @@ export default function EventDetailPage() {
                       <span>{duration}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-white/40 font-medium">NASA GIBS Links</span>
+                      <span className="text-white/40 font-medium">Source record</span>
                       {event.link ? (
                         <a
                           href={event.link}
@@ -223,15 +221,15 @@ export default function EventDetailPage() {
           </div>
         </div>
 
-        <RelatedEvents 
-          events={relatedEvents} 
-          categoryId={categoryId} 
-          categoryLabel={categoryLabel} 
-          categoryColor={categoryColor} 
+        <RelatedEvents
+          events={relatedEvents}
+          categoryId={categoryId}
+          categoryLabel={categoryLabel}
+          categoryColor={categoryColor}
         />
       </section>
 
-      <Footer />
+
     </div>
   );
 }

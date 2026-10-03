@@ -14,9 +14,7 @@ import type {
   DONKINotification,
   DONKIEventType,
   EPICImage,
-  EPICImageType,
-  MarsRoverPhoto,
-  MarsPhotosResponse,
+  EPICImageType, MarsPhotosResponse,
   MarsLatestPhotosResponse,
   MarsManifestResponse,
   MarsPhotosParams,
@@ -31,16 +29,15 @@ import type {
   TechportProjectListResponse,
   TechportProjectDetailResponse,
   TechportParams,
-  Exoplanet,
+  Exoplanet
 } from './types/nasa';
 
 // -----------------------------------------------------------------------------
 // Configuration
 // -----------------------------------------------------------------------------
 
-const NASA_API_KEY = process.env.NEXT_PUBLIC_NASA_API_KEY || 'DEMO_KEY';
-const NASA_BASE = 'https://api.nasa.gov';
-const REQUEST_TIMEOUT = 20_000;
+const NASA_BASE = '/api/nasa/core';
+const REQUEST_TIMEOUT = 30_000;
 
 // -----------------------------------------------------------------------------
 // Internal Helpers
@@ -58,16 +55,14 @@ async function nasaFetch<T>(url: string, options?: { timeout?: number }): Promis
     });
 
     if (!response.ok) {
-      const errorText = await response.text().catch(() => 'Unknown error');
-      throw new Error(
-        `NASA API error ${response.status}: ${response.statusText} — ${errorText}`
-      );
+      const body = await response.json().catch(() => ({}));
+      throw new Error(body.error || 'The data provider is temporarily unavailable.');
     }
 
     return (await response.json()) as T;
   } catch (error) {
     if (error instanceof DOMException && error.name === 'AbortError') {
-      throw new Error(`NASA API request timed out after ${timeoutMs}ms: ${url}`);
+      throw new Error("The source took too long to respond. Please try again.");
     }
     throw error;
   } finally {
@@ -75,10 +70,7 @@ async function nasaFetch<T>(url: string, options?: { timeout?: number }): Promis
   }
 }
 
-function withKey(url: string): string {
-  const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}api_key=${NASA_API_KEY}`;
-}
+function withKey(url: string): string { return url; }
 
 function buildParams(params: Record<string, string | number | boolean | undefined | null>): string {
   const searchParams = new URLSearchParams();
@@ -234,6 +226,7 @@ export async function fetchEarthAssets(lat: number, lon: number, date?: string, 
 export async function searchNASAMedia(params?: NASAMediaSearchParams): Promise<NASAMediaSearchResponse> {
   const queryParams = buildParams({
     q: params?.q,
+    page_size: params?.page_size,
     media_type: params?.media_type,
     year_start: params?.year_start,
     year_end: params?.year_end,
@@ -243,7 +236,7 @@ export async function searchNASAMedia(params?: NASAMediaSearchParams): Promise<N
   });
   // Note: NASA Image Library does NOT need an API key
   return nasaFetch<NASAMediaSearchResponse>(
-    `https://images-api.nasa.gov/search${queryParams}`
+    `/api/nasa/media${queryParams}`
   );
 }
 
@@ -262,7 +255,7 @@ export async function fetchFireballs(params?: FireballParams): Promise<FireballR
     'req-loc': 'true', // Always request location data
   });
   return nasaFetch<FireballResponse>(
-    `https://ssd-api.jpl.nasa.gov/fireball.api${queryParams}`
+    `/api/nasa/fireballs${queryParams}`
   );
 }
 
@@ -273,13 +266,13 @@ export async function fetchFireballs(params?: FireballParams): Promise<FireballR
 export async function fetchTLESearch(search: string, page = 1, pageSize = 20): Promise<TLESearchResponse> {
   const params = buildParams({ search, page, page_size: pageSize });
   return nasaFetch<TLESearchResponse>(
-    `https://tle.ivanstanojevic.me/api/tle${params}`
+    `/api/nasa/tle${params}`
   );
 }
 
 export async function fetchTLEById(noradId: number): Promise<TLESatellite> {
   return nasaFetch<TLESatellite>(
-    `https://tle.ivanstanojevic.me/api/tle/${noradId}`
+    `/api/nasa/tle/${noradId}`
   );
 }
 
@@ -290,13 +283,13 @@ export async function fetchTLEById(noradId: number): Promise<TLESatellite> {
 export async function fetchTechportProjects(params?: TechportParams): Promise<TechportProjectListResponse> {
   const queryParams = buildParams({ updatedSince: params?.updatedSince });
   return nasaFetch<TechportProjectListResponse>(
-    withKey(`${NASA_BASE}/techport/api/projects${queryParams}`)
+    withKey(`/api/nasa/techport${queryParams}`)
   );
 }
 
 export async function fetchTechportProject(projectId: number): Promise<TechportProjectDetailResponse> {
   return nasaFetch<TechportProjectDetailResponse>(
-    withKey(`${NASA_BASE}/techport/api/projects/${projectId}`)
+    withKey(`/api/nasa/techport/${projectId}`)
   );
 }
 
@@ -312,7 +305,7 @@ export async function queryExoplanets(
   const query = adqlQuery || defaultQuery;
   const params = buildParams({ query, format });
   return nasaFetch<Exoplanet[]>(
-    `https://exoplanetarchive.ipac.caltech.edu/TAP/sync${params}`,
+    `/api/nasa/exoplanets${params}`,
     { timeout: 30_000 }
   );
 }

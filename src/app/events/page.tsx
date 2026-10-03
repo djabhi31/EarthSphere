@@ -46,10 +46,10 @@ export default function EventsExplorerPage() {
       initialized.current = true;
       const paramCat = searchParams.get("category");
       if (paramCat) setCategories(paramCat.split(",").filter(Boolean));
-      
+
       const paramStatus = searchParams.get("status") as EventStatus | null;
       if (paramStatus && ["open", "closed", "all"].includes(paramStatus)) setStatus(paramStatus);
-      
+
       const paramSearch = searchParams.get("search");
       if (paramSearch) setSearchInput(paramSearch);
     }
@@ -58,6 +58,7 @@ export default function EventsExplorerPage() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [limit, setLimit] = useState(INITIAL_LIMIT);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [bbox, setBbox] = useState<[number, number, number, number] | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams();
@@ -87,8 +88,10 @@ export default function EventsExplorerPage() {
       status: status as EventStatus,
       limit,
       dateRange,
+      categories: selectedCategories,
+      bbox,
     }),
-    [status, limit, dateRange]
+    [status, limit, dateRange, selectedCategories, bbox]
   );
 
   const { data, isLoading, isError, error } = useEvents(apiFilters);
@@ -118,6 +121,8 @@ export default function EventsExplorerPage() {
 
   const clearAllFilters = useCallback(() => {
     resetFilters();
+    setBbox(null);
+    setLimit(INITIAL_LIMIT);
   }, [resetFilters]);
 
   const hasActiveFilters =
@@ -125,7 +130,7 @@ export default function EventsExplorerPage() {
     status !== "open" ||
     debouncedSearch.trim().length > 0 ||
     dateRange.start !== null ||
-    dateRange.end !== null;
+    dateRange.end !== null || bbox !== null;
 
   const handleLoadMore = useCallback(() => {
     setLimit((prev) => prev + LOAD_MORE_INCREMENT);
@@ -140,16 +145,17 @@ export default function EventsExplorerPage() {
     magID: null,
     magMin: null,
     magMax: null,
-    bbox: null,
+    bbox,
     limit: limit,
     days: null,
-  }), [selectedCategories, status, debouncedSearch, limit]);
+  }), [selectedCategories, status, debouncedSearch, limit, dateRange, bbox]);
 
   const handleApplyView = useCallback((filters: FilterState) => {
     if (filters.categories) setCategories([...filters.categories]);
     if (filters.status) setStatus(filters.status);
     if (filters.searchQuery !== undefined) setSearchInput(filters.searchQuery);
     if (filters.dateRange) setDateRange(filters.dateRange);
+    setBbox(filters.bbox ?? null);
   }, [setCategories, setStatus, setSearchInput, setDateRange]);
 
   const [compareModalOpen, setCompareModalOpen] = useState(false);
@@ -168,16 +174,15 @@ export default function EventsExplorerPage() {
 
   return (
     <>
-    <main className="min-h-screen bg-canvas pt-20 flex flex-col">
-      <div className="absolute top-6 right-4 sm:right-8 z-40">
-        <ShareSession />
-      </div>
+    <section className="min-h-screen bg-canvas pt-20 flex flex-col">
       <EventsHeader eventCount={filteredEvents.length} isLoading={isLoading} />
       <div className="px-4 sm:px-6 lg:px-8 my-2">
         <RecentEventsBar />
       </div>
-      <div className="flex justify-end items-center gap-3 px-4 sm:px-6 lg:px-8 mt-2 -mb-4 relative z-40">
-        <BBoxFilter onApplyBBox={() => {}} />
+      <div className="es-event-toolbar">
+        <ShareSession />
+        <BBoxFilter onApplyBBox={setBbox} />
+        {bbox && <button className="es-chip" onClick={() => setBbox(null)}>Clear selected area</button>}
         <button
           onClick={handleOpenCompare}
           disabled={filteredEvents.length === 0}
@@ -224,7 +229,7 @@ export default function EventsExplorerPage() {
         onSelectEventB={setCompareEventB}
       />
       <ShortcutsModal />
-    </main>
+    </section>
     </>
   );
 }

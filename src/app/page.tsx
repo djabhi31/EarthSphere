@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import HomePageClient from './HomePageClient';
 
 export const metadata: Metadata = {
-  title: 'EarthSphere | Live NASA EONET Data',
-  description: 'Watch Earth Breathe in Real Time. Live monitoring of natural events including wildfires, severe storms, and volcanoes using NASA EONET data.',
+  title: { absolute: 'EarthSphere — Your world. A new dimension.' },
+  description: 'Scroll through a living 3D Earth, explore real NASA observations, travel through satellite orbits, and discover Mars. Your world, in a new dimension.',
   keywords: ['NASA', 'EONET', 'Earth', 'Events', 'Wildfires', 'Storms', 'Volcanoes', 'Live Tracking'],
   openGraph: {
-    title: 'EarthSphere | Live NASA EONET Data',
-    description: 'Watch Earth Breathe in Real Time. Live monitoring of natural events including wildfires, severe storms, and volcanoes using NASA EONET data.',
+    title: 'EarthSphere — Your world. A new dimension.',
+    description: 'A scroll-driven expedition through Earth, satellite orbits, Mars, and planetary intelligence. Powered by NASA open data.',
     url: 'https://earthsphere.in',
     siteName: 'EarthSphere',
     images: [
@@ -23,15 +23,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return (
-    <>
-      <h1 className="sr-only">Watch Earth Breathe in Real Time</h1>
-      <p className="sr-only">
-        EarthSphere brings NASA's Earth Observatory Natural Event Tracker (EONET) 
-        to life. Monitor wildfires, severe storms, volcanoes, and other natural 
-        phenomena across the globe as they happen.
-      </p>
-      <HomePageClient />
-    </>
-  );
+  return <HomePageClient />;
 }

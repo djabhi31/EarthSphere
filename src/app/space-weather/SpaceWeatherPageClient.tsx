@@ -1,17 +1,20 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useMemo } from 'react';
+import { motion } from 'motion/react';
 import { format, subDays } from 'date-fns';
 import { Zap, Sun, Activity, Shield, Thermometer, Calendar, Clock, Compass, ActivityIcon } from 'lucide-react';
 
 import { useDONKISolarFlares, useDONKICME, useDONKIGST } from '@/hooks/useNasaApi';
 import { DONKISolarFlare, DONKICME, DONKIGeomagneticStorm } from '@/lib/types/nasa';
+import { DataState } from "@/components/site/DataState";
 import { cn } from '@/lib/utils';
 
 // ============================================================================
 // Types & Enums
 // ============================================================================
+
+function flareStrength(value: string) { const scale: Record<string, number> = { A: 1e-8, B: 1e-7, C: 1e-6, M: 1e-5, X: 1e-4 }; return (scale[value[0]] || 0) * (parseFloat(value.slice(1)) || 0); }
 
 type TabType = 'flares' | 'cmes' | 'storms';
 
@@ -19,12 +22,12 @@ type TabType = 'flares' | 'cmes' | 'storms';
 // Helper Components
 // ============================================================================
 
-function StatCard({ title, value, icon: Icon, colorClass, subtitle }: any) {
+function StatCard({ title, value, icon: Icon, colorClass, subtitle }: { title: string; value: string | number; icon: import("lucide-react").LucideIcon; colorClass: string; subtitle?: string }) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass rounded-2xl p-6 border border-[var(--border-default)] flex items-start gap-4"
+      className="es-statistic glass rounded-2xl p-6 border border-[var(--border-default)] flex items-start gap-4"
     >
       <div className={cn("p-3 rounded-xl", colorClass)}>
         <Icon className="w-6 h-6" />
@@ -54,7 +57,7 @@ function FlareCard({ flare }: { flare: DONKISolarFlare }) {
   const dateStr = flare.beginTime ? format(new Date(flare.beginTime), 'MMM d, yyyy HH:mm') : 'Unknown Date';
 
   return (
-    <div className="p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group">
+    <div className="es-solar-record p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group">
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
           <Clock className="w-4 h-4" />
@@ -89,9 +92,9 @@ function FlareCard({ flare }: { flare: DONKISolarFlare }) {
 function CMECard({ cme }: { cme: DONKICME }) {
   const analysis = cme.cmeAnalyses?.[0]; // Get primary analysis
   const dateStr = cme.startTime ? format(new Date(cme.startTime), 'MMM d, yyyy HH:mm') : 'Unknown Date';
-  
+
   return (
-    <div className="p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group">
+    <div className="es-solar-record p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group">
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
           <Calendar className="w-4 h-4" />
@@ -103,7 +106,7 @@ function CMECard({ cme }: { cme: DONKICME }) {
           </div>
         )}
       </div>
-      
+
       <div className="grid grid-cols-2 gap-4 mt-3">
         <div>
           <p className="text-xs text-[var(--text-muted)] uppercase tracking-wide flex items-center gap-1 mb-1">
@@ -138,14 +141,13 @@ function getKpColor(kp: number) {
 }
 
 function StormCard({ storm }: { storm: DONKIGeomagneticStorm }) {
-  const maxKpObj = storm.allKpIndex?.reduce((prev, current) => (prev.kpIndex > current.kpIndex) ? prev : current, { kpIndex: 0 } as any);
-  const maxKp = maxKpObj?.kpIndex || 0;
-  
+  const maxKp = Math.max(0, ...(storm.allKpIndex?.map(entry => entry.kpIndex) || []));
+
   const dateStr = storm.startTime ? format(new Date(storm.startTime), 'MMM d, yyyy') : 'Unknown Date';
   const colorClass = getKpColor(maxKp);
 
   return (
-    <div className="p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group">
+    <div className="es-solar-record p-4 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors group">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
           <Shield className="w-4 h-4" />
@@ -155,13 +157,13 @@ function StormCard({ storm }: { storm: DONKIGeomagneticStorm }) {
           ID: {storm.gstID.split('-')[0]}
         </div>
       </div>
-      
+
       <div className="space-y-2">
         <div className="flex justify-between items-end">
           <p className="text-xs text-[var(--text-muted)] uppercase tracking-wide">Max Kp Index</p>
           <span className="font-bold text-white">{maxKp.toFixed(1)}</span>
         </div>
-        
+
         {/* Kp Bar Visualization */}
         <div className="h-4 w-full bg-black/40 rounded-full overflow-hidden flex relative">
           {/* Markers */}
@@ -169,7 +171,7 @@ function StormCard({ storm }: { storm: DONKIGeomagneticStorm }) {
             <div key={i} className="flex-1 border-r border-white/10 last:border-0 h-full relative" />
           ))}
           {/* Active Bar */}
-          <motion.div 
+          <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${(maxKp / 9) * 100}%` }}
             transition={{ duration: 1, delay: 0.2 }}
@@ -192,30 +194,30 @@ function StormCard({ storm }: { storm: DONKIGeomagneticStorm }) {
 
 export default function SpaceWeatherPageClient() {
   const [activeTab, setActiveTab] = useState<TabType>('flares');
-  
+
   // Date states
   const today = new Date();
   const thirtyDaysAgo = subDays(today, 30);
-  
+
   const [startDateStr, setStartDateStr] = useState(format(thirtyDaysAgo, 'yyyy-MM-dd'));
   const [endDateStr, setEndDateStr] = useState(format(today, 'yyyy-MM-dd'));
 
   // Fetch Data
-  const { data: flares, isLoading: isLoadingFlares } = useDONKISolarFlares(startDateStr, endDateStr);
-  const { data: cmes, isLoading: isLoadingCMEs } = useDONKICME(startDateStr, endDateStr);
-  const { data: storms, isLoading: isLoadingStorms } = useDONKIGST(startDateStr, endDateStr);
+  const { data: flares, isLoading: isLoadingFlares, error: flareError, refetch: refetchFlares } = useDONKISolarFlares(startDateStr, endDateStr);
+  const { data: cmes, isLoading: isLoadingCMEs, error: cmeError, refetch: refetchCMEs } = useDONKICME(startDateStr, endDateStr);
+  const { data: storms, isLoading: isLoadingStorms, error: stormError, refetch: refetchStorms } = useDONKIGST(startDateStr, endDateStr);
 
   const isLoading = isLoadingFlares || isLoadingCMEs || isLoadingStorms;
 
   // Derived Stats
   const stats = useMemo(() => {
     let strongestFlare = 'None';
-    
+
     if (flares && flares.length > 0) {
       // Very rough sorting for class type (X > M > C > B > A)
       const sortedFlares = [...flares].sort((a, b) => {
-        const valA = (a.classType[0].charCodeAt(0) * -100) + parseFloat(a.classType.substring(1) || '0');
-        const valB = (b.classType[0].charCodeAt(0) * -100) + parseFloat(b.classType.substring(1) || '0');
+        const valA = flareStrength(a.classType);
+        const valB = flareStrength(b.classType);
         return valB - valA;
       });
       strongestFlare = sortedFlares[0].classType;
@@ -229,96 +231,61 @@ export default function SpaceWeatherPageClient() {
     };
   }, [flares, cmes, storms]);
 
+  if (flareError || cmeError || stormError) return <DataState error={flareError || cmeError || stormError} retry={() => { void Promise.all([refetchFlares(), refetchCMEs(), refetchStorms()]); }} />;
+
   return (
     <div className="min-h-screen pb-24">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 to-transparent -z-10" />
-        
-        <div className="ep-container">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl"
-          >
-            <div className="ep-eyebrow mb-4">DONKI Dashboard</div>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
-              Space <span className="text-gradient">Weather</span>
-            </h1>
-            <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed mb-8">
-              Monitor solar activity, coronal mass ejections, and geomagnetic storms 
-              affecting Earth's space environment. Data from NASA's Space Weather Database Of Notifications, Knowledge, Information (DONKI).
-            </p>
-            
-            {/* Date Filters */}
-            <div className="flex flex-wrap items-center gap-4 bg-white/5 p-2 pl-4 rounded-full border border-white/10 w-fit backdrop-blur-md">
-              <span className="text-sm font-medium text-[var(--text-secondary)]">Date Range:</span>
-              <input 
-                type="date" 
-                value={startDateStr}
-                onChange={(e) => setStartDateStr(e.target.value)}
-                className="bg-black/50 border border-white/10 rounded-full px-4 py-1.5 text-sm text-white focus:outline-none focus:border-[var(--electric-cyan)]"
-              />
-              <span className="text-[var(--text-muted)]">to</span>
-              <input 
-                type="date" 
-                value={endDateStr}
-                onChange={(e) => setEndDateStr(e.target.value)}
-                className="bg-black/50 border border-white/10 rounded-full px-4 py-1.5 text-sm text-white focus:outline-none focus:border-[var(--electric-cyan)]"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <div className="es-controls"><label className="text-sm text-[var(--text-secondary)]">From <input aria-label="Space weather start date" type="date" value={startDateStr} max={endDateStr} onChange={e => setStartDateStr(e.target.value)} className="ml-3 px-3" /></label><label className="text-sm text-[var(--text-secondary)]">To <input aria-label="Space weather end date" type="date" value={endDateStr} min={startDateStr} max={format(new Date(), 'yyyy-MM-dd')} onChange={e => setEndDateStr(e.target.value)} className="ml-3 px-3" /></label></div>
 
       <div className="ep-container space-y-8">
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatCard 
-            title="Solar Flares" 
-            value={isLoading ? '-' : stats.flareCount} 
-            icon={Zap} 
-            colorClass="bg-yellow-500/20 text-yellow-400" 
+        <div className="es-data-metrics grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StatCard
+            title="Solar Flares"
+            value={isLoading ? '-' : stats.flareCount}
+            icon={Zap}
+            colorClass="bg-yellow-500/20 text-yellow-400"
             subtitle="Recent eruptions"
           />
-          <StatCard 
-            title="Strongest Flare" 
-            value={isLoading ? '-' : stats.strongestFlare} 
-            icon={Thermometer} 
+          <StatCard
+            title="Strongest Flare"
+            value={isLoading ? '-' : stats.strongestFlare}
+            icon={Thermometer}
             colorClass="bg-red-500/20 text-red-400"
             subtitle="Peak magnitude"
           />
-          <StatCard 
-            title="CMEs" 
-            value={isLoading ? '-' : stats.cmeCount} 
-            icon={Sun} 
-            colorClass="bg-orange-500/20 text-orange-400" 
+          <StatCard
+            title="CMEs"
+            value={isLoading ? '-' : stats.cmeCount}
+            icon={Sun}
+            colorClass="bg-orange-500/20 text-orange-400"
             subtitle="Mass ejections"
           />
-          <StatCard 
-            title="Geomagnetic Storms" 
-            value={isLoading ? '-' : stats.stormCount} 
-            icon={Activity} 
-            colorClass="bg-blue-500/20 text-blue-400" 
+          <StatCard
+            title="Geomagnetic Storms"
+            value={isLoading ? '-' : stats.stormCount}
+            icon={Activity}
+            colorClass="bg-blue-500/20 text-blue-400"
             subtitle="Earth impacts"
           />
         </div>
 
         {/* Mobile Tabs */}
         <div className="lg:hidden flex bg-[var(--surface-elevated)] p-1 rounded-xl border border-[var(--border-default)]">
-          <button 
+          <button
             onClick={() => setActiveTab('flares')}
             className={cn("flex-1 py-2 text-sm font-medium rounded-lg transition-colors", activeTab === 'flares' ? 'bg-[var(--surface-active)] text-white' : 'text-[var(--text-secondary)]')}
           >
             Flares
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('cmes')}
             className={cn("flex-1 py-2 text-sm font-medium rounded-lg transition-colors", activeTab === 'cmes' ? 'bg-[var(--surface-active)] text-white' : 'text-[var(--text-secondary)]')}
           >
             CMEs
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('storms')}
             className={cn("flex-1 py-2 text-sm font-medium rounded-lg transition-colors", activeTab === 'storms' ? 'bg-[var(--surface-active)] text-white' : 'text-[var(--text-secondary)]')}
           >
@@ -328,7 +295,7 @@ export default function SpaceWeatherPageClient() {
 
         {/* Dashboard Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+
           {/* Flares Panel */}
           <div className={cn("glass-strong rounded-3xl border border-[var(--border-default)] p-6 flex flex-col h-[600px]", activeTab !== 'flares' && "hidden lg:flex")}>
             <div className="flex items-center gap-3 mb-6">
@@ -337,7 +304,7 @@ export default function SpaceWeatherPageClient() {
               </div>
               <h2 className="text-xl font-bold text-white">Solar Flares</h2>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto pr-2 space-y-3 custom-scrollbar">
               {isLoadingFlares ? (
                 [1,2,3,4].map(i => <div key={i} className="h-24 rounded-xl bg-white/5 animate-pulse" />)
@@ -360,7 +327,7 @@ export default function SpaceWeatherPageClient() {
               </div>
               <h2 className="text-xl font-bold text-white">Coronal Mass Ejections</h2>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto pr-2 space-y-3 custom-scrollbar">
               {isLoadingCMEs ? (
                 [1,2,3].map(i => <div key={i} className="h-32 rounded-xl bg-white/5 animate-pulse" />)
@@ -383,7 +350,7 @@ export default function SpaceWeatherPageClient() {
               </div>
               <h2 className="text-xl font-bold text-white">Geomagnetic Storms</h2>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto pr-2 space-y-3 custom-scrollbar">
               {isLoadingStorms ? (
                 [1,2,3].map(i => <div key={i} className="h-28 rounded-xl bg-white/5 animate-pulse" />)

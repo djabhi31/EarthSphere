@@ -1,11 +1,10 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Search, Filter, Menu } from 'lucide-react';
+import { X, Search, Menu } from 'lucide-react';
 import { cn, getCategoryColor, getCategoryLabel, formatDate } from '@/lib/utils';
 import type { EONETEvent } from '@/lib/types';
 import { CategoryIcon } from '@/components/ui/CategoryIcon';
 import { DateRangePicker } from '@/components/ui/DateRangePicker';
-import { slideUp } from '@/lib/motion-presets';
 
 /**
  * Props for MapSidebar component
@@ -31,10 +30,10 @@ export interface MapSidebarProps {
  * MapSidebar Component
  * Left sidebar containing search, filters, and a list of EONET events.
  */
-export function MapSidebar({ 
-  events, 
-  selectedEvent, 
-  onSelectEvent, 
+export function MapSidebar({
+  events,
+  selectedEvent,
+  onSelectEvent,
   isLoading,
   searchQuery,
   setSearchQuery,
@@ -48,7 +47,7 @@ export function MapSidebar({
   onDateChange = () => {},
 }: MapSidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   // Mobile drawer toggle
   const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -76,7 +75,7 @@ export function MapSidebar({
   return (
     <>
       {/* Mobile Trigger */}
-      <button 
+      <button
         className="md:hidden absolute top-20 left-4 z-40 p-2 glass rounded-lg text-text-primary"
         onClick={toggleOpen}
         aria-label="Toggle Sidebar"
@@ -87,9 +86,9 @@ export function MapSidebar({
       {/* Sidebar Overlay (Mobile) */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/50 z-40 md:hidden"
             onClick={() => setIsOpen(false)}
@@ -99,27 +98,25 @@ export function MapSidebar({
 
       {/* Sidebar Content */}
       <motion.aside
-        initial={{ x: "-100%" }}
-        animate={{ x: isOpen ? 0 : 0 }}
         className={cn(
-          "fixed top-16 bottom-0 left-0 w-80 z-50 glass-strong border-r border-border-subtle flex flex-col transition-transform duration-300 ease-in-out md:translate-x-0",
+          "es-map-sidebar fixed z-40 glass-strong border border-border-subtle flex flex-col transition-transform duration-300 ease-in-out md:translate-x-0",
           !isOpen && "-translate-x-full"
         )}
       >
         {/* Header / Search */}
         <div className="p-4 border-b border-border-subtle shrink-0 flex flex-col gap-4">
-          <div className="flex items-center justify-between md:hidden">
-            <h2 className="text-lg font-display text-text-primary">Events</h2>
-            <button onClick={() => setIsOpen(false)} className="text-text-secondary">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-display text-text-primary">Earth observations</h2>
+            <button aria-label="Close event sidebar" onClick={() => setIsOpen(false)} className="text-text-secondary md:hidden">
               <X className="w-5 h-5" />
             </button>
           </div>
-          
+
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
-            <input 
-              type="text" 
-              placeholder="Search events..." 
+            <input
+              type="text"
+              placeholder="Search events..." aria-label="Search map events"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-surface-base border border-border-subtle rounded-xl pl-9 pr-4 py-2 text-sm text-text-primary focus:outline-none focus:border-electric-cyan/50"
@@ -143,13 +140,13 @@ export function MapSidebar({
               </button>
             ))}
           </div>
-          
+
           {/* Date Range Picker */}
           <div className="flex">
-            <DateRangePicker 
-              startDate={dateStart} 
-              endDate={dateEnd} 
-              onDateChange={onDateChange} 
+            <DateRangePicker
+              startDate={dateStart}
+              endDate={dateEnd}
+              onDateChange={onDateChange}
             />
           </div>
         </div>
@@ -165,8 +162,8 @@ export function MapSidebar({
                   onClick={() => handleCategoryToggle(cat.id)}
                   className={cn(
                     "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors border",
-                    isSelected 
-                      ? "bg-surface-elevated text-text-primary border-border-strong" 
+                    isSelected
+                      ? "bg-surface-elevated text-text-primary border-border-strong"
                       : "bg-transparent text-text-secondary border-border-subtle hover:bg-surface-base"
                   )}
                 >
@@ -188,7 +185,7 @@ export function MapSidebar({
             filteredEvents.map(event => {
               const isSelected = selectedEvent?.id === event.id;
               const catId = event.categories[0]?.id;
-              
+
               return (
                 <button
                   key={event.id}

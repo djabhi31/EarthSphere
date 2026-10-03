@@ -6,27 +6,21 @@
 'use client';
 
 import { useMemo } from 'react';
+import { getLatestGeometry } from '@/lib/utils';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import type { UseQueryResult } from '@tanstack/react-query';
 import {
   fetchEvents,
-  fetchEventById,
-  fetchGeoJSON,
-  fetchCategories,
-  fetchSources,
-  fetchMagnitudes,
+  fetchEventById, fetchCategories,
+  fetchSources
 } from '@/lib/api';
 import type {
   EONETEventsResponse,
-  EONETEvent,
-  EONETGeoJSON,
-  CategoriesResponse,
-  SourcesResponse,
-  MagnitudesResponse,
-  FilterState,
+  EONETEvent, CategoriesResponse,
+  SourcesResponse, FilterState,
   EventStats,
   CategoryCount,
-  SourceCount,
+  SourceCount
 } from '@/lib/types';
 
 // -----------------------------------------------------------------------------
@@ -183,7 +177,7 @@ export function useEventStats(filters?: Partial<FilterState>): {
 
       // This month — check latest geometry date
       if (event.geometry.length > 0) {
-        const latestDate = new Date(event.geometry[event.geometry.length - 1].date);
+        const latestDate = new Date(getLatestGeometry(event)!.date);
         if (latestDate >= startOfMonth) {
           thisMonth++;
         }

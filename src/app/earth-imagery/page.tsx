@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import EarthImageryPageClient from './EarthImageryPageClient';
 
 export const metadata: Metadata = {
-  title: 'Earth Imagery — Landsat Satellite',
-  description: 'Explore Landsat satellite imagery of any location on Earth. View historical satellite photos and compare changes over time.',
+  title: 'Earth Imagery — NASA GIBS',
+  description: 'Explore dated Terra and Aqua satellite composites with NASA GIBS. Search coordinates or discover remarkable places on Earth.',
   keywords: ['Landsat', 'satellite imagery', 'NASA', 'Earth observation', 'remote sensing'],
 };
 

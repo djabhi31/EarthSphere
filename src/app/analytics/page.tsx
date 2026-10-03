@@ -8,7 +8,8 @@
 import { useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { useEvents, useCategories, useSources, useEventStats } from "@/hooks/useEvents";
-import { getCategoryColor, getCategoryLabel } from "@/lib/utils";
+import { getCategoryColor, getCategoryLabel, getLatestGeometry } from "@/lib/utils";
+import { DataState } from "@/components/site/DataState";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   BarChart,
@@ -45,7 +46,7 @@ import { SafetyGuideModal } from "@/components/features/SafetyGuideModal";
 import { AlertThresholdModal } from "@/components/features/AlertThresholdModal";
 import { PrintReportView } from "@/components/features/PrintReportView";
 import { fadeInUp } from "@/lib/motion-presets";
-import { Navbar } from "@/components/layout/Navbar";
+
 
 // Custom Tooltip for charts
 interface CustomTooltipProps {
@@ -77,7 +78,7 @@ function GlassTooltip({ active, payload, label }: CustomTooltipProps) {
 
 export default function AnalyticsPage() {
   const { data: statsData, isLoading: statsLoading } = useEventStats({ status: "all", days: 365 });
-  const { data: eventsData, isLoading: eventsLoading } = useEvents({ status: "all", days: 365 });
+  const { data: eventsData, isLoading: eventsLoading, error, refetch } = useEvents({ status: "all", days: 365 });
   const { data: categoriesData } = useCategories();
   const { data: sourcesData } = useSources();
 
@@ -113,7 +114,7 @@ export default function AnalyticsPage() {
     if (!eventsData?.events) return [];
     const monthMap = new Map<string, number>();
     const now = new Date();
-    
+
     for (let i = 11; i >= 0; i--) {
       const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
       monthMap.set(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`, 0);
@@ -121,7 +122,7 @@ export default function AnalyticsPage() {
 
     for (const event of eventsData.events) {
       if (event.geometry.length === 0) continue;
-      const latestDate = new Date(event.geometry[event.geometry.length - 1].date);
+      const latestDate = new Date(getLatestGeometry(event)!.date);
       const key = `${latestDate.getFullYear()}-${String(latestDate.getMonth() + 1).padStart(2, "0")}`;
       if (monthMap.has(key)) monthMap.set(key, (monthMap.get(key) ?? 0) + 1);
     }
@@ -143,10 +144,12 @@ export default function AnalyticsPage() {
 
   const totalEvents = (statsData?.totalActive ?? 0) + (statsData?.totalClosed ?? 0);
 
+  if (error) return <DataState error={error} retry={() => { void refetch(); }} title="Observations are temporarily unavailable." />;
+
   return (
     <>
-      <Navbar activeEventCount={statsData?.totalActive} />
-      <main className="min-h-screen bg-canvas pt-24 pb-16">
+
+      <section className="min-h-screen bg-canvas pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <AnalyticsHeader events={eventsData?.events} />
@@ -167,11 +170,11 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        <StatsGrid 
-          stats={statsData} 
+        <StatsGrid
+          stats={statsData}
           totalCategories={categoriesData?.categories?.length ?? 0}
           totalSources={sourcesData?.sources?.length ?? 0}
-          isLoading={isLoading} 
+          isLoading={isLoading}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
@@ -303,11 +306,11 @@ export default function AnalyticsPage() {
             <a href="https://eonet.gsfc.nasa.gov/docs/v3" target="_blank" rel="noopener noreferrer" className="text-electric-cyan/60 hover:text-electric-cyan transition-colors underline underline-offset-2">
               NASA EONET v3 API
             </a>
-            . Last 365 days of events. Updated every 5 minutes.
+            . Last 365 days of events, grouped by latest observation. Data cached for 5 minutes.
           </p>
         </motion.div>
       </div>
-    </main>
+    </section>
     </>
   );
 }

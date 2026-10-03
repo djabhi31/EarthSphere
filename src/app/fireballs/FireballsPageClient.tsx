@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { motion } from 'motion/react';
 import { Flame, Zap, MapPin, Gauge, Timer, AlertTriangle, ArrowUpDown } from 'lucide-react';
 import { useFireballs } from '@/hooks/useNasaApi';
@@ -9,18 +9,18 @@ import { cn } from '@/lib/utils';
 
 export default function FireballsPageClient() {
   const [sortConfig, setSortConfig] = useState<{key: string, direction: 'asc' | 'desc'} | null>(null);
-  
+
   // Default to last 2 years
   const endDate = new Date();
   const startDate = subYears(endDate, 2);
-  
-  const { data, isLoading, error } = useFireballs({
+
+  const { data, isLoading, error, refetch } = useFireballs({
     'date-min': format(startDate, 'yyyy-MM-dd')
   });
 
   const parsedData = useMemo(() => {
     if (!data?.fields || !data?.data) return [];
-    
+
     return data.data.map((row: readonly (string | null)[]) => {
       const obj: Record<string, string | null> = {};
       data.fields.forEach((field: string, index: number) => {
@@ -36,7 +36,7 @@ export default function FireballsPageClient() {
       sortableItems.sort((a, b) => {
         const rawA = a[sortConfig.key];
         const rawB = b[sortConfig.key];
-        
+
         let aVal: number | string = rawA ?? '';
         let bVal: number | string = rawB ?? '';
 
@@ -74,7 +74,7 @@ export default function FireballsPageClient() {
 
   const stats = useMemo(() => {
     if (!parsedData.length) return null;
-    
+
     let maxEnergy = 0;
     let totalVelocity = 0;
     let velocityCount = 0;
@@ -145,28 +145,14 @@ export default function FireballsPageClient() {
         .meteor:nth-child(2) { top: 100px; left: 100%; animation-delay: 1.2s; animation-duration: 5s; }
         .meteor:nth-child(3) { top: 300px; left: 120%; animation-delay: 2.5s; animation-duration: 3s; }
       `}} />
-      
+
       <div className="meteor-shower">
         <div className="meteor"></div>
         <div className="meteor"></div>
         <div className="meteor"></div>
       </div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        className="mb-12 text-center"
-      >
-        <div className="inline-flex items-center justify-center p-3 glass rounded-full mb-4 border-[var(--border-default)] shadow-[0_0_30px_rgba(255,100,50,0.2)]">
-          <Flame className="w-8 h-8 text-orange-500" />
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          <span className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent">Fireball & Bolide Tracker</span>
-        </h1>
-        <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
-          Track atmospheric entry of exceptionally bright meteors. Data covers events over the last 2 years based on US Government sensors.
-        </p>
-      </motion.div>
+
 
       {isLoading ? (
         <div className="space-y-6">
@@ -178,7 +164,7 @@ export default function FireballsPageClient() {
       ) : error ? (
         <div className="glass-strong p-8 rounded-2xl text-center text-red-400 border-red-500/30 flex flex-col items-center">
           <AlertTriangle className="w-12 h-12 mb-4 text-red-500" />
-          <p>Failed to load fireball data. Please try again later.</p>
+          <p>Failed to load fireball data. Please try again later.</p><button className="es-button es-button-secondary mt-5" onClick={() => { void refetch(); }}>Try again</button>
         </div>
       ) : (
         <>
@@ -191,15 +177,15 @@ export default function FireballsPageClient() {
                   <div className="text-3xl font-bold text-white mt-auto">{stats.total}</div>
                 </div>
               </motion.div>
-              
+
               <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{delay:0.2}} className="glass p-6 rounded-2xl border-red-500/20 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent z-0"></div>
                 <div className="relative z-10 flex flex-col h-full">
-                  <div className="text-[var(--text-muted)] text-sm font-medium mb-2 flex items-center gap-2"><Zap className="w-4 h-4"/> Max Energy (kt)</div>
+                  <div className="text-[var(--text-muted)] text-sm font-medium mb-2 flex items-center gap-2"><Zap className="w-4 h-4"/> Max radiant energy (10¹⁰ J)</div>
                   <div className="text-3xl font-bold text-red-400 mt-auto">{stats.maxEnergy}</div>
                 </div>
               </motion.div>
-              
+
               <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{delay:0.3}} className="glass p-6 rounded-2xl border-blue-500/20 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent z-0"></div>
                 <div className="relative z-10 flex flex-col h-full">
@@ -207,7 +193,7 @@ export default function FireballsPageClient() {
                   <div className="text-3xl font-bold text-blue-400 mt-auto">{stats.avgVelocity}</div>
                 </div>
               </motion.div>
-              
+
               <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{delay:0.4}} className="glass p-6 rounded-2xl border-purple-500/20 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent z-0"></div>
                 <div className="relative z-10 flex flex-col h-full">
@@ -218,7 +204,7 @@ export default function FireballsPageClient() {
             </div>
           )}
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
@@ -228,7 +214,7 @@ export default function FireballsPageClient() {
               <h2 className="text-xl font-semibold flex items-center gap-2"><Flame className="w-5 h-5 text-orange-500" /> Recorded Events</h2>
               <span className="text-sm text-[var(--text-muted)]">Sort by clicking headers</span>
             </div>
-            
+
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead className="bg-[var(--surface-primary)]/50 text-[var(--text-muted)] uppercase text-xs">
@@ -239,17 +225,17 @@ export default function FireballsPageClient() {
                       { key: 'lon', label: 'Longitude' },
                       { key: 'alt', label: 'Altitude (km)' },
                       { key: 'vel', label: 'Velocity (km/s)' },
-                      { key: 'energy', label: 'Impact Energy (kt)' },
+                      { key: 'energy', label: 'Radiant energy (10¹⁰ J)' },
                     ].map((col) => (
-                      <th 
+                      <th
                         key={col.key}
-                        onClick={() => requestSort(col.key)}
+                        onClick={() => requestSort(col.key)} tabIndex={0} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); requestSort(col.key); } }} aria-sort={sortConfig?.key === col.key ? sortConfig.direction === 'asc' ? 'ascending' : 'descending' : 'none'}
                         className="px-6 py-4 font-medium cursor-pointer hover:text-white transition-colors group"
                       >
                         <div className="flex items-center gap-1">
                           {col.label}
                           <ArrowUpDown className={cn(
-                            "w-3 h-3 transition-opacity", 
+                            "w-3 h-3 transition-opacity",
                             sortConfig?.key === col.key ? "opacity-100 text-orange-400" : "opacity-0 group-hover:opacity-50"
                           )} />
                         </div>
@@ -259,11 +245,11 @@ export default function FireballsPageClient() {
                 </thead>
                 <tbody className="divide-y divide-[var(--border-default)]">
                   {sortedData.map((item, i) => (
-                    <motion.tr 
+                    <motion.tr
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.1 * Math.min(i, 10) }}
-                      key={item.date} 
+                      key={item.date}
                       className="hover:bg-[var(--surface-primary)] transition-colors"
                     >
                       <td className="px-6 py-4 font-medium whitespace-nowrap">{item.date}</td>

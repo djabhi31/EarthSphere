@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import SatellitesPageClient from './SatellitesPageClient';
 
 export const metadata: Metadata = {
-  title: 'Satellite Tracker | EarthSphere',
+  title: 'Satellite Tracker',
   description: 'Search and track Earth-orbiting satellites with TLE data.',
 };
 

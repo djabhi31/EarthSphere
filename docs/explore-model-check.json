@@ -1,0 +1,333 @@
+{
+  "checked": "2026-10-03T19:27:20.372Z",
+  "nightUrl": "https://eoimages.gsfc.nasa.gov/images/imagerecords/79000/79765/dnb_land_ocean_ice.2012.3600x1800.jpg",
+  "models": [
+    {
+      "file": "sc_cloudsat/CloudSat.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 7,
+      "extensions": [],
+      "bufferBytes": 552668,
+      "dependencies": 6,
+      "failures": []
+    },
+    {
+      "file": "sc_calipso/calipso.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 5,
+      "extensions": [],
+      "bufferBytes": 603604,
+      "dependencies": 5,
+      "failures": []
+    },
+    {
+      "file": "sc_gpm/GPM.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 4,
+      "extensions": [],
+      "bufferBytes": 3448508,
+      "dependencies": 14,
+      "failures": []
+    },
+    {
+      "file": "sc_sac_d/aquarius.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 8,
+      "extensions": [],
+      "bufferBytes": 753364,
+      "dependencies": 10,
+      "failures": []
+    },
+    {
+      "file": "sc_cygnss/CYGNSS.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 18,
+      "extensions": [],
+      "bufferBytes": 320176,
+      "dependencies": 4,
+      "failures": []
+    },
+    {
+      "file": "sc_icesatii/ICESat2.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 5,
+      "extensions": [
+        "KHR_texture_transform"
+      ],
+      "bufferBytes": 1088820,
+      "dependencies": 6,
+      "failures": []
+    },
+    {
+      "file": "sc_iss/ISS_stationary.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 149,
+      "extensions": [],
+      "bufferBytes": 22186880,
+      "dependencies": 26,
+      "failures": []
+    },
+    {
+      "file": "sc_ostm/ostm.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 5,
+      "extensions": [
+        "KHR_draco_mesh_compression",
+        "KHR_texture_basisu"
+      ],
+      "bufferBytes": 105048,
+      "dependencies": 6,
+      "failures": []
+    },
+    {
+      "file": "sc_landsat_7/LandSat7.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 5,
+      "extensions": [],
+      "bufferBytes": 653312,
+      "dependencies": 6,
+      "failures": []
+    },
+    {
+      "file": "sc_landsat_8/LandSat8.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 14,
+      "extensions": [],
+      "bufferBytes": 683436,
+      "dependencies": 6,
+      "failures": []
+    },
+    {
+      "file": "sc_aqua/Aqua.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 9,
+      "extensions": [],
+      "bufferBytes": 1919244,
+      "dependencies": 7,
+      "failures": []
+    },
+    {
+      "file": "sc_grace/grace.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 3,
+      "extensions": [],
+      "bufferBytes": 209132,
+      "dependencies": 5,
+      "failures": []
+    },
+    {
+      "file": "sc_grace_fo/graceFO.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 2,
+      "extensions": [],
+      "bufferBytes": 112052,
+      "dependencies": 5,
+      "failures": []
+    },
+    {
+      "file": "sc_aura/Aura.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 8,
+      "extensions": [],
+      "bufferBytes": 1875352,
+      "dependencies": 6,
+      "failures": []
+    },
+    {
+      "file": "sc_noaa_20/noaa20.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 2,
+      "extensions": [
+        "EXT_texture_webp"
+      ],
+      "bufferBytes": 6228540,
+      "dependencies": 3,
+      "failures": []
+    },
+    {
+      "file": "sc_nisar/Nisar.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 21,
+      "extensions": [],
+      "bufferBytes": 951036,
+      "dependencies": 5,
+      "failures": []
+    },
+    {
+      "file": "sc_landsat_9/Landsat9.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 13,
+      "extensions": [],
+      "bufferBytes": 1004644,
+      "dependencies": 6,
+      "failures": []
+    },
+    {
+      "file": "sc_prefire/prefire.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 12,
+      "extensions": [],
+      "bufferBytes": 687080,
+      "dependencies": 5,
+      "failures": []
+    },
+    {
+      "file": "sc_mcubed_2/M-Cubed2.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 2,
+      "extensions": [],
+      "bufferBytes": 13644,
+      "dependencies": 4,
+      "failures": []
+    },
+    {
+      "file": "sc_sentinel_6/Sentinel6.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 14,
+      "extensions": [
+        "KHR_texture_transform"
+      ],
+      "bufferBytes": 882644,
+      "dependencies": 10,
+      "failures": []
+    },
+    {
+      "file": "sc_noaa_21/noaa21.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 2,
+      "extensions": [
+        "EXT_texture_webp"
+      ],
+      "bufferBytes": 7730780,
+      "dependencies": 5,
+      "failures": []
+    },
+    {
+      "file": "sc_smap/SMAP.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 10,
+      "extensions": [
+        "KHR_draco_mesh_compression"
+      ],
+      "bufferBytes": 489592,
+      "dependencies": 10,
+      "failures": []
+    },
+    {
+      "file": "sc_pace/pace.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 36,
+      "extensions": [],
+      "bufferBytes": 1047292,
+      "dependencies": 6,
+      "failures": []
+    },
+    {
+      "file": "sc_oco_2/oco2.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 9,
+      "extensions": [],
+      "bufferBytes": 1698852,
+      "dependencies": 14,
+      "failures": []
+    },
+    {
+      "file": "sc_sorce/sorce.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 5,
+      "extensions": [],
+      "bufferBytes": 459064,
+      "dependencies": 6,
+      "failures": []
+    },
+    {
+      "file": "sc_raincube/Raincube.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 7,
+      "extensions": [],
+      "bufferBytes": 1266404,
+      "dependencies": 10,
+      "failures": []
+    },
+    {
+      "file": "sc_npp/NPP.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 6,
+      "extensions": [],
+      "bufferBytes": 376532,
+      "dependencies": 9,
+      "failures": []
+    },
+    {
+      "file": "sc_tempo/tempo.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 62,
+      "extensions": [
+        "KHR_texture_transform"
+      ],
+      "bufferBytes": 2863688,
+      "dependencies": 7,
+      "failures": []
+    },
+    {
+      "file": "sc_swot_v2/swot.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 102,
+      "extensions": [
+        "KHR_texture_transform"
+      ],
+      "bufferBytes": 2400864,
+      "dependencies": 10,
+      "failures": []
+    },
+    {
+      "file": "sc_terra/Terra.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 5,
+      "extensions": [],
+      "bufferBytes": 585464,
+      "dependencies": 7,
+      "failures": []
+    },
+    {
+      "file": "sc_tropics/tropics.gltf",
+      "status": 200,
+      "cors": "*",
+      "meshes": 10,
+      "extensions": [],
+      "bufferBytes": 1000060,
+      "dependencies": 7,
+      "failures": []
+    }
+  ]
+}

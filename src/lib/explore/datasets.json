@@ -1,0 +1,837 @@
+[
+  {
+    "id": "visibleEarth",
+    "title": "Visible Earth",
+    "variants": [
+      {
+        "id": "visibleEarth",
+        "label": "VIIRS Visible Earth · VIIRS Daily Mosaics",
+        "average": "daily",
+        "missions": [
+          "sc_suomi_npp",
+          "sc_noaa_20",
+          "sc_noaa_21"
+        ]
+      },
+      {
+        "id": "modisTerra",
+        "label": "Terra / MODIS · Terra / MODIS Daily Mosaics",
+        "average": "daily",
+        "missions": [
+          "sc_terra"
+        ]
+      },
+      {
+        "id": "modisAqua",
+        "label": "Aqua / MODIS · Aqua / MODIS Daily Mosaics",
+        "average": "daily",
+        "missions": [
+          "sc_aqua"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "air-temperature",
+    "title": "Air Temperature",
+    "variants": [
+      {
+        "id": "airSurfaceDayTemp3Day",
+        "label": "AIRS Surface Temp. · Daytime 3 Day Average",
+        "average": "three_day",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "°F",
+          "bottom": -40,
+          "numOffset": -300,
+          "interval": 0.945,
+          "variation": 155,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "airSurfaceDayTempToday",
+        "label": "AIRS Surface Temp. · Daytime Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "°F",
+          "bottom": -40,
+          "numOffset": -300,
+          "interval": 0.945,
+          "variation": 155,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "airSurfaceNightTemp3Day",
+        "label": "AIRS Surface Temp. · Night 3 Day Average",
+        "average": "three_day",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "°F",
+          "bottom": -40,
+          "numOffset": -300,
+          "interval": 0.945,
+          "variation": 155,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "airSurfaceNightTempToday",
+        "label": "AIRS Surface Temp. · Night Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "°F",
+          "bottom": -40,
+          "numOffset": -300,
+          "interval": 0.945,
+          "variation": 155,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "dayTemp3Day",
+        "label": "AIRS Air Temperature (10,000 Feet) · Daytime 3 Day Average",
+        "average": "three_day",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "°F",
+          "bottom": -30,
+          "numOffset": -80,
+          "interval": 2,
+          "variation": 100,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "dayTempToday",
+        "label": "AIRS Air Temperature (10,000 Feet) · Daytime Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "°F",
+          "bottom": -30,
+          "numOffset": -80,
+          "interval": 2,
+          "variation": 100,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "nightTemp3Day",
+        "label": "AIRS Air Temperature (10,000 Feet) · Night 3 Day Average",
+        "average": "three_day",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "°F",
+          "bottom": -30,
+          "numOffset": -80,
+          "interval": 2,
+          "variation": 100,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "nightTempToday",
+        "label": "AIRS Air Temperature (10,000 Feet) · Night Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "°F",
+          "bottom": -30,
+          "numOffset": -80,
+          "interval": 2,
+          "variation": 100,
+          "scalingFactor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "carbon-dioxide",
+    "title": "Carbon Dioxide",
+    "variants": [
+      {
+        "id": "oco216Day",
+        "label": "OCO-2 Carbon Dioxide · 16 Day Composite",
+        "average": "sixteen_day",
+        "missions": [
+          "sc_oco_2"
+        ],
+        "readout": {
+          "units": "ppm",
+          "bottom": 390,
+          "numOffset": 0,
+          "interval": 1,
+          "variation": 40,
+          "scalingFactor": 0.01,
+          "dps": 2
+        }
+      },
+      {
+        "id": "newCo2Monthly",
+        "label": "AIRS Carbon Dioxide · Monthly Average",
+        "average": "month",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "ppm",
+          "bottom": 360,
+          "numOffset": 0,
+          "interval": 0.3086,
+          "variation": 50,
+          "scalingFactor": 0.01,
+          "dps": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "carbon-monoxide",
+    "title": "Carbon Monoxide",
+    "variants": [
+      {
+        "id": "mono3Day",
+        "label": "AIRS Carbon Monoxide · 3 Day Average",
+        "average": "three_day",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "ppb",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 3.2,
+          "variation": 160,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "monoToday",
+        "label": "AIRS Carbon Monoxide · Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "ppb",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 3.2,
+          "variation": 160,
+          "scalingFactor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "chlorophyll",
+    "title": "Chlorophyll",
+    "variants": [
+      {
+        "id": "chlorophyllToday",
+        "label": "PACE Chlorophyll · Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_pace"
+        ],
+        "readout": {
+          "bottom": 0,
+          "variation": 20,
+          "dps": 3,
+          "src": "chlorophyll_bar.png",
+          "label": "Chlorophyll (mg/m³)",
+          "units": "mg/m³",
+          "markers": [
+            0.01,
+            0.1,
+            1,
+            10,
+            20
+          ],
+          "preciseMarkers": true,
+          "markersSpacing": [
+            0,
+            29,
+            60.6,
+            87.6,
+            100
+          ],
+          "scalingFactor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "radar",
+    "title": "Radar Reflectivity",
+    "variants": [
+      {
+        "id": "radar",
+        "label": "NISAR Radar Reflectivity · Daily Average",
+        "average": "twelve_day",
+        "missions": [
+          "sc_nisar"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "precipitation",
+    "title": "Precipitation",
+    "variants": [
+      {
+        "id": "precipitationToday",
+        "label": "GPM Precipitation · Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_gpm"
+        ],
+        "readout": {
+          "rain": {
+            "src": "precipitation_rain_bar.png",
+            "label": "rain precipitation (mm/day)",
+            "units": "mm/day",
+            "markers": [
+              0,
+              10,
+              60,
+              200,
+              560
+            ],
+            "scalingFactor": 0.01
+          },
+          "snow": {
+            "src": "precipitation_snow_bar.png",
+            "label": "snow precipitation (mm/day)",
+            "units": "mm/day",
+            "markers": [
+              0,
+              10,
+              60,
+              200,
+              560
+            ],
+            "scalingFactor": 0.01
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "sea-level",
+    "title": "Sea Level",
+    "variants": [
+      {
+        "id": "akikoMonthly",
+        "label": "Sentinel-6 Sea Level Variation · Monthly Average",
+        "average": "month",
+        "missions": [
+          "sc_sentinel_6"
+        ],
+        "readout": {
+          "units": "mm",
+          "bottom": -176,
+          "numOffset": -1000,
+          "interval": 5.5,
+          "variation": 352,
+          "scalingFactor": 1,
+          "dps": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "sea-surface-temp",
+    "title": "Sea Surface Temperature",
+    "variants": [
+      {
+        "id": "seaSurfaceDayTempToday",
+        "label": "Sea Surface Temperature · Daytime Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_suomi_npp"
+        ],
+        "readout": {
+          "bottom": 0,
+          "variation": 32,
+          "src": "sea_surface_day_temp_bar.png",
+          "label": "Sea Surface Temperature (Day, L2)",
+          "units": "°C",
+          "markers": [
+            0,
+            8,
+            16,
+            24,
+            32
+          ],
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "seaSurfaceNightTempToday",
+        "label": "Sea Surface Temperature · Nighttime Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_suomi_npp"
+        ],
+        "readout": {
+          "bottom": 0,
+          "variation": 32,
+          "src": "sea_surface_night_temp_bar.png",
+          "label": "Sea Surface Temperature (Night, L2)",
+          "units": "°C",
+          "markers": [
+            0,
+            8,
+            16,
+            24,
+            32
+          ],
+          "scalingFactor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "soil-moisture",
+    "title": "Soil Moisture",
+    "variants": [
+      {
+        "id": "smapSoilMoisture8Day",
+        "label": "SMAP Soil Moisture · 8 Day Average",
+        "average": "eight_day",
+        "missions": [
+          "sc_smap"
+        ],
+        "readout": {
+          "units": "cm³/cm³",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.01,
+          "variation": 0.6,
+          "scalingFactor": 0.001,
+          "dps": 2
+        }
+      },
+      {
+        "id": "smapSoilMoistureMonthly",
+        "label": "SMAP Soil Moisture · Monthly Average",
+        "average": "month",
+        "missions": [
+          "sc_smap"
+        ],
+        "readout": {
+          "units": "cm³/cm³",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.01,
+          "variation": 0.6,
+          "scalingFactor": 0.001,
+          "dps": 2
+        }
+      },
+      {
+        "id": "smapSmSalinity8Day",
+        "label": "SMAP Soil Moisture and Salinity · SMAP Soil Moisture Sea Surface Salinity 8 Day Average",
+        "average": "eight_day",
+        "missions": [
+          "sc_smap"
+        ],
+        "readout": {
+          "units": "cm³/cm³",
+          "bottom": 0,
+          "numOffset": 39,
+          "interval": 0.01,
+          "variation": 600,
+          "scalingFactor": 1,
+          "dps": 2
+        }
+      },
+      {
+        "id": "smapRootzoneWetnessDayToday",
+        "label": "SMAP Root Zone Soil Moisture · SMAP Root Zone Soil Moisture",
+        "average": "daily",
+        "missions": [
+          "sc_smap"
+        ],
+        "readout": {
+          "units": "m³/m³",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.01,
+          "variation": 0.6,
+          "scalingFactor": 0.001,
+          "dps": 2
+        }
+      },
+      {
+        "id": "smapGppMean",
+        "label": "SMAP Gross Primary Production · SMAP Gross Primary Production",
+        "average": "daily",
+        "missions": [
+          "sc_smap"
+        ],
+        "readout": {
+          "units": "g C/m²/day",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.2,
+          "variation": 10,
+          "scalingFactor": 0.01,
+          "dps": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "salinity",
+    "title": "Salinity",
+    "variants": [
+      {
+        "id": "smapSalinity8Day",
+        "label": "SMAP Salinity · SMAP Sea Surface Salinity 8 Day Average",
+        "average": "eight_day",
+        "missions": [
+          "sc_smap"
+        ],
+        "readout": {
+          "units": "psu",
+          "bottom": 30,
+          "numOffset": 0,
+          "interval": 0.06,
+          "variation": 10,
+          "scalingFactor": 0.01
+        }
+      }
+    ]
+  },
+  {
+    "id": "ozone",
+    "title": "Ozone",
+    "variants": [
+      {
+        "id": "omiOzoneToday",
+        "label": "Daily Total Ozone (OMPS) · Daily Total Ozone (OMPS)",
+        "average": "daily",
+        "missions": [
+          "sc_suomi_npp"
+        ]
+      },
+      {
+        "id": "o37Day",
+        "label": "Microwave Limb Sounder Ozone · 7 Day Average",
+        "average": "seven_day",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 1.6,
+          "numOffset": 0,
+          "interval": 0.01111,
+          "variation": 1.8,
+          "scalingFactor": 0.03906,
+          "dps": 2
+        }
+      },
+      {
+        "id": "o3Today",
+        "label": "Microwave Limb Sounder Ozone · Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 1.6,
+          "numOffset": 0,
+          "interval": 0.01111,
+          "variation": 1.8,
+          "scalingFactor": 0.03906,
+          "dps": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "water-vapor",
+    "title": "Water Vapor",
+    "variants": [
+      {
+        "id": "newVaporCol3Day",
+        "label": "AIRS Total Precipitable Water Vapor Average · Total Column - 3 Day Average",
+        "average": "three_day",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "mm",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 5.83333,
+          "variation": 70,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "newVaporColToday",
+        "label": "AIRS Total Precipitable Water Vapor Average · Total Column - Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "mm",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 5.83333,
+          "variation": 70,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "newVaporColMonthly",
+        "label": "AIRS Total Precipitable Water Vapor Average · Total Column - Monthly Average",
+        "average": "month",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "mm",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 5.83333,
+          "variation": 70,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "vaporUpper3Day",
+        "label": "AIRS Total Precipitable Water Vapor Average · Upper Column - 3 Day Average",
+        "average": "three_day",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "mm",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 1.66667,
+          "variation": 20,
+          "scalingFactor": 1
+        }
+      },
+      {
+        "id": "vaporUpperToday",
+        "label": "AIRS Total Precipitable Water Vapor Average · Upper Column - Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aqua"
+        ],
+        "readout": {
+          "units": "mm",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 1.66667,
+          "variation": 20,
+          "scalingFactor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "gravity-field-map",
+    "title": "Water Storage",
+    "variants": [
+      {
+        "id": "newGraceMonthly",
+        "label": "GRACE-FO Water Storage Map · Monthly Average",
+        "average": "month",
+        "missions": [
+          "sc_grace_fo1",
+          "sc_grace_fo2"
+        ],
+        "readout": {
+          "units": "cm",
+          "bottom": -25,
+          "numOffset": -1000,
+          "interval": 0.20408,
+          "variation": 50,
+          "scalingFactor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "nitrous-oxide",
+    "title": "Nitrous Oxide",
+    "variants": [
+      {
+        "id": "n2O7Day",
+        "label": "Microwave Limb Sounder Nitrous Oxide · 7 Day Average",
+        "average": "seven_day",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 20,
+          "numOffset": 0,
+          "interval": 14.2857,
+          "variation": 300,
+          "scalingFactor": 0.03906
+        }
+      },
+      {
+        "id": "n2OToday",
+        "label": "Microwave Limb Sounder Nitrous Oxide · Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 20,
+          "numOffset": 0,
+          "interval": 14.2857,
+          "variation": 300,
+          "scalingFactor": 0.03906
+        }
+      }
+    ]
+  },
+  {
+    "id": "hydrochloric-acid",
+    "title": "Hydrochloric Acid",
+    "variants": [
+      {
+        "id": "hCl7Day",
+        "label": "Microwave Limb Sounder Hydrochloric Acid · 7 Day Average",
+        "average": "seven_day",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.071429,
+          "variation": 1.5,
+          "scalingFactor": 0.003906
+        }
+      },
+      {
+        "id": "hClToday",
+        "label": "Microwave Limb Sounder Hydrochloric Acid · Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.071429,
+          "variation": 1.5,
+          "scalingFactor": 0.003906
+        }
+      }
+    ]
+  },
+  {
+    "id": "chlorine-monoxide",
+    "title": "Chlorine Monoxide",
+    "variants": [
+      {
+        "id": "clO7Day",
+        "label": "Microwave Limb Sounder Chlorine Monoxide · 7 Day Average",
+        "average": "seven_day",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.085714,
+          "variation": 1,
+          "scalingFactor": 0.003906
+        }
+      },
+      {
+        "id": "clOToday",
+        "label": "Microwave Limb Sounder Chlorine Monoxide · Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.085714,
+          "variation": 1,
+          "scalingFactor": 0.003906
+        }
+      }
+    ]
+  },
+  {
+    "id": "nitric-acid",
+    "title": "Nitric Acid",
+    "variants": [
+      {
+        "id": "hNO37Day",
+        "label": "Microwave Limb Sounder Nitric Acid · 7 Day Average",
+        "average": "seven_day",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.571429,
+          "variation": 12,
+          "scalingFactor": 0.003906
+        }
+      },
+      {
+        "id": "hNO3Today",
+        "label": "Microwave Limb Sounder Nitric Acid · Daily Average",
+        "average": "daily",
+        "missions": [
+          "sc_aura"
+        ],
+        "readout": {
+          "units": "ppbv",
+          "bottom": 0,
+          "numOffset": 0,
+          "interval": 0.571429,
+          "variation": 12,
+          "scalingFactor": 0.003906
+        }
+      }
+    ]
+  }
+]

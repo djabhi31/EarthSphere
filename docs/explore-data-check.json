@@ -1,0 +1,681 @@
+{
+  "checkedAt": "2026-10-03T18:56:46.383Z",
+  "results": [
+    {
+      "id": "airSurfaceDayTempToday",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 157673,
+      "cors": "*"
+    },
+    {
+      "id": "airSurfaceDayTemp3Day",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 344538,
+      "cors": "*"
+    },
+    {
+      "id": "visibleEarth",
+      "date": "2026-10-02",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        512,
+        256
+      ],
+      "bytes": 299650,
+      "cors": "*"
+    },
+    {
+      "id": "modisAqua",
+      "date": "2026-10-02",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        512,
+        256
+      ],
+      "bytes": 327527,
+      "cors": "*"
+    },
+    {
+      "id": "modisTerra",
+      "date": "2026-10-02",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        512,
+        256
+      ],
+      "bytes": 329632,
+      "cors": "*"
+    },
+    {
+      "id": "oco216Day",
+      "date": "2026-07-28",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 360691,
+      "cors": "*"
+    },
+    {
+      "id": "airSurfaceNightTemp3Day",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 327142,
+      "cors": "*"
+    },
+    {
+      "id": "airSurfaceNightTempToday",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 142340,
+      "cors": "*"
+    },
+    {
+      "id": "dayTempToday",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 130596,
+      "cors": "*"
+    },
+    {
+      "id": "dayTemp3Day",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 281497,
+      "cors": "*"
+    },
+    {
+      "id": "mono3Day",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 402562,
+      "cors": "*"
+    },
+    {
+      "id": "chlorophyllToday",
+      "date": "2026-10-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        512,
+        256
+      ],
+      "bytes": 63143,
+      "cors": "*"
+    },
+    {
+      "id": "nightTemp3Day",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 269015,
+      "cors": "*"
+    },
+    {
+      "id": "precipitationToday",
+      "date": "2026-10-02",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 418622,
+      "cors": "*"
+    },
+    {
+      "id": "nightTempToday",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 117638,
+      "cors": "*"
+    },
+    {
+      "id": "newCo2Monthly",
+      "date": "2017-02-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 304009,
+      "cors": "*"
+    },
+    {
+      "id": "radar",
+      "date": "2026-10-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        512,
+        256
+      ],
+      "bytes": 56331,
+      "cors": "*"
+    },
+    {
+      "id": "seaSurfaceDayTempToday",
+      "date": "2026-10-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        512,
+        256
+      ],
+      "bytes": 61991,
+      "cors": "*"
+    },
+    {
+      "id": "akikoMonthly",
+      "date": "2026-08-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 228782,
+      "cors": "*"
+    },
+    {
+      "id": "smapSoilMoisture8Day",
+      "date": "2026-10-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 337999,
+      "cors": "*"
+    },
+    {
+      "id": "monoToday",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 314773,
+      "cors": "*"
+    },
+    {
+      "id": "seaSurfaceNightTempToday",
+      "date": "2026-10-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        512,
+        256
+      ],
+      "bytes": 56138,
+      "cors": "*"
+    },
+    {
+      "id": "omiOzoneToday",
+      "date": "2026-09-29",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 139369,
+      "cors": "*",
+      "visiblePixels": 1599500,
+      "note": "Timeline uses GIBS availability rather than the newer Eyes publication date."
+    },
+    {
+      "id": "smapSoilMoistureMonthly",
+      "date": "2026-09-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 331648,
+      "cors": "*"
+    },
+    {
+      "id": "smapSmSalinity8Day",
+      "date": "2026-09-30",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 575471,
+      "cors": "*"
+    },
+    {
+      "id": "smapSalinity8Day",
+      "date": "2026-09-30",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 271353,
+      "cors": "*"
+    },
+    {
+      "id": "o37Day",
+      "date": "2026-09-29",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 64451,
+      "cors": "*"
+    },
+    {
+      "id": "smapRootzoneWetnessDayToday",
+      "date": "2026-09-29",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 376505,
+      "cors": "*"
+    },
+    {
+      "id": "newVaporCol3Day",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 260412,
+      "cors": "*"
+    },
+    {
+      "id": "o3Today",
+      "date": "2026-09-30",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 84125,
+      "cors": "*"
+    },
+    {
+      "id": "smapGppMean",
+      "date": "2026-09-21",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        512,
+        256
+      ],
+      "bytes": 49125,
+      "cors": "*"
+    },
+    {
+      "id": "newGraceMonthly",
+      "date": "2026-07-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 177388,
+      "cors": "*"
+    },
+    {
+      "id": "n2O7Day",
+      "date": "2026-09-23",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 333513,
+      "cors": "*"
+    },
+    {
+      "id": "newVaporColToday",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 207763,
+      "cors": "*"
+    },
+    {
+      "id": "hCl7Day",
+      "date": "2026-09-29",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 219895,
+      "cors": "*"
+    },
+    {
+      "id": "vaporUpper3Day",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 137005,
+      "cors": "*"
+    },
+    {
+      "id": "newVaporColMonthly",
+      "date": "2026-09-01",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 184080,
+      "cors": "*"
+    },
+    {
+      "id": "vaporUpperToday",
+      "date": "2026-10-03",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 114216,
+      "cors": "*"
+    },
+    {
+      "id": "clO7Day",
+      "date": "2026-09-29",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 40455,
+      "cors": "*"
+    },
+    {
+      "id": "n2OToday",
+      "date": "2026-09-17",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 333513,
+      "cors": "*"
+    },
+    {
+      "id": "hNO37Day",
+      "date": "2026-09-29",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 371041,
+      "cors": "*"
+    },
+    {
+      "id": "hClToday",
+      "date": "2026-09-30",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 278664,
+      "cors": "*"
+    },
+    {
+      "id": "clOToday",
+      "date": "2026-09-30",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 76861,
+      "cors": "*"
+    },
+    {
+      "id": "hNO3Today",
+      "date": "2026-09-30",
+      "status": 200,
+      "type": "image/png",
+      "dimensions": [
+        2048,
+        1024
+      ],
+      "bytes": 414004,
+      "cors": "*"
+    }
+  ],
+  "orbits": [
+    {
+      "id": 25544,
+      "status": 200,
+      "name": "ISS (ZARYA)",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 25994,
+      "status": 200,
+      "name": "TERRA",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 27424,
+      "status": 200,
+      "name": "AQUA",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 28376,
+      "status": 200,
+      "name": "AURA",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 43013,
+      "status": 200,
+      "name": "NOAA 20 (JPSS-1)",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 54234,
+      "status": 200,
+      "name": "NOAA 21 (JPSS-2)",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 37849,
+      "status": 200,
+      "name": "SUOMI NPP",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 39084,
+      "status": 200,
+      "name": "LANDSAT 8",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 49260,
+      "status": 200,
+      "name": "LANDSAT 9",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 39574,
+      "status": 200,
+      "name": "GPM-CORE",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 40059,
+      "status": 200,
+      "name": "OCO 2",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 40376,
+      "status": 200,
+      "name": "SMAP",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 41240,
+      "status": 200,
+      "name": "JASON-3",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 41887,
+      "status": 200,
+      "name": "CYGFM01",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 43476,
+      "status": 200,
+      "name": "GRACE-FO 1",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 43613,
+      "status": 200,
+      "name": "ICESAT-2",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 46984,
+      "status": 200,
+      "name": "SENTINEL-6A",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 54754,
+      "status": 200,
+      "name": "SWOT",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 58928,
+      "status": 200,
+      "name": "PACE",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 65053,
+      "status": 200,
+      "name": "NISAR",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 59965,
+      "status": 200,
+      "name": "PREFIRE-1",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 59881,
+      "status": 200,
+      "name": "PREFIRE-2",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 66514,
+      "status": 200,
+      "name": "SENTINEL-6B",
+      "source": "CelesTrak"
+    },
+    {
+      "id": 56174,
+      "status": 200,
+      "name": "INTELSAT 40E (IS-40E)",
+      "source": "CelesTrak"
+    }
+  ]
+}

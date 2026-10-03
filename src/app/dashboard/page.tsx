@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import DashboardPageClient from './DashboardPageClient';
 
 export const metadata: Metadata = {
-  title: 'Mission Control Dashboard | EarthSphere',
+  title: 'Mission Control Dashboard',
   description: 'Unified NASA Mission Control combining data from multiple APIs.',
 };
 

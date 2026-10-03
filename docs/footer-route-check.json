@@ -1,0 +1,233 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": true,
+    "backToTop": true,
+    "links": 30
+  },
+  {
+    "path": "/dashboard",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/events",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/map",
+    "status": 200,
+    "footers": 0,
+    "missingDestinations": [],
+    "creatorPhoto": false,
+    "earthImage": false,
+    "originalDesignLink": false,
+    "backToTop": false,
+    "links": 0
+  },
+  {
+    "path": "/explore",
+    "status": 200,
+    "footers": 0,
+    "missingDestinations": [],
+    "creatorPhoto": false,
+    "earthImage": false,
+    "originalDesignLink": false,
+    "backToTop": false,
+    "links": 0
+  },
+  {
+    "path": "/epic",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/earth-imagery",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/analytics",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/apod",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/mars",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/asteroids",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/space-weather",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/satellites",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/fireballs",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/exoplanets",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/media",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/techport",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/intel",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/about",
+    "status": 200,
+    "footers": 1,
+    "missingDestinations": [],
+    "creatorPhoto": true,
+    "earthImage": true,
+    "originalDesignLink": false,
+    "backToTop": true,
+    "links": 28
+  },
+  {
+    "path": "/landing-v1",
+    "status": 200,
+    "footers": 0,
+    "missingDestinations": [],
+    "creatorPhoto": false,
+    "earthImage": false,
+    "originalDesignLink": false,
+    "backToTop": false,
+    "links": 0
+  },
+  {
+    "path": "/landing-classic",
+    "status": 200,
+    "footers": 0,
+    "missingDestinations": [],
+    "creatorPhoto": false,
+    "earthImage": false,
+    "originalDesignLink": false,
+    "backToTop": false,
+    "links": 0
+  }
+]
