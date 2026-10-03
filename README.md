@@ -1,444 +1,239 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/djabhi31/EarthSphere/master/public/og-image.jpg" alt="EarthSphere Header Banner" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,212,170,0.2);" />
+  <a href="https://earthsphere.in">
+    <img src="docs/assets/readme-banner.png" alt="EarthSphere — Your world. A new perspective. Earth observation, 3D exploration, and NASA open data." width="100%" />
+  </a>
 
-  <br />
-  <br />
+  <h1>EarthSphere</h1>
+  <p><strong>An open window into Earth and space.</strong></p>
+  <p>Explore natural events, orbit our planet, and discover the science behind the view.</p>
 
-  <h1>🌍 EarthSphere, 🛰️ God's Eye View & 🌐 World Monitor</h1>
-  
   <p>
-    <strong>The Executive Planetary & Global Intelligence Suite — Photorealistic 3D Tactical Globe, Real-Time OSINT News & Conflict Monitoring, 13 NASA Open APIs, Live Aircraft/Maritime/Satellite Telemetry, and Realtime AI Voice Operations.</strong>
+    <a href="https://earthsphere.in"><strong>Explore the website</strong></a> ·
+    <a href="#quick-start">Run locally</a> ·
+    <a href="#features">Features</a> ·
+    <a href="#data-sources">Data sources</a> ·
+    <a href="#contributing">Contribute</a>
   </p>
 
   <p>
-    <a href="https://earthsphere.in"><b>🌐 Live EarthSphere</b></a> •
-    <a href="https://godseyeview.earthsphere.in"><b>🛰️ Live God's Eye View (3D)</b></a> •
-    <a href="https://worldmonitor.earthsphere.in"><b>🌐 Live World Monitor</b></a> •
-    <a href="https://earthsphere.in/intel"><b>🛡️ In-App Intel Hub</b></a> •
-    <a href="#-the-vision"><b>🏗️ Architecture</b></a> •
-    <a href="#-tactical-highlights"><b>✨ Features</b></a> •
-    <a href="https://github.com/djabhi31/EarthSphere/issues"><b>🐛 Report Bug</b></a>
-  </p>
-
-  <p>
-    <img src="https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js 15" />
-    <img src="https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 19" />
-    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js" />
-    <img src="https://img.shields.io/badge/CesiumJS-Photorealistic_3D-6842FF?style=for-the-badge&logo=cesium&logoColor=white" alt="CesiumJS 3D" />
-    <img src="https://img.shields.io/badge/MapLibre_GL-1E293B?style=for-the-badge&logo=mapbook&logoColor=00D4AA" alt="MapLibre GL" />
-    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  </p>
-  
-  <p>
-    <a href="https://github.com/djabhi31/EarthSphere/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/djabhi31/EarthSphere/ci.yml?branch=master&style=flat-square&color=00d4aa&label=CI%20Build" alt="CI Status" /></a>
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&color=00d4aa" alt="License: MIT" /></a>
-    <a href="https://api.nasa.gov/"><img src="https://img.shields.io/badge/NASA_APIs-13_Endpoints-112244.svg?style=flat-square&color=00d4aa" alt="13 NASA APIs" /></a>
-    <a href="https://github.com/djabhi31/gods-eye-view"><img src="https://img.shields.io/badge/Suite-God's_Eye_View-6842ff.svg?style=flat-square&logo=github&logoColor=white" alt="God's Eye View Fork" /></a>
-    <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square&color=00d4aa" alt="PRs Welcome" />
+    <a href="https://github.com/djabhi31/EarthSphere/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/djabhi31/EarthSphere/ci.yml?style=flat-square&amp;label=build" alt="GitHub Actions build status" /></a>
+    <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-16-101820?style=flat-square&amp;logo=nextdotjs&amp;logoColor=white" alt="Next.js 16" /></a>
+    <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-101820?style=flat-square&amp;logo=react&amp;logoColor=61DAFB" alt="React 19" /></a>
+    <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5-101820?style=flat-square&amp;logo=typescript&amp;logoColor=3178C6" alt="TypeScript 5" /></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-dcc5a2?style=flat-square" alt="MIT license" /></a>
   </p>
 </div>
 
----
+EarthSphere is an independent, open-source project that brings public NASA and partner observations into one place. It combines a cinematic introduction, an interactive Earth observatory, a native 3D explorer, and searchable science archives. Built by [Abhilash Ghosh](https://github.com/djabhi31), it is designed for anyone curious about our planet and the worlds beyond.
 
-## 🌌 The Vision
- 
-> *"Half the magic is that it looks like a forbidden NORAD planetary command center. The other half is that every single byte of data is real, live, and public."*
- 
-**EarthSphere** bridges deep planetary science, live orbital telemetry, and real-time geopolitical intelligence into a single unified monorepo suite:
- 
-1. **EarthSphere Core Web ([earthsphere.in](https://earthsphere.in))**: An executive space intelligence portal consuming **13 official NASA Open APIs** across 15+ interactive pages — tracking everything from active natural disasters (wildfires, volcanoes, tsunamis) to solar flares, geomagnetic storms, near-Earth asteroids, and Mars rover camera feeds.
-2. **God's Eye View Tactical Console ([godseyeview.earthsphere.in](https://godseyeview.earthsphere.in))**: A cinematic 3D spy-satellite simulator powered by **CesiumJS** and **Google Photorealistic 3D Tiles** that renders live global aircraft cockpits, real-time cargo vessels, orbital satellite constellations, city CCTV camera projections, and hands-free voice control.
-3. **World Monitor Global Intelligence Dashboard ([worldmonitor.earthsphere.in](https://worldmonitor.earthsphere.in) & [/intel](https://earthsphere.in/intel))**: A real-time global intelligence console combining **100+ AI-synthesized news feeds**, geopolitical conflict monitoring, subsea internet cable mapping, transit chokepoints, and dual WebGL globes (`globe.gl` + `deck.gl`).
+The wider suite offers three connected ways to explore:
 
-Designed with an ultra-clean **cyber-glass aesthetic**, the suite operates with **zero cost for the host** via an air-gapped **BYOK (Bring Your Own Key)** architecture saved safely in the visitor's private browser `localStorage`.
+| Experience | What you can explore | Website |
+| --- | --- | --- |
+| **EarthSphere** | Earth events, science imagery, spacecraft, and astronomy archives | [earthsphere.in](https://earthsphere.in) |
+| **God’s Eye View** | A separate Cesium-based 3D geospatial console | [godseyeview.earthsphere.in](https://godseyeview.earthsphere.in) |
+| **World Monitor** | A separate global news and intelligence dashboard, also accessible through `/intel` | [worldmonitor.earthsphere.in](https://worldmonitor.earthsphere.in) |
 
----
+## Features
 
-## 🎛️ Dual-Suite Capabilities Matrix
+- **A journey through Earth and space.** Scroll through a Three.js landing experience with camera transitions, Earth and Mars scenes, and selectable NASA event observations.
+- **An Earth observatory.** Explore clustered events on a MapLibre globe or flat map. Filter by category, status, and date; replay recorded observations; inspect event trails; save events; and share a view. Satellite, atlas, and relief basemaps sit alongside density, sunlight, and plate-boundary layers.
+- **A native 3D Earth explorer.** Browse missions, spacecraft models, orbit paths, and 44 configured science-layer variants. Select observation dates, inspect numeric raster values where available, follow supported spacecraft, and export an attributed view. The interface is built in EarthSphere and draws on NASA’s public science resources.
+- **A universe of searchable archives.** Discover astronomy pictures, Earth imagery, Mars photography, near-Earth objects, solar activity, exoplanets, fireballs, and NASA research projects, with links back to their sources.
+- **A consistent experience.** A shared navigation bar and footer connect the pages. Responsive layouts, keyboard controls, reduced-motion support, theme preferences, and a local watchlist support different ways of exploring.
 
-<table>
-  <thead>
-    <tr>
-      <th width="50%">🌍 EarthSphere Core Engine (<a href="https://earthsphere.in">earthsphere.in</a>)</th>
-      <th width="50%">🛰️ God's Eye View 3D Console (<a href="https://godseyeview.earthsphere.in">godseyeview.earthsphere.in</a>)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td valign="top">
-        <ul>
-          <li><b>13 Official NASA Open APIs:</b> Real-time ingestion of EONET v3, DONKI, NeoWs, APOD, EPIC, Mars, Landsat, TechPort & more.</li>
-          <li><b>Scroll-Reactive WebGL Earth:</b> Three.js globe with custom atmospheric glow shaders, particle rings & camera fly-to orbits.</li>
-          <li><b>2D Tactical Vector Map:</b> Hardware-accelerated MapLibre GL JS engine with geospatial clustering and categorization.</li>
-          <li><b>Cosmic Radar:</b> Near-Earth Object (NeoWs) asteroid velocities, threat ratings, and CNEOS fireball atmospheric impacts.</li>
-          <li><b>Space Weather Operations:</b> DONKI live solar flares, Coronal Mass Ejections (CMEs), and geomagnetic disturbance alerts.</li>
-          <li><b>Multi-Rover Photography:</b> High-res feeds from Curiosity, Perseverance, and Opportunity across Martian Sols.</li>
-          <li><b>Cyber-Glass Pill Dock:</b> Floating mega-menu navigation dock with multi-accent theme switching (Cyan, Orange, Emerald, Purple).</li>
-        </ul>
-      </td>
-      <td valign="top">
-        <ul>
-          <li><b>Photorealistic 3D Planet:</b> Sub-meter Cesium ion terrain & Google Photorealistic 3D Tiles with elevation holding.</li>
-          <li><b>🛩️ Live Cockpit Mode:</b> Ride inside tracked aircraft — camera hugs the ground with active velocity and telemetry HUD.</li>
-          <li><b>🚢 Live Maritime Vessels:</b> Real-time global cargo ship & tanker positions streamed over AISStream WebSockets.</li>
-          <li><b>🛰️ Satellite Orbits & ISS:</b> Live orbital propagation from CelesTrak Two-Line Elements (TLEs).</li>
-          <li><b>📹 3D City CCTV Feeds:</b> Traffic cameras projected directly into the 3D geometry of London, Austin, and California.</li>
-          <li><b>🎨 GLSL Sensor Reskins:</b> Instant multi-spectral switching between CRT, NVG Night Vision, FLIR Thermal, Noir & Snow.</li>
-          <li><b>🎙️ OpenAI Realtime Voice Agent:</b> Conversational AI that knows its camera coordinates, identifies targets, and draws vector annotations.</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<details>
+<summary><strong>Browse all 18 destinations</strong></summary>
 
----
+<br />
 
-## ✨ Tactical Highlights
+| Area | Destination | What you’ll find |
+| --- | --- | --- |
+| Earth | [Natural events](https://earthsphere.in/events) | NASA EONET event feed and individual event details |
+| Earth | [Event map](https://earthsphere.in/map) | Globe/flat map, filters, observation timeline, and event inspector |
+| Earth | [3D Earth](https://earthsphere.in/explore) | Missions, science layers, spacecraft models, and orbit visualization |
+| Earth | [Earth from space](https://earthsphere.in/epic) | DSCOVR/EPIC full-disk images and daily sequences |
+| Earth | [Satellite imagery](https://earthsphere.in/earth-imagery) | NASA GIBS imagery by location, date, and layer |
+| Earth | [Event analytics](https://earthsphere.in/analytics) | Event counts, categories, sources, and trends |
+| Space | [Picture of the day](https://earthsphere.in/apod) | NASA’s Astronomy Picture of the Day archive |
+| Space | [Mars exploration](https://earthsphere.in/mars) | A curated search of Mars mission photography in NASA’s media archive |
+| Space | [Near-Earth asteroids](https://earthsphere.in/asteroids) | Close approaches, estimated sizes, distances, and velocities |
+| Space | [Space weather](https://earthsphere.in/space-weather) | Solar flares, coronal mass ejections, and geomagnetic storms |
+| Space | [Satellite catalog](https://earthsphere.in/satellites) | Spacecraft search and available orbital elements |
+| Space | [Fireballs & bolides](https://earthsphere.in/fireballs) | Reported atmospheric fireballs and measured properties |
+| Space | [Exoplanet archive](https://earthsphere.in/exoplanets) | Confirmed planets, host stars, and discovery information |
+| Discover | [Mission control](https://earthsphere.in/dashboard) | Observation summaries and a searchable destination directory |
+| Discover | [NASA media library](https://earthsphere.in/media) | Images, videos, audio, and original captions |
+| Discover | [Technology portfolio](https://earthsphere.in/techport) | NASA technology projects and research records |
+| Discover | [Global intelligence](https://earthsphere.in/intel) | Hosted World Monitor views and companion-platform links |
+| Discover | [Our story](https://earthsphere.in/about) | The project’s perspective, creator, and sources |
 
-### 🛩️ Live Cockpit Mode & Aircraft Tracking
-Lock onto any aircraft airborne across the globe. Click **COCKPIT** to drop behind the pilot's seat — the camera holds the terrain underneath as the aircraft descends, drawing a persistent vector trail. Filter by commercial airliners, military contacts (adsb.lol), or search an entire airport apron down to the taxiway lines.
+</details>
 
-### 🎙️ Hands-Free Voice Operations (OpenAI Realtime WebRTC)
-Speak directly to the globe via a low-latency WebRTC agent:
-- *"Take me to Tokyo and select the nearest airborne flight."*
-- *"Outline the state of Texas."* — Draws the exact geospatial boundary polygon, not a simple circle.
-- *"How far is the Eiffel Tower from the Louvre?"* — Generates an orbital measurement arrow and speaks the distance.
-- *"What is the biggest fire near Los Angeles?"* — Queries the NASA FIRMS active fire cluster in real time.
+## Quick start
 
-### 🎨 GLSL Tactical Sensor Modes
-Tap `1`–`7` on the keyboard to switch the entire planet into military-grade optics:
-- **Normal:** Full-color high-resolution satellite basemap.
-- **NVG:** Green-phosphor night-vision amplification.
-- **FLIR / Ironbow Thermal:** Heat-signature infrared rendering.
-- **CRT / Surveillance:** Cold-war monitor scanlines & phosphor decay.
-- **Snow / Noir:** High-contrast atmospheric desaturation.
+You’ll need **Git**, **Node.js**, and **npm**. Node.js 22 or newer is recommended; the installed Next.js version requires at least Node.js 20.9. A browser with WebGL support is needed for the map and 3D experiences.
 
-### 🔑 BYOK (Bring Your Own Key) & Zero-Cost Architecture
-The entire platform runs **100% free of charge for the host**:
-- **Keyless by Default:** Out of the box, the globe streams Esri satellite imagery, OpenStreetMap, live aircraft, ship transponders, satellites, earthquakes, and traffic cameras without requiring any API keys.
-- **Client-Side Storage:** Users who wish to unlock Google Photorealistic 3D Tiles or OpenAI Voice can paste their keys into the **POWER UP** modal. Keys are stored strictly in their browser's `localStorage` (`gev_cesium_token`, `gev_google_maps_key`, `gev_openai_key`) — zero hosting costs, zero credential risk.
-
----
-
-## 🌐 Live Modules & Route Directory
-
-Explore the complete multi-dashboard intelligence suite across **[earthsphere.in](https://earthsphere.in)**:
-
-| Module | Route / Host | Live Access | Intelligence Feeds & Telemetry |
-| :--- | :--- | :--- | :--- |
-| 🛰️ **God's Eye View (3D)** | `Subdomain` | [godseyeview.earthsphere.in](https://godseyeview.earthsphere.in) | Photorealistic 3D spy globe, live cockpits, ships, satellites, CCTV, voice HUD |
-| 🌐 **World Monitor (Live)** | `Subdomain` | [worldmonitor.earthsphere.in](https://worldmonitor.earthsphere.in) | Real-time global intelligence, 100+ OSINT news feeds, conflict zones, subsea cables |
-| 🛡️ **Intel Command Hub** | `/intel` | [earthsphere.in/intel](https://earthsphere.in/intel) | In-app situational dashboard, fullscreen mode, tech & financial variant switcher |
-| 🌍 **3D WebGL Globe** | `/` | [earthsphere.in/](https://earthsphere.in/) | Real-time Earth EONET natural disaster globe with Three.js shaders |
-| 🗺️ **2D Tactical Map** | `/map` | [earthsphere.in/map](https://earthsphere.in/map) | Vector tile mapping, spatial marker clustering, MapLibre GL JS |
-| 📊 **Telemetry Analytics** | `/analytics` | [earthsphere.in/analytics](https://earthsphere.in/analytics) | Historical disaster trends & category breakdown |
-| ⚡ **NASA Command Center** | `/dashboard` | [earthsphere.in/dashboard](https://earthsphere.in/dashboard) | Unified multi-API telemetry command dashboard |
-| ☄️ **Asteroid Radar** | `/asteroids` | [earthsphere.in/asteroids](https://earthsphere.in/asteroids) | NASA NeoWs orbital velocity & threat rating |
-| ☀️ **Space Weather** | `/space-weather` | [earthsphere.in/space-weather](https://earthsphere.in/space-weather) | DONKI Solar Flares, CMEs & Geomagnetic Storms |
-| 🔴 **Mars Rover Explorer** | `/mars` | [earthsphere.in/mars](https://earthsphere.in/mars) | Perseverance, Curiosity & Opportunity Sol camera feeds |
-| 🌎 **EPIC Earth Camera** | `/epic` | [earthsphere.in/epic](https://earthsphere.in/epic) | DSCOVR satellite full-disk polychromatic Earth views |
-| 📸 **APOD Archive** | `/apod` | [earthsphere.in/apod](https://earthsphere.in/apod) | Astronomy Picture of the Day HD image viewer |
-| 🛰️ **Satellite Tracker** | `/satellites` | [earthsphere.in/satellites](https://earthsphere.in/satellites) | TLE orbital element telemetry & ISS 3D orbit |
-| 🔍 **NASA Media Search** | `/media` | [earthsphere.in/media](https://earthsphere.in/media) | Official NASA image & video library search engine |
-| 🛰️ **Landsat Surface View**| `/earth-imagery` | [earthsphere.in/earth-imagery](https://earthsphere.in/earth-imagery) | Spectral satellite imagery & land surface tiles |
-| 🪐 **Exoplanet Explorer** | `/exoplanets` | [earthsphere.in/exoplanets](https://earthsphere.in/exoplanets) | Confirmed exoplanets discovery archive |
-| 💥 **Fireballs Telemetry** | `/fireballs` | [earthsphere.in/fireballs](https://earthsphere.in/fireballs) | CNEOS atmospheric bolide energy impact data |
-| 🔬 **TechPort Patents** | `/techport` | [earthsphere.in/techport](https://earthsphere.in/techport) | NASA space tech innovation & patent portfolio |
-
----
-
-## 📡 Integrated Data Streams (19 Sources)
-
-### NASA Open Science Endpoints (13)
-- 🌍 **NASA EONET v3:** Active natural hazards (wildfires, volcanoes, severe storms).
-- ☀️ **NASA DONKI:** Solar flare irradiance, Coronal Mass Ejections, geomagnetic disturbances.
-- ☄️ **NASA NeoWs:** Near-Earth Asteroid trajectories, orbital velocities, missed distances.
-- 💥 **NASA CNEOS:** High-energy atmospheric bolide impact data and kinetic energy metrics.
-- 🔴 **NASA Mars Rovers:** Sol-indexed raw optical feeds from Perseverance, Curiosity, Opportunity.
-- 🌎 **NASA DSCOVR EPIC:** Full-disk polychromatic 2048px imagery from Earth-Sun L1 orbit.
-- 📸 **NASA APOD:** Astronomy Picture of the Day HD imagery and planetary scientific context.
-- 📡 **NASA Landsat / Earth:** Surface spectral band imagery and thermal tile composites.
-- 🔍 **NASA Media Library:** Over 140,000 official historical mission photographs and videos.
-- 🪐 **NASA Exoplanet Archive:** Confirmed exoplanet discoveries, orbital periods, stellar metrics.
-- 🔬 **NASA TechPort:** Active space exploration technology projects and patents.
-- 🛰️ **NASA TLE Orbits:** Real-time orbital element ephemerides for the International Space Station.
-- 📊 **NASA Command Engine:** Cross-telemetry aggregation and threat assessment matrix.
-
-### Live Geospatial Feeds (6)
-- ✈️ **OpenSky Network & adsb.lol:** Live ADS-B state vectors for thousands of aircraft globally.
-- 🚢 **AISStream WebSockets:** Live automatic identification system messages for maritime vessels.
-- 🛰️ **CelesTrak:** Live Two-Line Element (TLE) satellite tracking and mathematical propagation.
-- 🔥 **NASA FIRMS (VIIRS):** Active thermal anomalies and satellite wildfire detections (trailing 24h).
-- 📹 **TfL & Caltrans CCTV:** Live metropolitan traffic camera streams projected in 3D.
-- 🌤️ **Open-Meteo:** Dynamic local weather observations, volumetric cloud and rain effects.
-
----
-
-## 🏗️ Dual-Suite Architecture
-
-```mermaid
-graph TD
-    subgraph Users ["Client Navigation & User Access"]
-        Visitor["Browser Visitor"]
-        Navbar["Cyber-Glass Pill Dock"]
-    end
-
-    subgraph CoreApp ["EarthSphere Core (Next.js 15 / Vercel)"]
-        Pages["15+ App Router Routes"]
-        WebGL["Three.js 3D Earth Engine"]
-        MapLibre["MapLibre GL Vector Engine"]
-        State["Zustand Store + SWR Cache"]
-        NasaProxy["Next.js Edge API Proxy"]
-    end
-
-    subgraph GEVSuite ["God's Eye View 3D Suite (CesiumJS / Azure / Render)"]
-        Cesium["CesiumJS 3D WebGL Globe"]
-        Google3D["Google Photorealistic 3D Tiles"]
-        Proxies["Live Node.js Telemetry Middleware"]
-        VoiceAgent["OpenAI Realtime WebRTC Agent"]
-        BYOK["Client localStorage (Zero Server Cost)"]
-    end
-
-    subgraph DataProviders ["External Telemetry Providers"]
-        NASA["13 NASA Open APIs"]
-        ADS["OpenSky & adsb.lol Flights"]
-        AIS["AISStream Maritime Ships"]
-        TLE["CelesTrak Satellites"]
-        FIRMS["NASA FIRMS Fires"]
-    end
-
-    Visitor -->|Accesses earthsphere.in| Pages
-    Visitor -->|Clicks God's Eye View 3D| Cesium
-    Pages --> Navbar
-    Navbar -->|Routes to Subdomain| Cesium
-    
-    Pages --> WebGL
-    Pages --> MapLibre
-    Pages --> NasaProxy
-    NasaProxy --> NASA
-    
-    Cesium --> Google3D
-    Cesium --> Proxies
-    Cesium --> VoiceAgent
-    Cesium --> BYOK
-    Proxies --> ADS
-    Proxies --> AIS
-    Proxies --> TLE
-    Proxies --> FIRMS
-    
-    style Visitor fill:#0f172a,stroke:#00d4aa,stroke-width:2px,color:#fff
-    style Navbar fill:#1e293b,stroke:#00d4aa,stroke-width:2px,color:#fff
-    style WebGL fill:#0284c7,stroke:#00d4aa,stroke-width:2px,color:#fff
-    style MapLibre fill:#0d9488,stroke:#00d4aa,stroke-width:2px,color:#fff
-    style Cesium fill:#6842ff,stroke:#a855f7,stroke-width:2px,color:#fff
-    style Google3D fill:#312e81,stroke:#6842ff,stroke-width:2px,color:#fff
-    style VoiceAgent fill:#431407,stroke:#f97316,stroke-width:2px,color:#fff
-```
-
----
-
-## 📂 Project Directory Structure
-
-```
-EarthSphere/
-├── .github/                      # CI/CD Workflows (ci.yml), Dependabot, Issue/PR Templates
-├── .vercelignore                 # Isolates Next.js build from gods-eye-view 3D assets
-├── docs/                         # System Specs, Changelogs & Cyber-Glass Design System
-│   ├── ARCHITECTURE.md           # Unified EarthSphere & God's Eye View system architecture
-│   ├── CHANGELOG.md              # Detailed release history (v2.1.0, v2.0.0, v1.2.0)
-│   ├── DESIGN_SYSTEM.md          # Cyber-glass UI tokens, colors, typography & glow specs
-│   └── design_inspiration.md     # Sci-Fi / NORAD UI research & design moodboards
-├── gods-eye-view/                # 🛰️ God's Eye View Photorealistic 3D Tactical Suite
-│   ├── src/                      # CesiumJS 3D engine, telemetry layers & HUD
-│   │   ├── data/                 # Telemetry ingestion (ADS-B, AIS, FIRMS, CelesTrak, CCTV)
-│   │   ├── overlays/             # 3D tactical markers, flight vectors & radar rings
-│   │   ├── scenes/               # Planetary bookmarks & cinematic camera transitions
-│   │   ├── voice/                # OpenAI Realtime WebRTC voice agent & audio visualizer
-│   │   ├── main.js               # Viewer bootstrap & BYOK localStorage loader
-│   │   ├── keySetup.js           # POWER UP modal & browser credentials manager
-│   │   ├── hud.js                # Heads-up display, search & telemetry status indicators
-│   │   └── ui.js                 # Cyberpunk glass control panels & layer toggles
-│   ├── server.mjs                # Standalone cloud production server (0.0.0.0 & dynamic $PORT)
-│   ├── Dockerfile                # Production container deployment specification
-│   ├── package.json              # GEV dependencies & scripts
-│   └── vite.config.js            # Telemetry proxy engine (bypasses browser CORS)
-├── public/                       # Static assets, textures, favicons & social preview
-│   ├── textures/                 # 8K/4K Earth Blue Marble, clouds, topology & water maps
-│   ├── og-image.jpg              # Open Graph high-res social preview banner (1200x630)
-│   └── *.svg                     # Planetary icons & UI vector graphics
-├── scripts/
-│   └── sync-gev.mjs              # 1-click script mirroring updates from djabhi31/gods-eye-view
-├── src/
-│   ├── app/                      # 18 Next.js 15 App Router Pages & API Routes
-│   │   ├── about/                # Mission overview, tech stack & project philosophy
-│   │   ├── analytics/            # EONET Historical natural disaster trend analytics
-│   │   ├── api/                  # Serverless API routes & NASA rate-limit caching proxies
-│   │   ├── apod/                 # Astronomy Picture of the Day with date navigator
-│   │   ├── asteroids/            # NeoWs Near-Earth Asteroid tracking & hazard radar
-│   │   ├── dashboard/            # Executive NASA Command Center operations dashboard
-│   │   ├── earth-imagery/        # Landsat & MODIS satellite surface imagery viewer
-│   │   ├── epic/                 # DSCOVR EPIC daily full-disk Earth photography
-│   │   ├── events/               # Live EONET Natural Disaster list & detail telemetry
-│   │   ├── exoplanets/           # NASA Exoplanet Archive discoveries explorer
-│   │   ├── explore/              # Interactive 3D Earth planetary globe (GIBS & orbits)
-│   │   ├── fireballs/            # CNEOS atmospheric bolide energy impact telemetry
-│   │   ├── map/                  # Fullscreen 2D/3D tactical disaster response vector map
-│   │   ├── mars/                 # Perseverance, Curiosity & Opportunity rover feeds
-│   │   ├── media/            # NASA Official Image & Video searchable library
-│   │   ├── satellites/           # Live ISS & satellite orbital propagation engine
-│   │   ├── space-weather/        # DONKI Solar flares, CMEs & geomagnetic storms
-│   │   └── techport/             # NASA Space Technology & Innovation portfolio
-│   ├── components/               # Modular Cyber-Glass Component Architecture
-│   │   ├── about/                # Mission, architecture & developer profile cards
-│   │   ├── analytics/            # Recharts metrics, temporal histograms & status breakdown
-│   │   ├── events/               # Disaster filters, category selectors & event list cards
-│   │   ├── explore/              # 3D Canvas, GIBS imagery layer controls & orbital paths
-│   │   ├── features/             # ThemeCustomizer, Watchlist, Calculators & AI Briefing
-│   │   ├── landing/              # HeroSection, Categories, Intelligence, Timeline & CTA
-│   │   ├── layout/               # Sci-Fi Floating Pill Dock Navbar, Footer & PageTransitions
-│   │   ├── map/                  # EventMap, MapControls, Radar & Tectonic Overlays
-│   │   ├── motion/               # ParallaxSection, ScrollReveal, StaggerGroup animations
-│   │   ├── providers/            # ThemeProvider & global client state contexts
-│   │   └── ui/                   # GlassCard, StatusBadge, CustomCursor, FloatingEarth, ParticleField
-│   ├── hooks/                    # Custom React Hooks (useNasaApi, useEvents, useDebouncedValue)
-│   └── lib/                      # Utilities, Design Tokens & Data Pipelines
-│       ├── explore/              # nasaGibs.ts tile provider & orbits.ts Keplerian math
-│       ├── types/                # nasa.ts comprehensive TypeScript schemas for 13 APIs
-│       ├── api.ts                # EONET API client & query builders
-│       ├── audio.ts              # Sci-fi tactical audio cues & Web Audio synthesizers
-│       ├── design-tokens.ts      # Tailwind cyber-glass color palettes & glow constants
-│       ├── motion-presets.ts     # Framer Motion animation variants & transitions
-│       ├── nasa-api.ts           # Unified 13-endpoint NASA Open API client engine
-│       ├── severity.ts           # Disaster severity scoring & threat ranking algorithms
-│       ├── store.ts              # Zustand global client-side state store
-│       ├── timezone.ts           # UTC / Local astronomical time helpers
-│       ├── types.ts              # Core UI, filter & event TypeScript interfaces
-│       └── utils.ts              # Class merging (cn) & utility functions
-├── .editorconfig                 # Multi-editor formatting standards
-├── .env.example                  # Environment variable schema template
-├── CHANGELOG.md                  # Root release changelog (v2.1.0)
-├── CITATIONS.cff                 # Academic & research citation metadata
-├── CODE_OF_CONDUCT.md            # Contributor Covenant v2.1 standards
-├── CONTRIBUTING.md               # Contribution guidelines & Conventional Commits
-├── LICENSE                       # MIT License with comprehensive third-party attributions
-├── package.json                  # Next.js 15, React 19, Cesium & Three.js dependencies
-├── README.md                     # Executive documentation & tactical user guide
-└── SECURITY.md                   # Enterprise vulnerability disclosure & BYOK privacy policy
-```
-
----
-
-## 🚀 Quick Start
-
-### 1. Clone the Complete Suite
 ```bash
 git clone https://github.com/djabhi31/EarthSphere.git
 cd EarthSphere
-```
-
-### 2. Run EarthSphere Core (Next.js)
-```bash
-# Install dependencies
-npm install
-
-# Start development server
+npm ci
 npm run dev
 ```
-Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-### 3. Run God's Eye View 3D Console (CesiumJS)
-```bash
-# Start directly from EarthSphere root:
-npm run gev:start
+Open [http://localhost:3000](http://localhost:3000). The main application does not require a database or a local companion service. An internet connection is needed to retrieve external observations and imagery.
 
-# Or launch from the gods-eye-view folder:
-cd gods-eye-view
-npm install --legacy-peer-deps
-node server.mjs
-```
-Open **[http://localhost:4173](http://localhost:4173)** in your browser.
+### Configure a NASA API key
 
-### 4. 🔄 Monorepo Sync Workflow
-God's Eye View is also maintained as an upstream-synced fork at **[djabhi31/gods-eye-view](https://github.com/djabhi31/gods-eye-view)**. Whenever you pull upstream updates or make customizations in your GEV fork, run this command in `EarthSphere` to sync the files into the monorepo:
-```bash
-npm run sync:gev
+Public resources such as EONET, NASA media, GIBS imagery, and mission metadata can be used without a NASA API key. Keyed NASA endpoints fall back to `DEMO_KEY`, which has shared request limits.
+
+For regular use, request a key at [api.nasa.gov](https://api.nasa.gov/), create `.env.local` in the repository root, and add:
+
+```dotenv
+NASA_API_KEY=your_nasa_api_key
 ```
 
----
+Restart the development server after changing the file. On a hosting platform, add the same variable in the project’s environment settings.
 
-## ☁️ Zero-Cost Cloud Deployment Guide
+The NASA proxy reads `NASA_API_KEY` first, then the legacy `NEXT_PUBLIC_NASA_API_KEY`, then `DEMO_KEY`. Prefer the server-side `NASA_API_KEY` for new setups, and keep real keys out of commits. EONET uses NASA’s fixed v3 endpoint and needs no environment configuration.
 
-The entire platform is architected to deploy **100% free of charge** using student credits and zero-tier cloud plans:
+## Development
 
-### 1. Main Website (`earthsphere.in`) on Vercel
-- Connect `https://github.com/djabhi31/EarthSphere` to **Vercel**.
-- Vercel automatically respects `.vercelignore`, ensuring the Next.js app builds instantly with zero overhead.
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Next.js development server |
+| `npm run build` | Compile the production application and check TypeScript |
+| `npm start` | Serve an existing production build |
+| `npm run typecheck` | Run TypeScript without emitting application code |
+| `npm run lint` | Run the repository’s ESLint configuration |
+| `npm run test:site` | Run the site’s Node.js regression tests |
 
-### 2. Subdomain (`godseyeview.earthsphere.in`) on Azure or Render
-- **Microsoft Azure App Service** ($100 free credits via GitHub Student Developer Pack):
-  - Create a Web App with Node 20 LTS or 22.
-  - Connect your `djabhi31/gods-eye-view` repository.
-  - Set **Startup Command:** `node server.mjs`.
-- **Render.com** (Free tier backup):
-  - Create a Web Service connecting `djabhi31/gods-eye-view`.
-  - Set Build: `npm install --legacy-peer-deps` and Start: `node server.mjs`.
+The regression suite covers data handling, source URL validation, camera paths, scientific decoding, orbital calculations, event filtering, UTC timelines, and geographic edge cases. It does not replace browser checks of rendering, touch controls, keyboard interaction, or responsive layouts.
 
-### 3. Cloudflare DNS Setup
-Add a single CNAME record inside your Cloudflare DNS dashboard for `earthsphere.in`:
-- **Type:** `CNAME`
-- **Name:** `godseyeview`
-- **Target:** Your Azure App Service URL (`xxxx.azurewebsites.net`) or Render URL (`xxxx.onrender.com`)
-- **Proxy status:** **Proxied (Orange Cloud ON)** ✅ — Instant zero-cost SSL certificate!
+The [current CI workflow](.github/workflows/ci.yml) installs dependencies, checks TypeScript, runs lint with non-blocking failures, and builds the application. Run `npm run test:site` locally as well; that command is not currently part of CI.
 
----
+For a local production run:
 
-## 📈 Performance & Quality Scorecard
+```bash
+npm run build
+npm start
+```
 
-- 🚀 **Performance:** `99 / 100` (Lighthouse Mobile & Desktop on EarthSphere)
-- 🎯 **SEO:** `100 / 100` (Fully SSR metadata & Open Graph schema across 15+ routes)
-- ♿ **Accessibility:** `95 / 100` (WCAG AA compliant, reduced-motion fallbacks)
-- 🔒 **Best Practices:** `100 / 100` (Strict CSP framing defense, sanitized coordinates)
-- 🔋 **Power Efficiency:** Auto-pauses WebGL rendering loops when browser tab is inactive to preserve GPU and battery life.
+For deployment, use a host that supports **Next.js server route handlers**. A plain static-file host is insufficient because the application uses `/api/eonet`, `/api/nasa`, and `/api/explore`. Companion applications have separate deployment and provider requirements.
 
----
+## How it’s built
 
-## 🗺️ Product Roadmap
+| Layer | Technology |
+| --- | --- |
+| Application | Next.js 16 App Router, React 19, TypeScript |
+| 3D rendering | Three.js, React Three Fiber, Drei, custom shaders |
+| Mapping | MapLibre GL JS and GeoJSON |
+| Motion and styling | Motion, Tailwind CSS 4, CSS modules |
+| State and data | TanStack Query, Zustand, browser-local preferences |
+| Charts and orbit calculations | Recharts, satellite.js |
+| Server integration | Next.js route handlers with upstream fetching and caching |
 
-- [x] **v1.0 Release** — Next.js 15 Migration, Three.js 3D Globe, MapLibre GL Integration.
-- [x] **v1.2 Release** — Cyber-Glass Design System overhaul, Edge API Proxy with caching.
-- [x] **v2.0 Release** — 13 NASA Open APIs Integration, 11 New Interactive Pages, Floating Mega-Menu Pill Dock, Accent Theme Customizer.
-- [x] **v2.1 Release** — 🛰️ God's Eye View Photorealistic 3D Tactical Globe Suite, BYOK (localStorage) Architecture & Monorepo Integration.
-- [ ] **v2.2 (Upcoming)** — AI-powered Natural Disaster Impact & Solar Storm Forecasting.
-- [ ] **v2.3 (Upcoming)** — Custom Geofence Satellite Alerts & PWA Push Notifications.
+```mermaid
+flowchart LR
+    UI["EarthSphere pages and explorers"] --> API["Next.js route handlers"]
+    API --> NASA["NASA and JPL observations"]
+    API --> ORBITS["CelesTrak and TLE API"]
+    UI --> ASSETS["Imagery, map tiles, and spacecraft assets"]
+    UI --> LOCAL["Local preferences and saved events"]
+```
 
----
+Structured data is fetched through the application’s route handlers. Imagery, map tiles, and some mission assets load directly from their providers. The native 3D explorer is inspired by [NASA Eyes on Earth](https://eyes.nasa.gov/apps/earth/); it is an independent implementation with its own interface and documented differences.
 
-## ⭐ Star History
+<details>
+<summary><strong>Repository layout and companion workflows</strong></summary>
 
-[![Star History Chart](https://api.star-history.com/svg?repos=djabhi31/EarthSphere&type=Date)](https://star-history.com/#djabhi31/EarthSphere&Date)
+```text
+EarthSphere/
+├── src/
+│   ├── app/                    # Pages, layouts, metadata, and API routes
+│   ├── components/
+│   │   ├── landing/journey/    # Current scroll-driven 3D landing page
+│   │   ├── explore/            # Native Earth explorer and spacecraft views
+│   │   ├── map/observatory/    # Event map, archive timeline, and inspector
+│   │   └── site/               # Shared navigation, footer, and content pages
+│   ├── hooks/                  # Queries and reusable client behavior
+│   └── lib/                    # Data helpers, science, geography, and state
+├── public/                     # Images, textures, map data, and model decoders
+├── scripts/                    # Regression tests and companion maintenance tools
+├── docs/                       # Design notes, source credits, and backups
+├── gods-eye-view/              # Companion application source
+└── .github/                    # CI, issue templates, and pull-request template
+```
 
----
+God’s Eye View is also maintained at [djabhi31/gods-eye-view](https://github.com/djabhi31/gods-eye-view). World Monitor is hosted separately and embedded by the `/intel` page.
 
-## 🤝 Contributing & Community
+The root `gev:start` and `gev:dev` scripts launch the included God’s Eye View application; follow its own setup instructions for dependencies and provider configuration. The `sync:gev` and `sync:wm` scripts are maintenance workflows that expect sibling checkouts. They are not part of the EarthSphere quick start. Review [sync-gev.mjs](scripts/sync-gev.mjs) and [sync-wm.mjs](scripts/sync-wm.mjs) before using them.
 
-Contributions are what make the open-source community an extraordinary place to learn, inspire, and create.
+</details>
 
-- Please review our **[Contributing Guidelines](CONTRIBUTING.md)** before submitting pull requests.
-- Read our **[Code of Conduct](CODE_OF_CONDUCT.md)** to understand community standards.
-- Check out **[SECURITY.md](SECURITY.md)** for security reporting.
+## Data sources
 
----
+EarthSphere combines NASA services with community and commercial mapping providers. Each view links to its source where available.
 
-## 📜 License & Credits
+| Provider | Used for |
+| --- | --- |
+| [NASA EONET](https://eonet.gsfc.nasa.gov/) | Natural-event records, categories, geometry, and observation histories |
+| [NASA Open APIs](https://api.nasa.gov/) | APOD, NeoWs, and EPIC records |
+| [NASA CCMC / DONKI](https://ccmc.gsfc.nasa.gov/tools/DONKI/) | Solar and geomagnetic event records |
+| [NASA Eyes](https://eyes.nasa.gov/apps/earth/) and [GIBS](https://gibs.earthdata.nasa.gov/) | Mission metadata, observation archives, scientific layers, and imagery |
+| [NASA Image and Video Library](https://images.nasa.gov/) | Media search, captions, playable assets, and Mars photography |
+| [NASA / JPL CNEOS](https://cneos.jpl.nasa.gov/fireballs/) | Reported fireballs and bolides |
+| [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/) | Confirmed planets and associated stellar data |
+| [NASA TechPort](https://techport.nasa.gov/) | Technology project records |
+| [CelesTrak](https://celestrak.org/) and [TLE API](https://tle.ivanstanojevic.me/) | Orbital elements for supported spacecraft and catalog search |
+| [Esri](https://www.esri.com/), [CARTO](https://carto.com/), and [OpenStreetMap](https://www.openstreetmap.org/copyright) | Reference basemaps and map labels |
 
-- EarthSphere Core is open source software licensed under the **[MIT License](LICENSE)**.
-- God's Eye View is licensed under the **[MIT License](gods-eye-view/LICENSE)** (Original work by [Bilawal Sidhu](https://github.com/bilawalsidhu/gods-eye-view)).
-- Planetary telemetry provided by **[NASA Open APIs](https://api.nasa.gov/)**, **OpenSky Network**, **AISStream**, and **CelesTrak**.
+### Understanding the observations
+
+- **Publication schedules vary.** Source dates, archive availability, caching, and provider limits determine what is shown. Imagery and event records are not continuous live camera feeds.
+- **Orbit positions are estimates.** Supported missions use SGP4 propagation from available TLEs. The explorer hides positions more than 14 days from an element set rather than presenting them as accurate historical tracking.
+- **Map archives have boundaries.** Event queries are capped at 1,000 records, and unusable geometry is reported as omitted. Narrow the date window when the result limit is reached. The map’s archive cursor changes event observations and sunlight; it does not date-match the reference basemap.
+- **Layer types differ.** Numeric point readouts apply to decoded scientific rasters. Image layers display imagery and available source legends. The Mars page searches NASA’s media archive, including photography and illustrations.
+
+## Documentation
+
+| Guide | Contents |
+| --- | --- |
+| [Native Earth explorer](docs/native-earth-explorer.md) | Missions, science layers, models, orbit behavior, and differences from NASA Eyes |
+| [Earth observatory map](docs/map-observatory-redesign.md) | Map controls, historical observations, data limits, and attribution |
+| [3D landing journey](docs/landing-3d-redesign.md) | Scroll-driven scene structure and motion behavior |
+| [Content-page design](docs/content-editorial-redesign.md) | About, dashboard, imagery, archives, and shared styling |
+| [Shared footer](docs/footer-redesign.md) | Navigation, creator links, motion, and responsive layouts |
+| [Contributing guide](CONTRIBUTING.md) | Contribution workflow and commit conventions |
+| [Security policy](SECURITY.md) | Private vulnerability-reporting instructions |
+| [Previous README](docs/backups/readme-before-redesign/README.md) | Unmodified backup of the README before this redesign |
+
+Earlier landing designs are also preserved at [`/landing-v1`](https://earthsphere.in/landing-v1) and [`/landing-classic`](https://earthsphere.in/landing-classic).
+
+## Contributing
+
+Contributions to code, documentation, accessibility, data handling, and visual design are welcome.
+
+1. Read the [contributing guide](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md).
+2. Use an [issue template](https://github.com/djabhi31/EarthSphere/issues/new/choose) to report a reproducible bug or discuss a substantial change.
+3. Fork the repository, make a focused change, and run the checks relevant to it. For visual changes, include desktop and mobile captures and check reduced-motion behavior.
+4. Open a pull request using the [PR template](.github/PULL_REQUEST_TEMPLATE.md), explaining the resulting behavior and how you verified it.
+
+For suspected vulnerabilities, use the private reporting channels in [SECURITY.md](SECURITY.md).
+
+## License and credits
+
+EarthSphere’s code is available under the **[MIT License](LICENSE)**. Bundled dependencies and companion applications retain their own licenses; provider data, imagery, models, and basemaps retain their respective terms and attribution requirements.
+
+Thanks to NASA, JPL, the scientific missions and data providers behind these observations, and the open-source projects that make the application possible. See the [editorial image credits](public/images/editorial/README.md), [Earth texture credits](public/textures/explore/README.md), [map-data credits](public/map/README.md), [decoder notices](public/explore/decoders/NOTICE.md), and [README artwork notes](docs/assets/README.md).
+
+EarthSphere is an independent project and is not affiliated with or endorsed by NASA.
 
 ---
 
 <div align="center">
-  <p>Built with ❤️ by <a href="https://github.com/djabhi31"><b>Abhilash</b></a> & the EarthSphere Contributors.</p>
-  <p>Dedicated to public planetary science & real-time geospatial situational intelligence.</p>
+  <a href="https://github.com/djabhi31"><img src="public/images/creator/abhilash-ghosh.webp" alt="Abhilash Ghosh, creator of EarthSphere" width="64" height="64" /></a>
+  <p>Created and maintained by <a href="https://github.com/djabhi31"><strong>Abhilash Ghosh</strong></a>.</p>
+  <p><a href="https://github.com/djabhi31">GitHub</a> · <a href="https://earthsphere.in/about">The story behind EarthSphere</a></p>
+  <p><sub>Made on Earth. For the endlessly curious.</sub></p>
 </div>

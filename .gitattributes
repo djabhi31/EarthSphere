@@ -1,0 +1,2 @@
+# Preserve the original README snapshot exactly, including its line endings.
+docs/backups/readme-before-redesign/README.md -text
